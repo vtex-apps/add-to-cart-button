@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import useProduct from 'vtex.product-context/useProduct'
-import { path } from 'ramda'
+import { useProduct } from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
@@ -11,7 +10,7 @@ interface Props {
   available: boolean
   disabled: boolean
   customToastUrl: string
-  showToast: () => void
+  showToast: Function
 }
 
 const BuyButtonWrapper: FC<Props> = ({
@@ -19,6 +18,7 @@ const BuyButtonWrapper: FC<Props> = ({
   available,
   disabled,
   customToastUrl,
+  showToast,
 }) => {
   const productContext: ProductContextState | undefined = useProduct()
 
@@ -28,7 +28,10 @@ const BuyButtonWrapper: FC<Props> = ({
   const product = productContext && productContext.product
   const selectedItem = productContext && productContext.selectedItem
   const assemblyOptions = productContext && productContext.assemblyOptions
-  const selectedSeller = path(['selectedItem', 'sellers', 0], productContext)
+  const selectedSeller =
+    productContext &&
+    productContext.selectedItem &&
+    productContext.selectedItem.sellers[0]
   const selectedQuantity =
     productContext && productContext.selectedQuantity != null
       ? productContext.selectedQuantity
@@ -45,9 +48,11 @@ const BuyButtonWrapper: FC<Props> = ({
   const isAvailable =
     isEmptyContext || available != null
       ? available
-      : selectedSeller &&
-        selectedSeller.commertialOffer &&
-        selectedSeller.commertialOffer.AvailableQuantity > 0
+      : Boolean(
+          selectedSeller &&
+            selectedSeller.commertialOffer &&
+            selectedSeller.commertialOffer.AvailableQuantity > 0
+        )
 
   const groupsValidArray =
     (assemblyOptions &&
@@ -66,6 +71,7 @@ const BuyButtonWrapper: FC<Props> = ({
       isOneClickBuy={isOneClickBuy}
       disabled={isDisabled}
       customToastUrl={customToastUrl}
+      showToast={showToast}
     />
   )
 }

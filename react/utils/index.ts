@@ -110,9 +110,9 @@ type Option = ItemOption
 
 export interface ItemOption {
   assemblyId: string
-  id: string
-  quantity: number
-  seller: string
+  id?: string
+  quantity?: number
+  seller?: string
   options?: Option[]
   inputValues?: InputValue
 }

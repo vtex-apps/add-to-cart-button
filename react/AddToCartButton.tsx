@@ -1,12 +1,11 @@
-import React, { FC, useContext, useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 import { useMutation } from 'react-apollo'
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl'
-import { compose } from 'recompose'
-import { useRuntime } from 'vtex.render-runtime'
+import { RenderContext } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { OrderForm } from 'vtex.order-manager'
 import { ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
-import { withToast, ToastContext, Button } from 'vtex.styleguide'
+import { Button } from 'vtex.styleguide'
 
 import { MapCatalogItemToCartReturn } from './utils'
 
@@ -16,6 +15,7 @@ interface Props {
   disabled: boolean
   customToastUrl: string
   skuItems: MapCatalogItemToCartReturn[]
+  showToast: Function
 }
 
 interface OrderFormContext {
@@ -54,14 +54,16 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   disabled,
   skuItems,
   customToastUrl,
+  showToast,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const { showToast } = useContext(ToastContext)
-  const { orderForm, setOrderForm, loading }: OrderFormContext = useOrderForm()
-  const translateMessage = useCallback(id => intl.formatMessage({ id: id }), [
-    intl,
-  ])
-  const { rootPath = '' } = useRuntime()
+  const {
+    orderForm,
+    setOrderForm,
+    loading,
+  }: OrderFormContext = OrderForm.useOrderForm()
+  const translateMessage = useCallback(id => intl.formatMessage({ id }), [intl])
+  const { rootPath = '' } = RenderContext.useRuntime()
   const checkoutUrl = rootPath + CONSTANTS.CHECKOUT_URL
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
@@ -102,7 +104,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     ADD_TO_CART
   )
 
-  const handleAddToCart = async (event: Event) => {
+  const handleAddToCart = async (event: React.MouseEvent) => {
     event.stopPropagation()
     event.preventDefault()
 
@@ -132,7 +134,8 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
   const availableButtonContent = (
     <div
-      className={`${handles.buttonDataContainer} flex w-100 justify-between items-center`}>
+      className={`${handles.buttonDataContainer} flex w-100 justify-between items-center`}
+    >
       <FormattedMessage id="store/buy-button.add-to-cart">
         {message => <span className={handles.buyButtonText}>{message}</span>}
       </FormattedMessage>
@@ -150,13 +153,11 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
       block
       disabled={disabled || !available || loading || mutationLoading}
       isLoading={mutationLoading}
-      onClick={e => handleAddToCart(e)}>
+      onClick={(e: React.MouseEvent) => handleAddToCart(e)}
+    >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
   )
 }
 
-export default compose(
-  withToast,
-  injectIntl
-)(AddToCartButton)
+export default injectIntl(AddToCartButton)
