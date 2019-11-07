@@ -2,8 +2,11 @@
   "extends": "@vtex/tsconfig",
   "compilerOptions": {
     "noEmitOnError": false,
+    "lib": ["es2017", "dom", "es2018.promise"],
     "typeRoots": ["node_modules/@types"],
-    "types": ["node", "jest", "graphql"]
+    "types": ["node", "jest", "graphql"],
+    "moduleResolution": "node",
+    "target": "es2017"
   },
   "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }

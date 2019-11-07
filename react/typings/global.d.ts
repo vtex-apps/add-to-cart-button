@@ -28,7 +28,7 @@ interface AssemblyOptionItem {
   quantity: number
   seller: string
   initialQuantity: number
-  choiceType: string
+  choiceType: 'SINGLE' | 'TOGGLE' | 'MULTIPLE'
   name: string
   price: number
   children: Record<string, AssemblyOptionItem[]> | null
@@ -275,10 +275,10 @@ interface Message {
 }
 
 interface AssemblyOptionInput {
-  id: string
-  quantity: number
+  id?: string
+  quantity?: number
   assemblyId: string
-  seller: string
+  seller?: string
   inputValues?: Record<string, string | boolean>
   options?: AssemblyOptionInput[]
 }
