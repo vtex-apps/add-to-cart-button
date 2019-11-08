@@ -1,4 +1,8 @@
 {
-  "admin/test": "test",
-  "store/test": "test"
+  "store/addtocart.success": "Item added to your cart",
+  "store/addtocart.duplicate": "Item already in your cart",
+  "store/addtocart.failure": "Something went wrong and the item was not added to your cart!",
+  "store/addtocart.see-cart": "View cart",
+  "store/addtocart.add-to-cart": "Add to cart",
+  "store/addtocart.select-sku-variations": "Please select an option of each variation"
 }

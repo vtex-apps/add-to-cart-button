@@ -1,4 +1,8 @@
 {
-  "admin/test": "teste",
-  "store/test": "teste"
+  "store/addtocart.success": "Ítem agregado a su carrito",
+  "store/addtocart.duplicate": "Ítem ya en tu carrito",
+  "store/addtocart.failure": "¡Algo salió mal y el artículo no se agregó a tu carrito!",
+  "store/addtocart.see-cart": "Ver carrito",
+  "store/addtocart.add-to-cart": "Agregar a su carrito",
+  "store/addtocart.select-sku-variations": "Por favor seleccione una opción de cada variación"
 }
