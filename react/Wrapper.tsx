@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useProduct } from 'vtex.product-context/useProduct'
+import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
@@ -13,7 +13,7 @@ interface Props {
   showToast: Function
 }
 
-const BuyButtonWrapper: FC<Props> = ({
+const Wrapper: FC<Props> = ({
   isOneClickBuy,
   available,
   disabled,
@@ -21,6 +21,10 @@ const BuyButtonWrapper: FC<Props> = ({
   showToast,
 }) => {
   const productContext: ProductContextState | undefined = useProduct()
+
+  if (!productContext) {
+    throw new Error('useProduct must be used within a ProductContextProvider')
+  }
 
   const isEmptyContext =
     !productContext || Object.keys(productContext).length === 0
@@ -64,8 +68,12 @@ const BuyButtonWrapper: FC<Props> = ({
   const isDisabled =
     isEmptyContext || disabled != null ? disabled : !areAssemblyGroupsValid
 
+  const areAllSkuVariationsSelected =
+    productContext && productContext.skuSelector.areAllVariationsSelected
+
   return (
     <AddToCartButton
+      allSkuVariationsSelected={areAllSkuVariationsSelected}
       skuItems={skuItems}
       available={isAvailable}
       isOneClickBuy={isOneClickBuy}
@@ -76,6 +84,4 @@ const BuyButtonWrapper: FC<Props> = ({
   )
 }
 
-const EnhancedBuyButton = withToast(BuyButtonWrapper)
-
-export default EnhancedBuyButton
+export default withToast(Wrapper)
