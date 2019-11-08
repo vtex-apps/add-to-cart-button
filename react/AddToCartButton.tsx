@@ -1,13 +1,19 @@
 import React, { FC, useCallback } from 'react'
 import { useMutation } from 'react-apollo'
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl'
-import { RenderContext } from 'vtex.render-runtime'
-import { useCssHandles } from 'vtex.css-handles'
+import {
+  FormattedMessage,
+  injectIntl,
+  InjectedIntlProps,
+  defineMessages,
+} from 'react-intl'
+import { Button, Tooltip } from 'vtex.styleguide'
 import { OrderForm } from 'vtex.order-manager'
-import { ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
-import { Button } from 'vtex.styleguide'
+import { useCssHandles } from 'vtex.css-handles'
+import { useRuntime } from 'vtex.render-runtime'
+import { addToCart as ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
+import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
 
-import { MapCatalogItemToCartReturn } from './utils'
+import { MapCatalogItemToCartReturn, compareObjects } from './utils'
 
 interface Props {
   isOneClickBuy: boolean
@@ -16,6 +22,7 @@ interface Props {
   customToastUrl: string
   skuItems: MapCatalogItemToCartReturn[]
   showToast: Function
+  allSkuVariationsSelected: boolean
 }
 
 interface OrderFormContext {
@@ -25,15 +32,14 @@ interface OrderFormContext {
 }
 
 const CSS_HANDLES = ['buyButtonText', 'buttonDataContainer']
-const CONSTANTS = {
-  SUCCESS_MESSAGE_ID: 'store/buybutton.buy-success',
-  OFFLINE_BUY_MESSAGE_ID: 'store/buybutton.buy-offline-success',
-  DUPLICATE_CART_ITEM_ID: 'store/buybutton.buy-success-duplicate',
-  ERROR_MESSAGE_ID: 'store/buybutton.add-failure',
-  SEE_CART_ID: 'store/buybutton.see-cart',
-  CHECKOUT_URL: '/checkout/#/cart',
-  TOAST_TIMEOUT: 3000,
-}
+const CHECKOUT_URL = '/checkout/#/cart'
+
+const messages = defineMessages({
+  success: { id: 'store/addtocart.success', defaultMessage: '' },
+  duplicate: { id: 'store/addtocart.duplicate', defaultMessage: '' },
+  error: { id: 'store/addtocart.failure', defaultMessage: '' },
+  seeCart: { id: 'store/addtocart.see-cart', defaultMessage: '' },
+})
 
 const adjustItemsForMutationInput = (
   newItems: MapCatalogItemToCartReturn[]
@@ -55,6 +61,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   skuItems,
   customToastUrl,
   showToast,
+  allSkuVariationsSelected = true,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const {
@@ -62,20 +69,18 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     setOrderForm,
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
-  const translateMessage = useCallback(id => intl.formatMessage({ id }), [intl])
-  const { rootPath = '' } = RenderContext.useRuntime()
-  const checkoutUrl = rootPath + CONSTANTS.CHECKOUT_URL
+  const translateMessage = useCallback(
+    (id: string) => intl.formatMessage({ id }),
+    [intl]
+  )
+  const { navigate } = useRuntime()
+  const dispatch = useProductDispatch()
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
-    if (!success) return translateMessage(CONSTANTS.ERROR_MESSAGE_ID)
-    if (!isNewItem) return translateMessage(CONSTANTS.DUPLICATE_CART_ITEM_ID)
+    if (!success) return translateMessage(messages.error.id)
+    if (!isNewItem) return translateMessage(messages.duplicate.id)
 
-    const isOffline = window && window.navigator && !window.navigator.onLine
-    const checkForOffline = !isOffline
-      ? translateMessage(CONSTANTS.SUCCESS_MESSAGE_ID)
-      : translateMessage(CONSTANTS.OFFLINE_BUY_MESSAGE_ID)
-
-    return checkForOffline
+    return translateMessage(messages.success.id)
   }
 
   const toastMessage = ({
@@ -89,7 +94,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
     const action = success
       ? {
-          label: translateMessage(CONSTANTS.SEE_CART_ID),
+          label: translateMessage(messages.seeCart.id),
           href: customToastUrl,
         }
       : undefined
@@ -120,23 +125,39 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
       return
     }
 
-    if (mutationResult.data && mutationResult.data.addToCart === orderForm) {
+    if (
+      mutationResult.data &&
+      compareObjects(mutationResult.data.addToCart, orderForm)
+    ) {
       toastMessage({ success: true, isNewItem: false })
-      if (isOneClickBuy) {
-        location.assign(checkoutUrl)
-      }
+      return
     }
 
     // Update OrderForm from the context
     mutationResult.data && setOrderForm(mutationResult.data.addToCart)
+
+    if (isOneClickBuy) {
+      navigate({
+        to: CHECKOUT_URL,
+      })
+    }
+
     toastMessage({ success: true, isNewItem: true })
   }
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (dispatch) {
+      dispatch({ type: 'SET_BUY_BUTTON_CLICKED', args: { clicked: true } })
+    }
+
+    if (allSkuVariationsSelected) {
+      handleAddToCart(e)
+    }
+  }
+
   const availableButtonContent = (
-    <div
-      className={`${handles.buttonDataContainer} flex w-100 justify-between items-center`}
-    >
-      <FormattedMessage id="store/buy-button.add-to-cart">
+    <div className={`${handles.buttonDataContainer} flex justify-center`}>
+      <FormattedMessage id="store/addtocart.add-to-cart">
         {message => <span className={handles.buyButtonText}>{message}</span>}
       </FormattedMessage>
     </div>
@@ -148,15 +169,32 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     </FormattedMessage>
   )
 
-  return (
+  const tooltipLabel = (
+    <FormattedMessage id="store/addtocart.select-sku-variations">
+      {message => <span className={handles.errorMessage}>{message}</span>}
+    </FormattedMessage>
+  )
+
+  return allSkuVariationsSelected ? (
     <Button
       block
       disabled={disabled || !available || loading || mutationLoading}
       isLoading={mutationLoading}
-      onClick={(e: React.MouseEvent) => handleAddToCart(e)}
+      onClick={(e: React.MouseEvent) => handleClick(e)}
     >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
+  ) : (
+    <Tooltip trigger="click" label={tooltipLabel}>
+      <Button
+        block
+        disabled={disabled || !available || loading || mutationLoading}
+        isLoading={mutationLoading}
+        onClick={(e: React.MouseEvent) => handleClick(e)}
+      >
+        {available ? availableButtonContent : unavailableButtonContent}
+      </Button>
+    </Tooltip>
   )
 }
 
