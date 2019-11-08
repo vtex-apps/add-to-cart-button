@@ -5614,10 +5614,6 @@ verror@1.10.0:
   version "0.6.0"
   resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.order-manager@0.6.0/public/@types/vtex.order-manager#1a6db116346ae7f8c0330c82b4fb539b943a2358"
 
-"vtex.render-runtime@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@8.76.0/public/@types/vtex.render-runtime":
-  version "8.76.0"
-  resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@8.76.0/public/@types/vtex.render-runtime#c9b4c81a4c84d7998c6f925dfc11ad1a21585326"
-
 "vtex.styleguide@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.styleguide@9.94.0/public/_types/react":
   version "0.0.0"
   resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.styleguide@9.94.0/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
