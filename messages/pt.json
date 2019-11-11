@@ -1,8 +1,8 @@
 {
-  "store/addtocart.success": "Item adicionado ao seu carrinho",
-  "store/addtocart.duplicate": "Item já no seu carrinho",
-  "store/addtocart.failure": "Algo deu errado e o item não pôde ser adicionado ao seu carrinho!",
-  "store/addtocart.see-cart": "Ver carrinho",
-  "store/addtocart.add-to-cart": "Adicionar ao carrinho",
-  "store/addtocart.select-sku-variations": "Por favor selecione uma opção de cada variação"
+  "store/add-to-cart.success": "Item adicionado ao seu carrinho",
+  "store/add-to-cart.duplicate": "Item já no seu carrinho",
+  "store/add-to-cart.failure": "Algo deu errado e o item não pôde ser adicionado ao seu carrinho!",
+  "store/add-to-cart.see-cart": "Ver carrinho",
+  "store/add-to-cart.add-to-cart": "Adicionar ao carrinho",
+  "store/add-to-cart.select-sku-variations": "Por favor selecione uma opção de cada variação"
 }

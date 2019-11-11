@@ -35,10 +35,10 @@ const CSS_HANDLES = ['buyButtonText', 'buttonDataContainer']
 const CHECKOUT_URL = '/checkout/#/cart'
 
 const messages = defineMessages({
-  success: { id: 'store/addtocart.success', defaultMessage: '' },
-  duplicate: { id: 'store/addtocart.duplicate', defaultMessage: '' },
-  error: { id: 'store/addtocart.failure', defaultMessage: '' },
-  seeCart: { id: 'store/addtocart.see-cart', defaultMessage: '' },
+  success: { id: 'store/add-to-cart.success', defaultMessage: '' },
+  duplicate: { id: 'store/add-to-cart.duplicate', defaultMessage: '' },
+  error: { id: 'store/add-to-cart.failure', defaultMessage: '' },
+  seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
 
 const adjustItemsForMutationInput = (
@@ -157,7 +157,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
-      <FormattedMessage id="store/addtocart.add-to-cart">
+      <FormattedMessage id="store/add-to-cart.add-to-cart">
         {message => <span className={handles.buyButtonText}>{message}</span>}
       </FormattedMessage>
     </div>
@@ -170,7 +170,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   )
 
   const tooltipLabel = (
-    <FormattedMessage id="store/addtocart.select-sku-variations">
+    <FormattedMessage id="store/add-to-cart.select-sku-variations">
       {message => <span className={handles.errorMessage}>{message}</span>}
     </FormattedMessage>
   )
