@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC } from 'react'
 import { useMutation } from 'react-apollo'
 import {
   FormattedMessage,
@@ -69,18 +69,17 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     setOrderForm,
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
-  const translateMessage = useCallback(
-    (id: string) => intl.formatMessage({ id }),
-    [intl]
-  )
+  const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
+    intl.formatMessage(message)
+
   const { navigate } = useRuntime()
   const dispatch = useProductDispatch()
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
-    if (!success) return translateMessage(messages.error.id)
-    if (!isNewItem) return translateMessage(messages.duplicate.id)
+    if (!success) return translateMessage(messages.error)
+    if (!isNewItem) return translateMessage(messages.duplicate)
 
-    return translateMessage(messages.success.id)
+    return translateMessage(messages.success)
   }
 
   const toastMessage = ({
@@ -94,7 +93,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
     const action = success
       ? {
-          label: translateMessage(messages.seeCart.id),
+          label: translateMessage(messages.seeCart),
           href: customToastUrl,
         }
       : undefined
@@ -180,7 +179,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
       block
       disabled={disabled || !available || loading || mutationLoading}
       isLoading={mutationLoading}
-      onClick={(e: React.MouseEvent) => handleClick(e)}
+      onClick={handleClick}
     >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
@@ -190,7 +189,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
         block
         disabled={disabled || !available || loading || mutationLoading}
         isLoading={mutationLoading}
-        onClick={(e: React.MouseEvent) => handleClick(e)}
+        onClick={handleClick}
       >
         {available ? availableButtonContent : unavailableButtonContent}
       </Button>

@@ -1,10 +1,9 @@
 type Maybe<T> = T | null | undefined
-type MaybeProduct = Maybe<Product>
 
 interface OrderForm {
   items: Item[]
   shipping?: Shipping
-  marketingData: OrderFormMarketingData | null
+  marketingData: Maybe<OrderFormMarketingData>
   totalizers: Array<{
     id: string
     name: string
@@ -39,8 +38,8 @@ interface BuyButtonContextState {
 }
 
 interface ProductContextState {
-  selectedItem?: ProductContextItem | null
-  product: MaybeProduct
+  selectedItem: Maybe<ProductContextItem>
+  product: Maybe<Product>
   selectedQuantity: number
   skuSelector: {
     isVisible: boolean

@@ -20,14 +20,13 @@ const Wrapper: FC<Props> = ({
   customToastUrl,
   showToast,
 }) => {
-  const productContext: ProductContextState | undefined = useProduct()
+  const productContext: Maybe<ProductContextState> = useProduct()
 
   if (!productContext) {
     throw new Error('useProduct must be used within a ProductContextProvider')
   }
 
-  const isEmptyContext =
-    !productContext || Object.keys(productContext).length === 0
+  const isEmptyContext = Object.keys(productContext).length === 0
 
   const product = productContext && productContext.product
   const selectedItem = productContext && productContext.selectedItem
