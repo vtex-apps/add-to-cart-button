@@ -10,6 +10,7 @@ import { Button, Tooltip } from 'vtex.styleguide'
 import { OrderForm } from 'vtex.order-manager'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
+import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { addToCart as ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
 import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
 
@@ -54,6 +55,23 @@ const adjustItemsForMutationInput = (
   }))
 }
 
+const adjustSkuItemForPixelEvent = (skuItem: MapCatalogItemToCartReturn) => {
+  // Changes this `/Apparel & Accessories/Clothing/Tops/`
+  // to this `Apparel & Accessories/Clothing/Tops`
+  const category = skuItem.category ? skuItem.category.slice(1, -1) : ''
+
+  return {
+    skuId: skuItem.skuId,
+    variant: skuItem.variant,
+    price: skuItem.price,
+    name: skuItem.name,
+    quantity: skuItem.quantity,
+    productRefId: skuItem.productRefId,
+    brand: skuItem.brand,
+    category,
+  }
+}
+
 const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   intl,
   isOneClickBuy,
@@ -71,11 +89,11 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     setOrderForm,
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
+  const dispatch = useProductDispatch()
   const { rootPath } = useRuntime()
+  const { push } = usePixel()
   const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
     intl.formatMessage(message)
-
-  const dispatch = useProductDispatch()
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
     if (!success) return translateMessage(messages.error)
@@ -136,6 +154,13 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
     // Update OrderForm from the context
     mutationResult.data && setOrderForm(mutationResult.data.addToCart)
+
+    // Send event to pixel-manager
+    const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
+    push({
+      event: 'addToCart',
+      items: pixelEventItems,
+    })
 
     if (isOneClickBuy) {
       location.assign(rootPath + (customOneClickBuyLink || CHECKOUT_URL))
