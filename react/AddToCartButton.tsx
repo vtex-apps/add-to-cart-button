@@ -20,6 +20,7 @@ interface Props {
   available: boolean
   disabled: boolean
   customToastUrl: string
+  customOneClickBuyLink: string
   skuItems: MapCatalogItemToCartReturn[]
   showToast: Function
   allSkuVariationsSelected: boolean
@@ -56,6 +57,7 @@ const adjustItemsForMutationInput = (
 const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   intl,
   isOneClickBuy,
+  customOneClickBuyLink,
   available,
   disabled,
   skuItems,
@@ -69,10 +71,10 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     setOrderForm,
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
+  const { rootPath } = useRuntime()
   const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
     intl.formatMessage(message)
 
-  const { navigate } = useRuntime()
   const dispatch = useProductDispatch()
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
@@ -136,9 +138,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     mutationResult.data && setOrderForm(mutationResult.data.addToCart)
 
     if (isOneClickBuy) {
-      navigate({
-        to: CHECKOUT_URL,
-      })
+      location.assign(rootPath + (customOneClickBuyLink || CHECKOUT_URL))
     }
 
     toastMessage({ success: true, isNewItem: true })

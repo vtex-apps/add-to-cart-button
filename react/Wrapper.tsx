@@ -10,6 +10,7 @@ interface Props {
   available: boolean
   disabled: boolean
   customToastUrl: string
+  customOneClickBuyLink: string
   showToast: Function
 }
 
@@ -19,6 +20,7 @@ const Wrapper: FC<Props> = ({
   disabled,
   customToastUrl,
   showToast,
+  customOneClickBuyLink,
 }) => {
   const productContext: Maybe<ProductContextState> = useProduct()
 
@@ -79,6 +81,7 @@ const Wrapper: FC<Props> = ({
       disabled={isDisabled}
       customToastUrl={customToastUrl}
       showToast={showToast}
+      customOneClickBuyLink={customOneClickBuyLink}
     />
   )
 }
