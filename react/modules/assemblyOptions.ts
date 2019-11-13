@@ -1,82 +1,5 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { path } from 'ramda'
-
 type GroupId = string
 type GroupTypes = 'SINGLE' | 'TOGGLE' | 'MULTIPLE'
-
-interface MapCatalogItemToCartArgs {
-  product: Maybe<Product>
-  selectedItem: Maybe<ProductContextItem>
-  selectedQuantity: number
-  selectedSeller: any
-  assemblyOptions?: {
-    items: Record<string, AssemblyOptionItem[]>
-    inputValues: Record<string, Record<string, string>>
-    areGroupsValid: Record<string, boolean>
-  }
-}
-
-export interface MapCatalogItemToCartReturn {
-  index: 0
-  quantity: number
-  detailUrl: string
-  name: string
-  brand: string
-  category: string
-  productRefId: string
-  seller: any
-  price: number
-  listPrice: number
-  variant: string
-  skuId: string
-  imageUrl: string | undefined
-  sellingPriceWithAssemblies: number
-  options: Option[]
-  assemblyOptions: ParsedAssemblyOptionsMeta
-}
-
-export function mapCatalogItemToCart({
-  product,
-  selectedItem,
-  selectedQuantity,
-  selectedSeller,
-  assemblyOptions,
-}: MapCatalogItemToCartArgs): MapCatalogItemToCartReturn[] {
-  return (
-    product &&
-    selectedItem &&
-    selectedSeller &&
-    selectedSeller.commertialOffer && [
-      {
-        index: 0,
-        quantity: selectedQuantity,
-        detailUrl: `/${product.linkText}/p`,
-        name: product.productName,
-        brand: product.brand,
-        category:
-          product.categories && product.categories.length > 0
-            ? product.categories[0]
-            : '',
-        productRefId: product.productReference,
-        seller: selectedSeller.sellerId,
-        price: selectedSeller.commertialOffer.Price,
-        listPrice: selectedSeller.commertialOffer.ListPrice,
-        variant: selectedItem.name,
-        skuId: selectedItem.itemId,
-        imageUrl: path(['images', '0', 'imageUrl'], selectedItem),
-        ...transformAssemblyOptions(
-          path(['items'], assemblyOptions),
-          path(['inputValues'], assemblyOptions),
-          selectedSeller.commertialOffer.Price,
-          selectedQuantity
-        ),
-        sellingPriceWithAssemblies:
-          selectedSeller.commertialOffer.Price +
-          sumAssembliesPrice(path(['items'], assemblyOptions) || {}),
-      },
-    ]
-  )
-}
 
 export function sumAssembliesPrice(
   assemblyOptions: Record<GroupId, AssemblyOptionItem[]>
@@ -106,7 +29,7 @@ export interface AssemblyOptions {
   areGroupsValid: Record<string, boolean>
 }
 
-type Option = ItemOption
+export type Option = ItemOption
 
 export interface ItemOption {
   assemblyId: string
@@ -139,7 +62,7 @@ interface CartRemovedOption {
   removedQuantity: number
 }
 
-interface ParsedAssemblyOptionsMeta {
+export interface ParsedAssemblyOptionsMeta {
   added: CartAddedOption[]
   removed: CartRemovedOption[]
   parentPrice: number
@@ -254,36 +177,4 @@ export function transformAssemblyOptions(
       parentPrice,
     },
   }
-}
-
-export function compareObjects(obj1: any, obj2: any) {
-  //Loop through properties in object 1
-  for (const p in obj1) {
-    //Check property exists on both objects
-    if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
-
-    switch (typeof obj1[p]) {
-      //Deep compare objects
-      case 'object':
-        if (!compareObjects(obj1[p], obj2[p])) return false
-        break
-      //Compare function code
-      case 'function':
-        if (
-          typeof obj2[p] == 'undefined' ||
-          (p != 'compare' && obj1[p].toString() != obj2[p].toString())
-        )
-          return false
-        break
-      //Compare values
-      default:
-        if (obj1[p] != obj2[p]) return false
-    }
-  }
-
-  //Check object 2 for any extra properties
-  for (const p in obj2) {
-    if (typeof obj1[p] == 'undefined') return false
-  }
-  return true
 }

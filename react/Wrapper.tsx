@@ -3,7 +3,7 @@ import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
-import { mapCatalogItemToCart } from './utils'
+import { mapCatalogItemToCart } from './modules/catalogItemToCart'
 
 interface Props {
   isOneClickBuy: boolean

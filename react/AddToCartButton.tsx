@@ -14,7 +14,8 @@ import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { addToCart as ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
 import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
 
-import { MapCatalogItemToCartReturn, compareObjects } from './utils'
+import { compareObjects } from './modules/compareObjects'
+import { MapCatalogItemToCartReturn } from './modules/catalogItemToCart'
 
 interface Props {
   isOneClickBuy: boolean
