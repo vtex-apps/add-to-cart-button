@@ -56,3 +56,8 @@ pre_build:
     - npm run verify
     - echo Lint and tests finished!
 ```
+
+
+**Upcoming documentation:**
+
+ - [First implementation](https://github.com/vtex-apps/add-to-cart-button/pull/1)
