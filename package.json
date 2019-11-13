@@ -1,15 +1,24 @@
 {
-  "version": "0.0.0",
-  "devDependencies": {
-    "@vtex/intl-equalizer": "^2.3.0",
-    "husky": "^2.4.1"
-  },
+  "name": "add-to-cart-button",
+  "private": false,
+  "license": "UNLICENSED",
   "scripts": {
     "lint": "cd ./react && yarn lint",
     "test": "cd ./react && yarn test",
     "lint:locales": "intl-equalizer",
     "locales:fix": "intl-equalizer --fix",
     "verify": "yarn lint && yarn lint:locales && yarn test"
+  },
+  "version": "0.0.0",
+  "devDependencies": {
+    "@types/node": "^12.7.12",
+    "@vtex/intl-equalizer": "^2.3.0",
+    "eslint": "^6.4.0",
+    "eslint-config-vtex": "^11.0.0",
+    "eslint-config-vtex-react": "^5.0.1",
+    "husky": "^2.4.1",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.3"
   },
   "husky": {
     "hooks": {
