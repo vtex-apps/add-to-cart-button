@@ -9,7 +9,7 @@
     "locales:fix": "intl-equalizer --fix",
     "verify": "yarn lint && yarn lint:locales && yarn test"
   },
-  "version": "0.0.0",
+  "version": "0.1.0",
   "devDependencies": {
     "@types/node": "^12.7.12",
     "@vtex/intl-equalizer": "^2.3.0",
