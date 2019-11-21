@@ -29,5 +29,6 @@
     "vtex.order-items": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.order-items@0.5.0/public/@types/vtex.order-items",
     "vtex.order-manager": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.order-manager@0.6.0/public/@types/vtex.order-manager",
     "vtex.styleguide": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.styleguide@9.94.0/public/_types/react"
-  }
+  },
+  "version": "0.1.1"
 }
