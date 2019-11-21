@@ -17,11 +17,9 @@
     "vtex.order-items": "0.x",
     "vtex.checkout-resources": "0.x",
     "vtex.product-context": "0.x",
-    "vtex.pixel-manager": "0.x"
+    "vtex.pixel-manager": "1.x"
   },
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
