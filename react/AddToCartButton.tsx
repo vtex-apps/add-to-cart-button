@@ -94,7 +94,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   const dispatch = useProductDispatch()
   const { rootPath } = useRuntime()
   const { push } = usePixel()
-  const { settings = {}, showInstallPrompt } = usePWA()
+  const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
   const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
     intl.formatMessage(message)
