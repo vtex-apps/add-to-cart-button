@@ -17,7 +17,8 @@
     "vtex.order-items": "0.x",
     "vtex.checkout-resources": "0.x",
     "vtex.product-context": "0.x",
-    "vtex.pixel-manager": "1.x"
+    "vtex.pixel-manager": "1.x",
+    "vtex.store-resources": "0.x"
   },
   "registries": [
     "smartcheckout"

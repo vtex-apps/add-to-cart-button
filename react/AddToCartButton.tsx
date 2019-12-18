@@ -13,6 +13,7 @@ import { useRuntime } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { addToCart as ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
 import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
+import { usePWA } from 'vtex.store-resources/PWAContext'
 
 import { compareObjects } from './modules/compareObjects'
 import { MapCatalogItemToCartReturn } from './modules/catalogItemToCart'
@@ -93,6 +94,8 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   const dispatch = useProductDispatch()
   const { rootPath } = useRuntime()
   const { push } = usePixel()
+  const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
+  const { promptOnCustomEvent } = settings
   const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
     intl.formatMessage(message)
 
@@ -168,6 +171,11 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     }
 
     toastMessage({ success: true, isNewItem: true })
+
+    /* PWA */
+    if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
+      showInstallPrompt()
+    }
   }
 
   const handleClick = (e: React.MouseEvent) => {
