@@ -35,7 +35,7 @@ interface OrderFormContext {
   setOrderForm: (orderForm: Partial<OrderForm>) => void
 }
 
-const CSS_HANDLES = ['buyButtonText', 'buttonDataContainer']
+const CSS_HANDLES = ['buttonText', 'buttonDataContainer']
 const CHECKOUT_URL = '/checkout/#/cart'
 
 const messages = defineMessages({
@@ -191,14 +191,14 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
       <FormattedMessage id="store/add-to-cart.add-to-cart">
-        {message => <span className={handles.buyButtonText}>{message}</span>}
+        {message => <span className={handles.buttonText}>{message}</span>}
       </FormattedMessage>
     </div>
   )
 
   const unavailableButtonContent = (
     <FormattedMessage id="store/buyButton-label-unavailable">
-      {message => <span className={handles.buyButtonText}>{message}</span>}
+      {message => <span className={handles.buttonText}>{message}</span>}
     </FormattedMessage>
   )
 

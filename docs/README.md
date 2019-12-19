@@ -1,63 +1,47 @@
-# VTEX React App Template
+📢 Don't fork this project. Use, [contribute](https://github.com/vtex-apps/awesome-io#contributing), or open issues through [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
-Our guide repository to structure for react apps, that should be used as a template.
+# Add To Cart Button
 
-We use `yarn` as our default package manager, before coding make sure to run yarn on: `root` and `react` folders.
+`AddToCartButton` is a button responsible for handling events of adding products in the minicart.
 
-## Some features:
+![image](https://user-images.githubusercontent.com/284515/70233985-69e13700-173e-11ea-91f7-6675a6a0e73b.png)
 
-### Tests
+## Configuration
 
-For testing we use `@vtex/test-tools`, our own testing framework based on `react-testing-library`, the tests should be located on the `react/__tests__` folder. For references, visit our [repository](https://github.com/vtex/test-tools).
-
-### Hooks
-
-Husky hooks tha runs on every `pre-commit` and `pre-push`.
-
-### Intl Equalizer
-
-Tool for equalizing the messages located on the `messages` folder/builder. It's configured to use the **en.json** as the default file for comparison. For references, visit our [repository](https://github.com/vtex/intl-equalizer).
-
-### Lint + Formatting
-
-TS lint configured with Prettier and .Config.
-
-### Available Scripts
+1. Import the `vtex.add-to-cart-button`'s app to your theme's dependencies in the manifest.json, for example:
 
 ```json
-{
-  "lint": "cd ./react && yarn lint",
-  "test": "cd ./react && yarn test",
-  "lint:locales": "intl-equalizer",
-  "locales:fix": "intl-equalizer --fix",
-  "verify": "yarn lint && yarn lint:locales && yarn test"
+"dependencies": {
+  "vtex.add-to-cart-button": "0.x"
 }
 ```
 
-### Ci
+2. Add the `add-to-cart-button` block to any block bellow `store.product`. For example:
 
-#### Install:
-
-```yml
-install:
-  commands:
-    - echo Installing Packages...
-    - cd react
-    - npm install
-    - echo Packages installed!
+```json
+  "store.product": {
+    "children": [
+      "flex-layout.row#product",
+    ]
+  },
+  "flex-layout.row#product": {
+    "children": [
+      "add-to-cart-button"
+    ]
+  }
 ```
 
-#### Pre-build:
+| Prop name               | Type      | Description                                                                       | Default value        |
+| ----------------------- | --------- | --------------------------------------------------------------------------------- | -------------------- |
+| `isOneClickBuy`         | `Boolean` | Should redirect to the checkout page or not                                       | `false`              |
+| `customToastURL`        | `String`  | Set the link associated with the Toast created when adding an item to your cart.  | `/checkout/#/cart`   |
+| `customOneClickBuyLink` | `String`  | Set the link to redirect the user when the `isOneClickBuy` prop is set to `true`. | `'/checkout/#/cart'` |
 
-```yml
-pre_build:
-  commands:
-    - echo Running tests...
-    - npm run verify
-    - echo Lint and tests finished!
-```
+## Customization
 
+In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
 
-**Upcoming documentation:**
-
- - [First implementation](https://github.com/vtex-apps/add-to-cart-button/pull/1)
+| CSS Handles           |
+| --------------------- |
+| `buttonText`          |
+| `buttonDataContainer` |
