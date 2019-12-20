@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useMutation } from 'react-apollo'
 import {
   FormattedMessage,
@@ -44,6 +44,19 @@ const messages = defineMessages({
   error: { id: 'store/add-to-cart.failure', defaultMessage: '' },
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
+
+const useAddWhileLoadingHandler = (orderFormLoading: boolean, addToCartAndFinish: Function): [boolean, (state: boolean) => void] => {
+  const [isAddingToCart, setAddingToCart] = useState(false)
+  useEffect(() => {
+    if (!orderFormLoading && isAddingToCart) {
+      addToCartAndFinish().then(() => {
+        setAddingToCart(false)
+      })
+    }
+  }, [orderFormLoading])
+
+  return [isAddingToCart, setAddingToCart]
+}
 
 const adjustItemsForMutationInput = (
   newItems: MapCatalogItemToCartReturn[]
@@ -117,9 +130,9 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
     const action = success
       ? {
-          label: translateMessage(messages.seeCart),
-          href: customToastUrl,
-        }
+        label: translateMessage(messages.seeCart),
+        href: customToastUrl,
+      }
       : undefined
 
     showToast({ message, action })
@@ -132,10 +145,13 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     ADD_TO_CART
   )
 
-  const handleAddToCart = async (event: React.MouseEvent) => {
+  const beforeAddToCart = (event: React.MouseEvent) => {
     event.stopPropagation()
     event.preventDefault()
 
+  }
+
+  const callAddToCart = async () => {
     const adjustedSkuItems = adjustItemsForMutationInput(skuItems)
 
     const mutationResult = await addToCart({
@@ -178,13 +194,26 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     }
   }
 
+  const [isAddingToCart, setAddingToCart] = useAddWhileLoadingHandler(loading, callAddToCart)
+
+  const handleAddToCart = async (event: React.MouseEvent) => {
+    beforeAddToCart(event)
+    await callAddToCart()
+  }
+
   const handleClick = (e: React.MouseEvent) => {
     if (dispatch) {
       dispatch({ type: 'SET_BUY_BUTTON_CLICKED', args: { clicked: true } })
     }
 
     if (allSkuVariationsSelected) {
-      handleAddToCart(e)
+      if (loading) {
+        // Just call the beforeAddToCart method and wait for the hook useAddWhileLoadingHandler to call the add to cart logic
+        beforeAddToCart(e)
+        setAddingToCart(true)
+      } else {
+        handleAddToCart(e)
+      }
     }
   }
 
@@ -208,27 +237,22 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     </FormattedMessage>
   )
 
+  const ButtonWithLabel = <Button
+    block
+    disabled={disabled || !available || mutationLoading || isAddingToCart}
+    isLoading={mutationLoading || isAddingToCart}
+    onClick={handleClick}
+  >
+    {available ? availableButtonContent : unavailableButtonContent}
+  </Button>
+
   return allSkuVariationsSelected ? (
-    <Button
-      block
-      disabled={disabled || !available || loading || mutationLoading}
-      isLoading={mutationLoading}
-      onClick={handleClick}
-    >
-      {available ? availableButtonContent : unavailableButtonContent}
-    </Button>
+    ButtonWithLabel
   ) : (
-    <Tooltip trigger="click" label={tooltipLabel}>
-      <Button
-        block
-        disabled={disabled || !available || loading || mutationLoading}
-        isLoading={mutationLoading}
-        onClick={handleClick}
-      >
-        {available ? availableButtonContent : unavailableButtonContent}
-      </Button>
-    </Tooltip>
-  )
+      <Tooltip trigger="click" label={tooltipLabel}>
+        {ButtonWithLabel}
+      </Tooltip>
+    )
 }
 
 export default injectIntl(AddToCartButton)
