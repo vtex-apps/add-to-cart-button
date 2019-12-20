@@ -45,11 +45,11 @@ const messages = defineMessages({
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
 
-const useAddWhileLoadingHandler = (orderFormLoading: boolean, addToCartAndFinish: Function): [boolean, (state: boolean) => void] => {
+const useAddWhileLoadingHandler = (orderFormLoading: boolean, addToCart: () => Promise<void>): [boolean, (state: boolean) => void] => {
   const [isAddingToCart, setAddingToCart] = useState(false)
   useEffect(() => {
     if (!orderFormLoading && isAddingToCart) {
-      addToCartAndFinish().then(() => {
+      addToCart().then(() => {
         setAddingToCart(false)
       })
     }
@@ -148,7 +148,6 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   const beforeAddToCart = (event: React.MouseEvent) => {
     event.stopPropagation()
     event.preventDefault()
-
   }
 
   const callAddToCart = async () => {
