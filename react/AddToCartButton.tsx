@@ -45,17 +45,17 @@ const messages = defineMessages({
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
 
-const useAddWhileLoadingHandler = (orderFormLoading: boolean, addToCart: () => Promise<void>): [boolean, (state: boolean) => void] => {
-  const [isAddingToCart, setAddingToCart] = useState(false)
+const useWaitForOrderFormAndAddToCart = (orderFormLoading: boolean, addToCart: () => Promise<void>): [boolean, (state: boolean) => void] => {
+  const [waitingOrderFormLoad, setWaitForOrderForm] = useState(false)
   useEffect(() => {
-    if (!orderFormLoading && isAddingToCart) {
+    if (!orderFormLoading && waitingOrderFormLoad) {
       addToCart().then(() => {
-        setAddingToCart(false)
+        setWaitForOrderForm(false)
       })
     }
   }, [orderFormLoading])
 
-  return [isAddingToCart, setAddingToCart]
+  return [waitingOrderFormLoad, setWaitForOrderForm]
 }
 
 const adjustItemsForMutationInput = (
@@ -193,7 +193,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     }
   }
 
-  const [isAddingToCart, setAddingToCart] = useAddWhileLoadingHandler(loading, callAddToCart)
+  const [waitingOrderFormLoad, setWaitOrderFormLoad] = useWaitForOrderFormAndAddToCart(loading, callAddToCart)
 
   const handleAddToCart = async (event: React.MouseEvent) => {
     beforeAddToCart(event)
@@ -209,7 +209,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
       if (loading) {
         // Just call the beforeAddToCart method and wait for the hook useAddWhileLoadingHandler to call the add to cart logic
         beforeAddToCart(e)
-        setAddingToCart(true)
+        setWaitOrderFormLoad(true)
       } else {
         handleAddToCart(e)
       }
@@ -238,8 +238,8 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
   const ButtonWithLabel = <Button
     block
-    disabled={disabled || !available || mutationLoading || isAddingToCart}
-    isLoading={mutationLoading || isAddingToCart}
+    disabled={disabled || !available || mutationLoading || waitingOrderFormLoad}
+    isLoading={mutationLoading || waitingOrderFormLoad}
     onClick={handleClick}
   >
     {available ? availableButtonContent : unavailableButtonContent}
