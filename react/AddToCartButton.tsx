@@ -105,7 +105,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
   const dispatch = useProductDispatch()
-  const { rootPath } = useRuntime()
+  const { rootPath = '' } = useRuntime()
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
