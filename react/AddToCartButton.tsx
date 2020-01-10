@@ -8,6 +8,7 @@ import {
 } from 'react-intl'
 import { Button, Tooltip } from 'vtex.styleguide'
 import { OrderForm } from 'vtex.order-manager'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
@@ -36,7 +37,6 @@ interface OrderFormContext {
 }
 
 const CSS_HANDLES = ['buttonText', 'buttonDataContainer']
-const CHECKOUT_URL = '/checkout/#/cart'
 
 const messages = defineMessages({
   success: { id: 'store/add-to-cart.success', defaultMessage: '' },
@@ -45,7 +45,10 @@ const messages = defineMessages({
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
 
-const useWaitForOrderFormAndAddToCart = (orderFormLoading: boolean, addToCart: () => Promise<void>): [boolean, (state: boolean) => void] => {
+const useWaitForOrderFormAndAddToCart = (
+  orderFormLoading: boolean,
+  addToCart: () => Promise<void>
+): [boolean, (state: boolean) => void] => {
   const [waitingOrderFormLoad, setWaitForOrderForm] = useState(false)
   useEffect(() => {
     if (!orderFormLoading && waitingOrderFormLoad) {
@@ -53,7 +56,7 @@ const useWaitForOrderFormAndAddToCart = (orderFormLoading: boolean, addToCart: (
         setWaitForOrderForm(false)
       })
     }
-  }, [orderFormLoading])
+  }, [addToCart, orderFormLoading, waitingOrderFormLoad])
 
   return [waitingOrderFormLoad, setWaitForOrderForm]
 }
@@ -105,7 +108,8 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     loading,
   }: OrderFormContext = OrderForm.useOrderForm()
   const dispatch = useProductDispatch()
-  const { rootPath = '' } = useRuntime()
+  const { rootPath = '', navigate } = useRuntime()
+  const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
@@ -130,9 +134,9 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
 
     const action = success
       ? {
-        label: translateMessage(messages.seeCart),
-        href: customToastUrl,
-      }
+          label: translateMessage(messages.seeCart),
+          href: customToastUrl,
+        }
       : undefined
 
     showToast({ message, action })
@@ -182,7 +186,11 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     })
 
     if (isOneClickBuy) {
-      location.assign(rootPath + (customOneClickBuyLink || CHECKOUT_URL))
+      if (major > 0 && !customOneClickBuyLink) {
+        navigate({ to: checkoutURL })
+      } else {
+        location.assign(rootPath + (customOneClickBuyLink || checkoutURL))
+      }
     }
 
     toastMessage({ success: true, isNewItem: true })
@@ -193,7 +201,10 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     }
   }
 
-  const [waitingOrderFormLoad, setWaitOrderFormLoad] = useWaitForOrderFormAndAddToCart(loading, callAddToCart)
+  const [
+    waitingOrderFormLoad,
+    setWaitOrderFormLoad,
+  ] = useWaitForOrderFormAndAddToCart(loading, callAddToCart)
 
   const handleAddToCart = async (event: React.MouseEvent) => {
     beforeAddToCart(event)
@@ -236,22 +247,26 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     </FormattedMessage>
   )
 
-  const ButtonWithLabel = <Button
-    block
-    disabled={disabled || !available || mutationLoading || waitingOrderFormLoad}
-    isLoading={mutationLoading || waitingOrderFormLoad}
-    onClick={handleClick}
-  >
-    {available ? availableButtonContent : unavailableButtonContent}
-  </Button>
+  const ButtonWithLabel = (
+    <Button
+      block
+      disabled={
+        disabled || !available || mutationLoading || waitingOrderFormLoad
+      }
+      isLoading={mutationLoading || waitingOrderFormLoad}
+      onClick={handleClick}
+    >
+      {available ? availableButtonContent : unavailableButtonContent}
+    </Button>
+  )
 
   return allSkuVariationsSelected ? (
     ButtonWithLabel
   ) : (
-      <Tooltip trigger="click" label={tooltipLabel}>
-        {ButtonWithLabel}
-      </Tooltip>
-    )
+    <Tooltip trigger="click" label={tooltipLabel}>
+      {ButtonWithLabel}
+    </Tooltip>
+  )
 }
 
 export default injectIntl(AddToCartButton)
