@@ -186,7 +186,10 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     })
 
     if (isOneClickBuy) {
-      if (major > 0 && !customOneClickBuyLink) {
+      if (
+        major > 0 &&
+        (!customOneClickBuyLink || customOneClickBuyLink === checkoutURL)
+      ) {
         navigate({ to: checkoutURL })
       } else {
         location.assign(rootPath + (customOneClickBuyLink || checkoutURL))
