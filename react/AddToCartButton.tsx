@@ -87,6 +87,8 @@ const adjustSkuItemForPixelEvent = (skuItem: MapCatalogItemToCartReturn) => {
     productRefId: skuItem.productRefId,
     brand: skuItem.brand,
     category,
+    detailUrl: skuItem.detailUrl,
+    imageUrl: skuItem.imageUrl,
   }
 }
 
