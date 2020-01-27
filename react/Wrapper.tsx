@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
@@ -22,11 +22,7 @@ const Wrapper: FC<Props> = ({
   showToast,
   customOneClickBuyLink,
 }) => {
-  const productContext: Maybe<ProductContextState> = useProduct()
-
-  if (!productContext) {
-    throw new Error('useProduct must be used within a ProductContextProvider')
-  }
+  const productContext = useProduct()
 
   const isEmptyContext = Object.keys(productContext).length === 0
 
@@ -42,13 +38,17 @@ const Wrapper: FC<Props> = ({
       ? productContext.selectedQuantity
       : 1
 
-  const skuItems = mapCatalogItemToCart({
-    product,
-    selectedItem,
-    selectedQuantity,
-    selectedSeller,
-    assemblyOptions,
-  })
+  const skuItems = useMemo(
+    () =>
+      mapCatalogItemToCart({
+        product,
+        selectedItem,
+        selectedQuantity,
+        selectedSeller,
+        assemblyOptions,
+      }),
+    [assemblyOptions, product, selectedItem, selectedQuantity, selectedSeller]
+  )
 
   const isAvailable =
     isEmptyContext || available != null
