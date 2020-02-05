@@ -5606,14 +5606,6 @@ verror@1.10.0:
   version "0.4.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.1/public/@types/vtex.css-handles#16fe9485e8e7183b94f28496ed8cdd741c83f227"
 
-"vtex.order-items@https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-items@0.5.1+build1580146029/public/@types/vtex.order-items":
-  version "0.5.1"
-  resolved "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-items@0.5.1+build1580146029/public/@types/vtex.order-items#09699b278eb951da3b30ca100170f8182842275d"
-
-"vtex.order-manager@https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-manager@0.6.9+build1579176442/public/@types/vtex.order-manager":
-  version "0.6.9"
-  resolved "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-manager@0.6.9+build1579176442/public/@types/vtex.order-manager#2a128d730f1216e38a353d904567e25052006e27"
-
 "vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager":
   version "1.1.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager#96907e17f4e5c584162a47dc425cb5afb2267d00"

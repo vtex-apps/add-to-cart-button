@@ -30,9 +30,7 @@
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.7.0/public/@types/vtex.product-context",
     "vtex.store-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.43.0/public/_types/react",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.90.1/public/@types/vtex.render-runtime",
-    "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.15.0/public/@types/vtex.checkout-resources",
-    "vtex.order-manager": "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-manager@0.6.9+build1579176442/public/@types/vtex.order-manager",
-    "vtex.order-items": "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-items@0.5.1+build1580146029/public/@types/vtex.order-items"
+    "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.15.0/public/@types/vtex.checkout-resources"
   },
   "version": "0.4.0"
 }
