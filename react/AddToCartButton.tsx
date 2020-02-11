@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import {
   FormattedMessage,
-  injectIntl,
-  InjectedIntlProps,
+  MessageDescriptor,
+  useIntl,
   defineMessages,
 } from 'react-intl'
 import { Button, Tooltip } from 'vtex.styleguide'
@@ -55,8 +55,7 @@ const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
   }
 }
 
-const AddToCartButton: FC<Props & InjectedIntlProps> = ({
-  intl,
+const AddToCartButton: FC<Props> = ({
   isOneClickBuy,
   customOneClickBuyLink,
   available,
@@ -66,6 +65,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   showToast,
   allSkuVariationsSelected = true,
 }) => {
+  const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItem } = useOrderItems()
   const dispatch = useProductDispatch()
@@ -74,7 +74,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
-  const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
+  const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
@@ -180,4 +180,4 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   )
 }
 
-export default injectIntl(AddToCartButton)
+export default AddToCartButton
