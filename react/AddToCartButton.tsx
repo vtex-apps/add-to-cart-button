@@ -107,7 +107,7 @@ const AddToCartButton: FC<Props> = ({
     event.stopPropagation()
     event.preventDefault()
 
-    addItem(skuItems)
+    const itemsAdded = addItem(skuItems)
 
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
 
@@ -127,7 +127,7 @@ const AddToCartButton: FC<Props> = ({
       }
     }
 
-    toastMessage({ success: true, isNewItem: true })
+    toastMessage({ success: true, isNewItem: itemsAdded })
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
