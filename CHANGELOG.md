@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [0.5.0] - 2020-02-20
+### Changed
+- Use `addItem` function from `OrderItems` context instead of calling mutation directly.
 
 ## [0.4.0] - 2020-01-13
 ### Added
