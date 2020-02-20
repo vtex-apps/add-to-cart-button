@@ -1,23 +1,20 @@
-import React, { FC, useEffect, useState } from 'react'
-import { useMutation } from 'react-apollo'
+import React, { FC } from 'react'
 import {
   FormattedMessage,
-  injectIntl,
-  InjectedIntlProps,
+  MessageDescriptor,
+  useIntl,
   defineMessages,
 } from 'react-intl'
 import { Button, Tooltip } from 'vtex.styleguide'
-import { OrderForm } from 'vtex.order-manager'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
-import { addToCart as ADD_TO_CART } from 'vtex.checkout-resources/Mutations'
 import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
 import { usePWA } from 'vtex.store-resources/PWAContext'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 
-import { compareObjects } from './modules/compareObjects'
-import { MapCatalogItemToCartReturn } from './modules/catalogItemToCart'
+import { CartItem } from './modules/catalogItemToCart'
 
 interface Props {
   isOneClickBuy: boolean
@@ -25,15 +22,9 @@ interface Props {
   disabled: boolean
   customToastUrl: string
   customOneClickBuyLink: string
-  skuItems: MapCatalogItemToCartReturn[]
+  skuItems: CartItem[]
   showToast: Function
   allSkuVariationsSelected: boolean
-}
-
-interface OrderFormContext {
-  loading: boolean
-  orderForm: OrderForm | undefined
-  setOrderForm: (orderForm: Partial<OrderForm>) => void
 }
 
 const CSS_HANDLES = ['buttonText', 'buttonDataContainer']
@@ -45,41 +36,13 @@ const messages = defineMessages({
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
 })
 
-const useWaitForOrderFormAndAddToCart = (
-  orderFormLoading: boolean,
-  addToCart: () => Promise<void>
-): [boolean, (state: boolean) => void] => {
-  const [waitingOrderFormLoad, setWaitForOrderForm] = useState(false)
-  useEffect(() => {
-    if (!orderFormLoading && waitingOrderFormLoad) {
-      addToCart().then(() => {
-        setWaitForOrderForm(false)
-      })
-    }
-  }, [addToCart, orderFormLoading, waitingOrderFormLoad])
-
-  return [waitingOrderFormLoad, setWaitForOrderForm]
-}
-
-const adjustItemsForMutationInput = (
-  newItems: MapCatalogItemToCartReturn[]
-): OrderFormItemInput[] => {
-  return newItems.map(item => ({
-    id: Number.parseInt(item.skuId),
-    index: item.index,
-    seller: item.seller,
-    quantity: item.quantity,
-    options: item.options,
-  }))
-}
-
-const adjustSkuItemForPixelEvent = (skuItem: MapCatalogItemToCartReturn) => {
+const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
   const category = skuItem.category ? skuItem.category.slice(1, -1) : ''
 
   return {
-    skuId: skuItem.skuId,
+    skuId: skuItem.id,
     variant: skuItem.variant,
     price: skuItem.price,
     name: skuItem.name,
@@ -92,8 +55,7 @@ const adjustSkuItemForPixelEvent = (skuItem: MapCatalogItemToCartReturn) => {
   }
 }
 
-const AddToCartButton: FC<Props & InjectedIntlProps> = ({
-  intl,
+const AddToCartButton: FC<Props> = ({
   isOneClickBuy,
   customOneClickBuyLink,
   available,
@@ -103,19 +65,16 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   showToast,
   allSkuVariationsSelected = true,
 }) => {
+  const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
-  const {
-    orderForm,
-    setOrderForm,
-    loading,
-  }: OrderFormContext = OrderForm.useOrderForm()
+  const { addItem } = useOrderItems()
   const dispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
-  const translateMessage = (message: FormattedMessage.MessageDescriptor) =>
+  const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
@@ -144,44 +103,14 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     showToast({ message, action })
   }
 
-  const [
-    addToCart,
-    { error: mutationError, loading: mutationLoading },
-  ] = useMutation<{ addToCart: OrderForm }, { items: OrderFormItemInput[] }>(
-    ADD_TO_CART
-  )
-
-  const beforeAddToCart = (event: React.MouseEvent) => {
+  const handleAddToCart: React.MouseEventHandler = event => {
     event.stopPropagation()
     event.preventDefault()
-  }
 
-  const callAddToCart = async () => {
-    const adjustedSkuItems = adjustItemsForMutationInput(skuItems)
+    const itemsAdded = addItem(skuItems)
 
-    const mutationResult = await addToCart({
-      variables: { items: adjustedSkuItems },
-    })
-
-    if (mutationError) {
-      console.error(mutationError)
-      toastMessage({ success: false, isNewItem: false })
-      return
-    }
-
-    if (
-      mutationResult.data &&
-      compareObjects(mutationResult.data.addToCart, orderForm)
-    ) {
-      toastMessage({ success: true, isNewItem: false })
-      return
-    }
-
-    // Update OrderForm from the context
-    mutationResult.data && setOrderForm(mutationResult.data.addToCart)
-
-    // Send event to pixel-manager
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
+
     push({
       event: 'addToCart',
       items: pixelEventItems,
@@ -198,22 +127,12 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
       }
     }
 
-    toastMessage({ success: true, isNewItem: true })
+    toastMessage({ success: true, isNewItem: itemsAdded })
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
       showInstallPrompt()
     }
-  }
-
-  const [
-    waitingOrderFormLoad,
-    setWaitOrderFormLoad,
-  ] = useWaitForOrderFormAndAddToCart(loading, callAddToCart)
-
-  const handleAddToCart = async (event: React.MouseEvent) => {
-    beforeAddToCart(event)
-    await callAddToCart()
   }
 
   const handleClick = (e: React.MouseEvent) => {
@@ -222,13 +141,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
     }
 
     if (allSkuVariationsSelected) {
-      if (loading) {
-        // Just call the beforeAddToCart method and wait for the hook useAddWhileLoadingHandler to call the add to cart logic
-        beforeAddToCart(e)
-        setWaitOrderFormLoad(true)
-      } else {
-        handleAddToCart(e)
-      }
+      handleAddToCart(e)
     }
   }
 
@@ -253,14 +166,7 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   )
 
   const ButtonWithLabel = (
-    <Button
-      block
-      disabled={
-        disabled || !available || mutationLoading || waitingOrderFormLoad
-      }
-      isLoading={mutationLoading || waitingOrderFormLoad}
-      onClick={handleClick}
-    >
+    <Button block disabled={disabled || !available} onClick={handleClick}>
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
   )
@@ -274,4 +180,4 @@ const AddToCartButton: FC<Props & InjectedIntlProps> = ({
   )
 }
 
-export default injectIntl(AddToCartButton)
+export default AddToCartButton

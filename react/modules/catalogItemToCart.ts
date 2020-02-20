@@ -7,32 +7,26 @@ import {
   Option,
 } from './assemblyOptions'
 
-interface MapCatalogItemToCartArgs {
-  product: Maybe<Product>
-  selectedItem: Maybe<ProductContextItem>
-  selectedQuantity: number
-  selectedSeller: any
-  assemblyOptions?: {
-    items: Record<string, AssemblyOptionItem[]>
-    inputValues: Record<string, Record<string, string>>
-    areGroupsValid: Record<string, boolean>
-  }
-}
-
-export interface MapCatalogItemToCartReturn {
-  index: 0
-  quantity: number
+export interface CartItem {
   detailUrl: string
-  name: string
-  brand: string
-  category: string
-  productRefId: string
-  seller: any
-  price: number
+  id: string
+  imageUrl: string
+  index?: number
   listPrice: number
+  measurementUnit: string
+  name: string
+  price: number
+  productId: string
+  quantity: number
+  seller: string
+  sellingPrice: number
+  productRefId: string
+  brand: string
   variant: string
-  skuId: string
-  imageUrl: string | undefined
+  category: string
+  skuName: string
+  skuSpecifications: SKUSpecification[]
+  uniqueId: string
   sellingPriceWithAssemblies: number
   options: Option[]
   assemblyOptions: ParsedAssemblyOptionsMeta
@@ -44,39 +38,60 @@ export function mapCatalogItemToCart({
   selectedQuantity,
   selectedSeller,
   assemblyOptions,
-}: MapCatalogItemToCartArgs): MapCatalogItemToCartReturn[] {
-  return (
-    product &&
-    selectedItem &&
-    selectedSeller &&
-    selectedSeller.commertialOffer && [
-      {
-        index: 0,
-        quantity: selectedQuantity,
-        detailUrl: `/${product.linkText}/p`,
-        name: product.productName,
-        brand: product.brand,
-        category:
-          product.categories && product.categories.length > 0
-            ? product.categories[0]
-            : '',
-        productRefId: product.productReference,
-        seller: selectedSeller.sellerId,
-        price: selectedSeller.commertialOffer.Price,
-        listPrice: selectedSeller.commertialOffer.ListPrice,
-        variant: selectedItem.name,
-        skuId: selectedItem.itemId,
-        imageUrl: path(['images', '0', 'imageUrl'], selectedItem),
-        ...transformAssemblyOptions(
-          path(['items'], assemblyOptions),
-          path(['inputValues'], assemblyOptions),
-          selectedSeller.commertialOffer.Price,
-          selectedQuantity
-        ),
-        sellingPriceWithAssemblies:
-          selectedSeller.commertialOffer.Price +
-          sumAssembliesPrice(path(['items'], assemblyOptions) || {}),
-      },
-    ]
-  )
+}: {
+  product: Maybe<Product>
+  selectedItem: Maybe<ProductContextItem>
+  selectedQuantity: number
+  selectedSeller: any
+  assemblyOptions?: {
+    items: Record<string, AssemblyOptionItem[]>
+    inputValues: Record<string, Record<string, string>>
+    areGroupsValid: Record<string, boolean>
+  }
+}): CartItem[] {
+  if (
+    !product ||
+    !selectedItem ||
+    !selectedSeller ||
+    !selectedSeller.commertialOffer
+  ) {
+    return []
+  }
+
+  return [
+    {
+      index: 0,
+      id: selectedItem.itemId,
+      productId: product.productId,
+      quantity: selectedQuantity,
+      uniqueId: '',
+      detailUrl: `/${product.linkText}/p`,
+      name: product.productName,
+      brand: product.brand,
+      category:
+        product.categories && product.categories.length > 0
+          ? product.categories[0]
+          : '',
+      productRefId: product.productReference,
+      seller: selectedSeller.sellerId,
+      variant: selectedItem.name,
+      skuName: selectedItem.name,
+      price: selectedSeller.commertialOffer.PriceWithoutDiscount * 100,
+      listPrice: selectedSeller.commertialOffer.ListPrice * 100,
+      sellingPrice: selectedSeller.commertialOffer.Price * 100,
+      sellingPriceWithAssemblies:
+        (selectedSeller.commertialOffer.Price +
+          sumAssembliesPrice(path(['items'], assemblyOptions) || {})) *
+        100,
+      measurementUnit: selectedItem.measurementUnit,
+      skuSpecifications: [],
+      imageUrl: selectedItem.images[0].imageUrl,
+      ...transformAssemblyOptions(
+        path(['items'], assemblyOptions),
+        path(['inputValues'], assemblyOptions),
+        selectedSeller.commertialOffer.Price,
+        selectedQuantity
+      ),
+    },
+  ]
 }
