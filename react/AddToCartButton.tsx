@@ -15,6 +15,7 @@ import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
 
 import { CartItem } from './modules/catalogItemToCart'
+import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
 interface Props {
   isOneClickBuy: boolean
@@ -74,6 +75,7 @@ const AddToCartButton: FC<Props> = ({
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
+  const { utmParams, utmiParams } = useMarketingSessionParams()
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
 
@@ -107,7 +109,10 @@ const AddToCartButton: FC<Props> = ({
     event.stopPropagation()
     event.preventDefault()
 
-    const itemsAdded = addItem(skuItems)
+    const itemsAdded = addItem({
+      items: skuItems,
+      marketingData: { ...utmParams, ...utmiParams },
+    })
 
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
 
