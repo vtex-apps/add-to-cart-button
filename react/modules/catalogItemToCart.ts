@@ -80,18 +80,18 @@ export function mapCatalogItemToCart({
       listPrice: selectedSeller.commertialOffer.ListPrice * 100,
       sellingPrice: selectedSeller.commertialOffer.Price * 100,
       sellingPriceWithAssemblies:
-        (selectedSeller.commertialOffer.Price +
-          sumAssembliesPrice(path(['items'], assemblyOptions) || {})) *
+        ((selectedSeller.commertialOffer.Price as number) +
+          sumAssembliesPrice(path(['items'], assemblyOptions) ?? {})) *
         100,
       measurementUnit: selectedItem.measurementUnit,
       skuSpecifications: [],
       imageUrl: selectedItem.images[0].imageUrl,
-      ...transformAssemblyOptions(
-        path(['items'], assemblyOptions),
-        path(['inputValues'], assemblyOptions),
-        selectedSeller.commertialOffer.Price,
-        selectedQuantity
-      ),
+      ...transformAssemblyOptions({
+        assemblyOptionsItems: assemblyOptions?.items,
+        inputValues: assemblyOptions?.inputValues,
+        parentPrice: selectedSeller.commertialOffer.Price,
+        parentQuantity: selectedQuantity,
+      }),
     },
   ]
 }
