@@ -123,7 +123,9 @@ const AddToCartButton: FC<Props> = ({
       ) {
         navigate({ to: checkoutURL })
       } else {
-        location.assign(rootPath + (customOneClickBuyLink || checkoutURL))
+        window.location.assign(
+          `${rootPath}${customOneClickBuyLink || checkoutURL}`
+        )
       }
     }
 

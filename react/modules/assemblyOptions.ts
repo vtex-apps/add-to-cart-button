@@ -73,12 +73,17 @@ interface ParsedAssemblyOptions {
   assemblyOptions: ParsedAssemblyOptionsMeta
 }
 
-export function transformAssemblyOptions(
-  assemblyOptionsItems: Record<GroupId, AssemblyOptionItem[]> = {},
-  inputValues: Record<GroupId, InputValue> = {},
-  parentPrice: number,
+export function transformAssemblyOptions({
+  assemblyOptionsItems = {},
+  inputValues = {},
+  parentPrice,
+  parentQuantity,
+}: {
+  assemblyOptionsItems?: Record<GroupId, AssemblyOptionItem[]>
+  inputValues?: Record<GroupId, InputValue>
+  parentPrice: number
   parentQuantity: number
-): ParsedAssemblyOptions {
+}): ParsedAssemblyOptions {
   // contains options sent as arguments to graphql mutation
   const options: Option[] = []
 
@@ -94,18 +99,18 @@ export function transformAssemblyOptions(
     const items = assemblyOptionsItems[groupId]
     for (const item of items) {
       const childrenAddedData = item.children
-        ? transformAssemblyOptions(
-            item.children,
-            {},
-            item.price,
-            item.quantity * parentQuantity
-          )
+        ? transformAssemblyOptions({
+            assemblyOptionsItems: item.children,
+            inputValues: {},
+            parentPrice: item.price,
+            parentQuantity: item.quantity * parentQuantity,
+          })
         : null
 
       const {
         options: childrenOptions,
         assemblyOptions: childrenAssemblyOptions,
-      } = childrenAddedData || {
+      } = childrenAddedData ?? {
         options: undefined,
         assemblyOptions: undefined,
       }
@@ -122,7 +127,7 @@ export function transformAssemblyOptions(
             sellingPrice: item.price,
             quantity,
             sellingPriceWithAssemblies:
-              item.price + sumAssembliesPrice(item.children || {}),
+              item.price + sumAssembliesPrice(item.children ?? {}),
             id: item.id,
             ...(childrenAssemblyOptions
               ? { assemblyOptions: childrenAssemblyOptions }
