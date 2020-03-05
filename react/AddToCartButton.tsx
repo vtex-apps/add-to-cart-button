@@ -109,11 +109,7 @@ const AddToCartButton: FC<Props> = ({
     event.stopPropagation()
     event.preventDefault()
 
-    const itemsAdded = addItem({
-      items: skuItems,
-      marketingData: { ...utmParams, ...utmiParams },
-    })
-
+    const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
 
     push({
