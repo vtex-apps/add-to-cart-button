@@ -25,25 +25,27 @@ interface UtmiParams {
 }
 
 interface SessionPromiseResponse {
-  id: string
-  namespaces: {
-    account: {
-      id: SessionPromiseFieldValue & { keepAlive: boolean }
-      accountName: SessionPromiseFieldValue
-    }
-    store: {
-      channel: SessionPromiseFieldValue
-      countryCode: SessionPromiseFieldValue
-      cultureInfo: SessionPromiseFieldValue
-      currencyCode: SessionPromiseFieldValue
-      currencySymbol: SessionPromiseFieldValue
-      admin_cultureInfo: SessionPromiseFieldValue
-    }
-    public: Record<PublicSessionField, SessionPromiseFieldValue>
-    creditControl: Record<string, SessionPromiseFieldValue>
-    authentication: Record<string, any>
-    profile: {
-      isAuthenticated: SessionPromiseFieldValue
+  response?: {
+    id: string
+    namespaces?: {
+      account: {
+        id: SessionPromiseFieldValue & { keepAlive: boolean }
+        accountName: SessionPromiseFieldValue
+      }
+      store: {
+        channel: SessionPromiseFieldValue
+        countryCode: SessionPromiseFieldValue
+        cultureInfo: SessionPromiseFieldValue
+        currencyCode: SessionPromiseFieldValue
+        currencySymbol: SessionPromiseFieldValue
+        admin_cultureInfo: SessionPromiseFieldValue
+      }
+      public: Record<PublicSessionField, SessionPromiseFieldValue>
+      creditControl: Record<string, SessionPromiseFieldValue>
+      authentication: Record<string, any>
+      profile: {
+        isAuthenticated: SessionPromiseFieldValue
+      }
     }
   }
 }
@@ -51,17 +53,17 @@ interface SessionPromiseResponse {
 const getUtmParams = (
   publicFields: Record<PublicSessionField, SessionPromiseFieldValue>
 ) => ({
-  utmSource: publicFields.utm_source.value,
-  utmMedium: publicFields.utm_medium.value,
-  utmCampaign: publicFields.utm_campaign.value,
+  utmSource: publicFields.utm_source?.value ?? '',
+  utmMedium: publicFields.utm_medium?.value ?? '',
+  utmCampaign: publicFields.utm_campaign?.value ?? '',
 })
 
 const getUtmiParams = (
   publicFields: Record<PublicSessionField, SessionPromiseFieldValue>
 ) => ({
-  utmiPage: publicFields.utmi_p.value,
-  utmiPart: publicFields.utmi_pc.value,
-  utmiCampaign: publicFields.utmi_cp.value,
+  utmiPage: publicFields.utmi_p?.value ?? '',
+  utmiPart: publicFields.utmi_pc?.value ?? '',
+  utmiCampaign: publicFields.utmi_cp?.value ?? '',
 })
 
 const getSessionPromiseFromWindow = () => {
@@ -79,28 +81,27 @@ const useMarketingSessionParams = () => {
   const [utmiParams, setUtmiParams] = useState<UtmiParams>({})
 
   useEffect(() => {
-    async function updateMarketingData() {
-      const data = await getSessionPromiseFromWindow()
+    getSessionPromiseFromWindow()
+      ?.then(data => {
+        const publicFields = data?.response?.namespaces?.public ?? {}
+        if (Object.keys(publicFields).length === 0) {
+          return
+        }
 
-      const publicFields = data?.namespaces.public ?? {}
-
-      if (Object.keys(publicFields).length === 0) {
-        return
-      }
-
-      setUtmParams(
-        getUtmParams(
-          publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
+        setUtmParams(
+          getUtmParams(
+            publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
+          )
         )
-      )
-      setUtmiParams(
-        getUtmiParams(
-          publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
+        setUtmiParams(
+          getUtmiParams(
+            publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
+          )
         )
-      )
-    }
-
-    updateMarketingData()
+      })
+      .catch(() => {
+        // Do nothing
+      })
   }, [])
 
   return { utmParams, utmiParams }
