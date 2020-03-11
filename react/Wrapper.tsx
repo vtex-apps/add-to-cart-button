@@ -26,15 +26,12 @@ const Wrapper: FC<Props> = ({
 
   const isEmptyContext = Object.keys(productContext).length === 0
 
-  const product = productContext && productContext.product
-  const selectedItem = productContext && productContext.selectedItem
-  const assemblyOptions = productContext && productContext.assemblyOptions
-  const selectedSeller =
-    productContext &&
-    productContext.selectedItem &&
-    productContext.selectedItem.sellers[0]
+  const product = productContext?.product
+  const selectedItem = productContext?.selectedItem
+  const assemblyOptions = productContext?.assemblyOptions
+  const selectedSeller = productContext?.selectedItem?.sellers[0]
   const selectedQuantity =
-    productContext && productContext.selectedQuantity != null
+    productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
       : 1
 
@@ -54,14 +51,12 @@ const Wrapper: FC<Props> = ({
     isEmptyContext || available != null
       ? available
       : Boolean(
-          selectedSeller &&
-            selectedSeller.commertialOffer &&
+          selectedSeller?.commertialOffer &&
             selectedSeller.commertialOffer.AvailableQuantity > 0
         )
 
   const groupsValidArray =
-    (assemblyOptions &&
-      assemblyOptions.areGroupsValid &&
+    (assemblyOptions?.areGroupsValid &&
       Object.values(assemblyOptions.areGroupsValid)) ||
     []
 
@@ -70,7 +65,7 @@ const Wrapper: FC<Props> = ({
     isEmptyContext || disabled != null ? disabled : !areAssemblyGroupsValid
 
   const areAllSkuVariationsSelected =
-    productContext && productContext.skuSelector.areAllVariationsSelected
+    productContext?.skuSelector.areAllVariationsSelected
 
   return (
     <AddToCartButton
