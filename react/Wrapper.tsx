@@ -22,8 +22,7 @@ const Wrapper: FC<Props> = ({
   showToast,
   customOneClickBuyLink,
 }) => {
-  const productContext = useProduct()
-
+  const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
 
   const product = productContext?.product
@@ -47,25 +46,41 @@ const Wrapper: FC<Props> = ({
     [assemblyOptions, product, selectedItem, selectedQuantity, selectedSeller]
   )
 
-  const isAvailable =
-    isEmptyContext || available != null
-      ? available
-      : Boolean(
-          selectedSeller?.commertialOffer &&
-            selectedSeller.commertialOffer.AvailableQuantity > 0
-        )
+  const checkAvailability = (availableProp: Props['available']) => {
+    if (isEmptyContext) {
+      return false
+    }
+    if (availableProp != null) {
+      return availableProp
+    }
+
+    return Boolean(
+      selectedSeller?.commertialOffer &&
+        selectedSeller.commertialOffer.AvailableQuantity > 0
+    )
+  }
+  const isAvailable = checkAvailability(available)
 
   const groupsValidArray =
     (assemblyOptions?.areGroupsValid &&
       Object.values(assemblyOptions.areGroupsValid)) ||
     []
-
   const areAssemblyGroupsValid = groupsValidArray.every(Boolean)
-  const isDisabled =
-    isEmptyContext || disabled != null ? disabled : !areAssemblyGroupsValid
+
+  const checkDisabled = (disabledProp: Props['disabled']) => {
+    if (isEmptyContext) {
+      return true
+    }
+    if (disabledProp != null) {
+      return disabledProp
+    }
+
+    return !areAssemblyGroupsValid
+  }
+  const isDisabled = checkDisabled(disabled)
 
   const areAllSkuVariationsSelected =
-    productContext?.skuSelector.areAllVariationsSelected
+    !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
   return (
     <AddToCartButton
