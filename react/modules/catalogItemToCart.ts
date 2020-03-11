@@ -32,13 +32,7 @@ export interface CartItem {
   assemblyOptions: ParsedAssemblyOptionsMeta
 }
 
-export function mapCatalogItemToCart({
-  product,
-  selectedItem,
-  selectedQuantity,
-  selectedSeller,
-  assemblyOptions,
-}: {
+interface MapCatalogItemToCartArgs {
   product: Maybe<Product>
   selectedItem: Maybe<ProductContextItem>
   selectedQuantity: number
@@ -48,7 +42,15 @@ export function mapCatalogItemToCart({
     inputValues: Record<string, Record<string, string>>
     areGroupsValid: Record<string, boolean>
   }
-}): CartItem[] {
+}
+
+export function mapCatalogItemToCart({
+  product,
+  selectedItem,
+  selectedQuantity,
+  selectedSeller,
+  assemblyOptions,
+}: MapCatalogItemToCartArgs): CartItem[] {
   if (
     !product ||
     !selectedItem ||

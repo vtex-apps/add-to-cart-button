@@ -65,31 +65,28 @@ interface Product {
   linkText: string
   productReference: string
   categoryId: string
-  categoriesIds: string[]
+  categoriesIds?: string[]
   categories: string[]
-  categoryTree: {
+  categoryTree?: Array<{
     id: string
     name: string
     href: string
-  }[]
+  }>
   brand: string
-  brandId: string
-  properties: {
+  brandId: number
+  properties: Array<{
     name: string
-    values: string
-  }[]
-  specificationGroups: {
+    values: string[]
+  }>
+  specificationGroups: Array<{
     name: string
-    specifications: {
+    specifications: Array<{
       name: string
       values: string[]
-    }[]
-  }[]
+    }>
+  }>
   items: ProductContextItem[]
-  itemMetadata: {
-    items: ItemMetadata[]
-    priceTable: any[]
-  }
+  itemMetadata: ItemMetadata
 }
 
 interface ProductContextItem {
@@ -98,49 +95,49 @@ interface ProductContextItem {
   nameComplete: string
   complementName: string
   ean: string
-  referenceId: {
+  referenceId: Array<{
     Key: string
     Value: string
-  }[]
+  }> | null
   measurementUnit: string
   unitMultiplier: number
-  images: {
+  images: Array<{
     imageId: string
     imageLabel: string
     imageTag: string
     imageUrl: string
     imageText: string
-  }[]
-  videos: {
+  }>
+  videos: Array<{
     videoUrl: string
-  }[]
+  }>
   sellers: Seller[]
-  variations: {
+  variations: Array<{
     name: string
     values: string[]
-  }[]
-  productClusters: {
+  }>
+  productClusters?: Array<{
     id: string
     name: string
-  }[]
-  clusterHighlights: {
+  }>
+  clusterHighlights?: Array<{
     id: string
     name: string
-  }[]
+  }>
 }
 
 interface Seller {
   sellerId: string
   sellerName: string
   addToCartLink: string
-  sellerDefault: string
+  sellerDefault: string | boolean
   commertialOffer: {
-    discountHighlights: {
+    discountHighlights: Array<{
       name: string
-    }[]
-    teasers: {
+    }>
+    teasers: Array<{
       name: string
-    }[]
+    }>
     Price: number
     ListPrice: number
     PriceWithoutDiscount: number
@@ -153,27 +150,27 @@ interface Seller {
 }
 
 interface ItemMetadata {
-  items: {
+  items: Array<{
     id: string
     name: string
     imageUrl: string
     seller: string
     assemblyOptions: {
-      id: string
-      name: string
-      required: boolean
-      inputValues: InputValue[]
-      composition: Composition | null
+      id?: string
+      name?: string
+      required?: boolean
+      inputValues?: InputValue[]
+      composition?: Composition | null
     }
-  }[]
-  priceTable: {
+  }>
+  priceTable: Array<{
     type: string
-    values: {
+    values: Array<{
       id: string
       assemblyId: string
       price: number | null
-    }[]
-  }[]
+    }>
+  }>
 }
 
 type InputValue = TextInputValue | BooleanInputValue | OptionsInputValue
@@ -211,14 +208,14 @@ interface OptionsInputValue {
 interface Composition {
   minQuantity: number
   maxQuantity: number
-  items: {
+  items: Array<{
     id: string
     minQuantity: number
     maxQuantity: number
     priceTable: string
     seller: string
     initialQuantity: number
-  }[]
+  }>
 }
 
 interface OrderFormMarketingData {
