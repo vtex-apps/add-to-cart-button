@@ -1,13 +1,27 @@
 {
   "extends": "@vtex/tsconfig",
   "compilerOptions": {
+    "jsx": "react",
     "noEmitOnError": false,
-    "lib": ["es2017", "dom", "es2018.promise"],
-    "typeRoots": ["node_modules/@types"],
-    "types": ["node", "jest"],
+    "lib": [
+      "es2017",
+      "dom",
+      "es2018.promise"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
     "moduleResolution": "node",
     "target": "es2017",
     "module": "esnext"
   },
-  "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
+  "include": [
+    "./typings/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.ts"
+  ]
 }
