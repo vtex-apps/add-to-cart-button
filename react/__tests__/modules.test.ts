@@ -1,7 +1,10 @@
-/* eslint-disable jest/no-mocks-import */
 import { compareObjects } from '../modules/compareObjects'
-import { StarColorTop } from '../__mocks__/productContext'
-import { customBell, comboPizza, starColor } from '../__mocks__/assemblyOptions'
+import { StarColorTop } from '../__fixtures__/productContext'
+import {
+  customBell,
+  comboPizza,
+  starColor,
+} from '../__fixtures__/assemblyOptions'
 import {
   sumAssembliesPrice,
   transformAssemblyOptions,

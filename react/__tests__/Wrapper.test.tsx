@@ -1,14 +1,13 @@
 /* eslint-disable no-console */
-/* eslint-disable jest/no-mocks-import */
 import React from 'react'
 import { cleanup } from '@vtex/test-tools/react'
 
-import { renderWithProductContext } from '../__mocks__/testUtils'
+import { renderWithProductContext } from '../modules/testUtils'
 import {
   StarColorTop,
   ProductOutOfStock,
   ProductWithInvalidAssemblies,
-} from '../__mocks__/productContext'
+} from '../__fixtures__/productContext'
 import Wrapper from '../Wrapper'
 
 jest.mock('../AddToCartButton.tsx')
@@ -16,8 +15,12 @@ jest.mock('../AddToCartButton.tsx')
 afterEach(cleanup)
 
 describe('Wrapper component', () => {
-  const originalWarn = console.log
-  afterEach(() => (console.log = originalWarn))
+  /**
+   * To test the values this component passes down to AddToCartButton,
+   * we use a mock implementation of the console.log() function.
+   */
+  const originalLog = console.log
+  afterEach(() => (console.log = originalLog))
 
   let consoleOutput: Array<Record<string, any>> = []
   const mockedLog = (output: any) => consoleOutput.push(output)
