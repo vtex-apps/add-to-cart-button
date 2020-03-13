@@ -4,6 +4,7 @@ import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
 import { mapCatalogItemToCart } from './modules/catalogItemToCart'
+import { AssemblyOptions } from './modules/assemblyOptions'
 
 interface Props {
   isOneClickBuy: boolean
@@ -12,6 +13,45 @@ interface Props {
   customToastUrl: string
   customOneClickBuyLink: string
   showToast: Function
+}
+
+function checkAvailability(
+  isEmptyContext: boolean,
+  selectedSeller: Seller | undefined,
+  availableProp: Props['available']
+) {
+  if (isEmptyContext) {
+    return false
+  }
+  if (availableProp != null) {
+    return availableProp
+  }
+
+  const availableProductQuantity =
+    selectedSeller?.commertialOffer?.AvailableQuantity
+
+  return Boolean(availableProductQuantity)
+}
+
+function checkDisabled(
+  isEmptyContext: boolean,
+  assemblyOptions: AssemblyOptions,
+  disabledProp: Props['disabled']
+) {
+  if (isEmptyContext) {
+    return true
+  }
+  if (disabledProp != null) {
+    return disabledProp
+  }
+
+  const groupsValidArray =
+    (assemblyOptions?.areGroupsValid &&
+      Object.values(assemblyOptions.areGroupsValid)) ||
+    []
+  const areAssemblyGroupsValid = groupsValidArray.every(Boolean)
+
+  return !areAssemblyGroupsValid
 }
 
 const Wrapper: FC<Props> = ({
@@ -46,38 +86,13 @@ const Wrapper: FC<Props> = ({
     [assemblyOptions, product, selectedItem, selectedQuantity, selectedSeller]
   )
 
-  const checkAvailability = (availableProp: Props['available']) => {
-    if (isEmptyContext) {
-      return false
-    }
-    if (availableProp != null) {
-      return availableProp
-    }
+  const isAvailable = checkAvailability(
+    isEmptyContext,
+    selectedSeller,
+    available
+  )
 
-    return Boolean(
-      selectedSeller?.commertialOffer &&
-        selectedSeller.commertialOffer.AvailableQuantity > 0
-    )
-  }
-  const isAvailable = checkAvailability(available)
-
-  const groupsValidArray =
-    (assemblyOptions?.areGroupsValid &&
-      Object.values(assemblyOptions.areGroupsValid)) ||
-    []
-  const areAssemblyGroupsValid = groupsValidArray.every(Boolean)
-
-  const checkDisabled = (disabledProp: Props['disabled']) => {
-    if (isEmptyContext) {
-      return true
-    }
-    if (disabledProp != null) {
-      return disabledProp
-    }
-
-    return !areAssemblyGroupsValid
-  }
-  const isDisabled = checkDisabled(disabled)
+  const isDisabled = checkDisabled(isEmptyContext, assemblyOptions, disabled)
 
   const areAllSkuVariationsSelected =
     !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
