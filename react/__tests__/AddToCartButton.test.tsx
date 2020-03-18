@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react'
 import { render, cleanup, act, fireEvent } from '@vtex/test-tools/react'
 
@@ -45,6 +44,9 @@ const mockMarketingData = {
   utmiPart: 'testing utmiPart',
 }
 
+const mockAddItem = jest.fn()
+const mockPixelEventPush = jest.fn()
+
 jest.mock('../hooks/useMarketingSessionParams', () => {
   return () => ({
     utmParams: {
@@ -60,23 +62,23 @@ jest.mock('../hooks/useMarketingSessionParams', () => {
   })
 })
 
-afterEach(cleanup)
+jest.mock('vtex.order-items/OrderItems', () => ({
+  useOrderItems: () => ({
+    addItem: mockAddItem,
+  }),
+}))
+
+jest.mock('vtex.pixel-manager/PixelContext', () => ({
+  usePixel: () => ({ push: mockPixelEventPush }),
+}))
+
+afterEach(() => {
+  mockAddItem.mockClear()
+  mockPixelEventPush.mockClear()
+  cleanup()
+})
 
 describe('AddToCartButton component', () => {
-  /**
-   * To test the values this component passes to each function it calls,
-   * we use a mock implementation of the console.log() function.
-   */
-  const originalWarn = console.log
-  afterEach(() => (console.log = originalWarn))
-
-  let consoleOutput: Record<string, any> = {}
-  const mockedLog = (output: any) => Object.assign(consoleOutput, output)
-  beforeEach(() => {
-    console.log = mockedLog
-    consoleOutput = {}
-  })
-
   it('should render correct message for unavailable button', () => {
     const { queryByText } = render(
       <AddToCartButton
@@ -173,7 +175,7 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(consoleOutput.addItemMock.skuItems).toEqual(mockSKUItems)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
   })
 
   it('should pass correct marketing data info to addItem function', () => {
@@ -200,7 +202,7 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(consoleOutput.addItemMock.marketingData).toEqual(mockMarketingData)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
   })
 
   it('should sent correct information about SKU items to pixel event', () => {
@@ -246,7 +248,7 @@ describe('AddToCartButton component', () => {
       ],
     }
 
-    expect(consoleOutput.pixelContextPush).toEqual(expectedPixelEvent)
+    expect(mockPixelEventPush).toBeCalledWith(expectedPixelEvent)
   })
 
   it('should not add item to the cart if not all SKU variations are selected', () => {
@@ -273,6 +275,6 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(consoleOutput.addItemMock).toBeUndefined()
+    expect(mockAddItem).toHaveBeenCalledTimes(0)
   })
 })

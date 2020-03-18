@@ -1,34 +1,37 @@
-/* eslint-disable no-console */
 import React from 'react'
 import { cleanup } from '@vtex/test-tools/react'
 
+import Wrapper from '../Wrapper'
+import AddToCartButton from '../AddToCartButton'
 import { renderWithProductContext } from '../modules/testUtils'
 import {
   StarColorTop,
   ProductOutOfStock,
   ProductWithInvalidAssemblies,
 } from '../__fixtures__/productContext'
-import Wrapper from '../Wrapper'
 
-jest.mock('../AddToCartButton.tsx')
+jest.mock('../AddToCartButton.tsx', () => ({
+  __esModule: true,
+  namedExport: jest.fn(),
+  default: jest.fn(),
+}))
 
-afterEach(cleanup)
+const MockAddToCartButton = jest.fn(() => {
+  return <button>Add to Cart</button>
+})
+
+beforeAll(() => {
+  ;(AddToCartButton as typeof AddToCartButton & {
+    mockImplementation: Function
+  }).mockImplementation(MockAddToCartButton)
+})
+
+afterEach(() => {
+  cleanup()
+  MockAddToCartButton.mockClear()
+})
 
 describe('Wrapper component', () => {
-  /**
-   * To test the values this component passes down to AddToCartButton,
-   * we use a mock implementation of the console.log() function.
-   */
-  const originalLog = console.log
-  afterEach(() => (console.log = originalLog))
-
-  let consoleOutput: Array<Record<string, any>> = []
-  const mockedLog = (output: any) => consoleOutput.push(output)
-  beforeEach(() => {
-    console.log = mockedLog
-    consoleOutput = []
-  })
-
   it('should pass all props received via blocks.json to AddToCart button correctly', () => {
     renderWithProductContext(
       <Wrapper
@@ -36,13 +39,16 @@ describe('Wrapper component', () => {
         customToastUrl="customToastUrl"
         customOneClickBuyLink="customOneClickBuyLink"
       />,
-      StarColorTop
+      {}
     )
 
-    expect(consoleOutput[0].isOneClickBuy).toBe(false)
-    expect(consoleOutput[0].customToastUrl).toEqual('customToastUrl')
-    expect(consoleOutput[0].customOneClickBuyLink).toEqual(
-      'customOneClickBuyLink'
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        isOneClickBuy: false,
+        customToastUrl: 'customToastUrl',
+        customOneClickBuyLink: 'customOneClickBuyLink',
+      }),
+      {}
     )
   })
 
@@ -62,37 +68,62 @@ describe('Wrapper component', () => {
   it('should evaluate isAvailable to false if product is out of stock', () => {
     renderWithProductContext(<Wrapper />, ProductOutOfStock)
 
-    expect(consoleOutput[0].available).toBe(false)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        available: false,
+      }),
+      {}
+    )
   })
 
   it('should evaluate isAvailable to false when productContext is empty', () => {
     renderWithProductContext(<Wrapper />, {})
 
-    expect(consoleOutput[0].available).toBe(false)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        available: false,
+      }),
+      {}
+    )
   })
 
   it("should evaluate isAvailable to true when product's available quantity is greater than 0", () => {
     renderWithProductContext(<Wrapper />, StarColorTop)
 
-    expect(consoleOutput[0].available).toBe(true)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        available: true,
+      }),
+      {}
+    )
   })
 
   it('should evaluate isDisabled to true when product has invalid assembly options', () => {
     renderWithProductContext(<Wrapper />, ProductWithInvalidAssemblies)
 
-    expect(consoleOutput[0].disabled).toBe(true)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        disabled: true,
+      }),
+      {}
+    )
   })
 
   it('should evaluate isDisabled to false when product does not have invalid assembly options', () => {
     renderWithProductContext(<Wrapper />, StarColorTop)
 
-    expect(consoleOutput[0].disabled).toBe(false)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        disabled: false,
+      }),
+      {}
+    )
   })
 
   it('should pass correct skuItems to AddToCartButton', () => {
     renderWithProductContext(<Wrapper />, StarColorTop)
 
-    const expectedOutput = [
+    const expectedSkuItems = [
       {
         index: 0,
         id: '2000564',
@@ -124,6 +155,11 @@ describe('Wrapper component', () => {
       },
     ]
 
-    expect(consoleOutput[0].skuItems).toStrictEqual(expectedOutput)
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        skuItems: expectedSkuItems,
+      }),
+      {}
+    )
   })
 })
