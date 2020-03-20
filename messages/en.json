@@ -4,5 +4,6 @@
   "store/add-to-cart.failure": "Something went wrong and the item was not added to your cart!",
   "store/add-to-cart.see-cart": "View cart",
   "store/add-to-cart.add-to-cart": "Add to cart",
+  "store/add-to-cart.label-unavailable": "Unavailable",
   "store/add-to-cart.select-sku-variations": "Please select an option of each variation"
 }

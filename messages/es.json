@@ -4,5 +4,6 @@
   "store/add-to-cart.failure": "¡Algo salió mal y el artículo no se agregó a tu carrito!",
   "store/add-to-cart.see-cart": "Ver carrito",
   "store/add-to-cart.add-to-cart": "Agregar a su carrito",
+  "store/add-to-cart.label-unavailable": "Indisponible",
   "store/add-to-cart.select-sku-variations": "Por favor seleccione una opción de cada variación"
 }

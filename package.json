@@ -5,10 +5,10 @@
   "scripts": {
     "lint": "cd ./react && yarn lint",
     "format": "prettier --write \"**/*.{ts,js,json}\"",
-    "test": "cd ./react && yarn test",
+    "test": "cd ./react && yarn test --verbose",
     "lint:locales": "intl-equalizer",
     "locales:fix": "intl-equalizer --fix",
-    "verify": "yarn lint && yarn lint:locales && yarn test"
+    "verify": "yarn lint && yarn lint:locales && yarn test --silent"
   },
   "husky": {
     "hooks": {

@@ -28,13 +28,21 @@ interface Props {
   allSkuVariationsSelected: boolean
 }
 
-const CSS_HANDLES = ['buttonText', 'buttonDataContainer']
+const CSS_HANDLES = [
+  'buttonText',
+  'buttonDataContainer',
+  'tooltipLabelText',
+] as const
 
 const messages = defineMessages({
   success: { id: 'store/add-to-cart.success', defaultMessage: '' },
   duplicate: { id: 'store/add-to-cart.duplicate', defaultMessage: '' },
   error: { id: 'store/add-to-cart.failure', defaultMessage: '' },
   seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
+  skuVariations: {
+    id: 'store/add-to-cart.select-sku-variations',
+    defaultMessage: '',
+  },
 })
 
 const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
@@ -157,15 +165,15 @@ const AddToCartButton: FC<Props> = ({
   )
 
   const unavailableButtonContent = (
-    <FormattedMessage id="store/buyButton-label-unavailable">
+    <FormattedMessage id="store/add-to-cart.label-unavailable">
       {message => <span className={handles.buttonText}>{message}</span>}
     </FormattedMessage>
   )
 
   const tooltipLabel = (
-    <FormattedMessage id="store/add-to-cart.select-sku-variations">
-      {message => <span className={handles.errorMessage}>{message}</span>}
-    </FormattedMessage>
+    <span className={handles.tooltipLabelText}>
+      {intl.formatMessage(messages.skuVariations)}
+    </span>
   )
 
   const ButtonWithLabel = (

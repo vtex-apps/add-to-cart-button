@@ -4,6 +4,7 @@ import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
 import { mapCatalogItemToCart } from './modules/catalogItemToCart'
+import { AssemblyOptions } from './modules/assemblyOptions'
 
 interface Props {
   isOneClickBuy: boolean
@@ -14,6 +15,45 @@ interface Props {
   showToast: Function
 }
 
+function checkAvailability(
+  isEmptyContext: boolean,
+  selectedSeller: Seller | undefined,
+  availableProp: Props['available']
+) {
+  if (isEmptyContext) {
+    return false
+  }
+  if (availableProp != null) {
+    return availableProp
+  }
+
+  const availableProductQuantity =
+    selectedSeller?.commertialOffer?.AvailableQuantity
+
+  return Boolean(availableProductQuantity)
+}
+
+function checkDisabled(
+  isEmptyContext: boolean,
+  assemblyOptions: AssemblyOptions,
+  disabledProp: Props['disabled']
+) {
+  if (isEmptyContext) {
+    return true
+  }
+  if (disabledProp != null) {
+    return disabledProp
+  }
+
+  const groupsValidArray =
+    (assemblyOptions?.areGroupsValid &&
+      Object.values(assemblyOptions.areGroupsValid)) ||
+    []
+  const areAssemblyGroupsValid = groupsValidArray.every(Boolean)
+
+  return !areAssemblyGroupsValid
+}
+
 const Wrapper: FC<Props> = ({
   isOneClickBuy,
   available,
@@ -22,19 +62,15 @@ const Wrapper: FC<Props> = ({
   showToast,
   customOneClickBuyLink,
 }) => {
-  const productContext = useProduct()
-
+  const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
 
-  const product = productContext && productContext.product
-  const selectedItem = productContext && productContext.selectedItem
-  const assemblyOptions = productContext && productContext.assemblyOptions
-  const selectedSeller =
-    productContext &&
-    productContext.selectedItem &&
-    productContext.selectedItem.sellers[0]
+  const product = productContext?.product
+  const selectedItem = productContext?.selectedItem
+  const assemblyOptions = productContext?.assemblyOptions
+  const selectedSeller = productContext?.selectedItem?.sellers[0]
   const selectedQuantity =
-    productContext && productContext.selectedQuantity != null
+    productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
       : 1
 
@@ -50,27 +86,16 @@ const Wrapper: FC<Props> = ({
     [assemblyOptions, product, selectedItem, selectedQuantity, selectedSeller]
   )
 
-  const isAvailable =
-    isEmptyContext || available != null
-      ? available
-      : Boolean(
-          selectedSeller &&
-            selectedSeller.commertialOffer &&
-            selectedSeller.commertialOffer.AvailableQuantity > 0
-        )
+  const isAvailable = checkAvailability(
+    isEmptyContext,
+    selectedSeller,
+    available
+  )
 
-  const groupsValidArray =
-    (assemblyOptions &&
-      assemblyOptions.areGroupsValid &&
-      Object.values(assemblyOptions.areGroupsValid)) ||
-    []
-
-  const areAssemblyGroupsValid = groupsValidArray.every(Boolean)
-  const isDisabled =
-    isEmptyContext || disabled != null ? disabled : !areAssemblyGroupsValid
+  const isDisabled = checkDisabled(isEmptyContext, assemblyOptions, disabled)
 
   const areAllSkuVariationsSelected =
-    productContext && productContext.skuSelector.areAllVariationsSelected
+    !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
   return (
     <AddToCartButton
