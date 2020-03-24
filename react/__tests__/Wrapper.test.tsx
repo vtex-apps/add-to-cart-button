@@ -152,6 +152,9 @@ describe('Wrapper component', () => {
           parentPrice: 35,
           removed: [],
         },
+        referenceId: [
+          { Key: 'RefId', Value: '987134', __typename: 'Reference' },
+        ],
       },
     ]
 

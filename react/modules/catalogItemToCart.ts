@@ -1,5 +1,3 @@
-import { path } from 'ramda'
-
 import {
   transformAssemblyOptions,
   sumAssembliesPrice,
@@ -30,6 +28,7 @@ export interface CartItem {
   sellingPriceWithAssemblies: number
   options: Option[]
   assemblyOptions: ParsedAssemblyOptionsMeta
+  referenceId: ProductContextItem['referenceId']
 }
 
 interface MapCatalogItemToCartArgs {
@@ -83,7 +82,7 @@ export function mapCatalogItemToCart({
       sellingPrice: selectedSeller.commertialOffer.Price * 100,
       sellingPriceWithAssemblies:
         ((selectedSeller.commertialOffer.Price as number) +
-          sumAssembliesPrice(path(['items'], assemblyOptions) ?? {})) *
+          sumAssembliesPrice(assemblyOptions?.items ?? {})) *
         100,
       measurementUnit: selectedItem.measurementUnit,
       skuSpecifications: [],
@@ -94,6 +93,7 @@ export function mapCatalogItemToCart({
         parentPrice: selectedSeller.commertialOffer.Price,
         parentQuantity: selectedQuantity,
       }),
+      referenceId: selectedItem.referenceId,
     },
   ]
 }
