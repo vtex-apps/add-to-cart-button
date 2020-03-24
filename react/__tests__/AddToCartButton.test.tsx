@@ -32,6 +32,7 @@ const mockSKUItems = [
       parentPrice: 35,
       removed: [],
     },
+    referenceId: [{ Key: 'Reference', Value: 'red star' }],
   },
 ]
 
@@ -87,7 +88,7 @@ describe('AddToCartButton component', () => {
         available={false}
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -104,7 +105,7 @@ describe('AddToCartButton component', () => {
         available
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -121,7 +122,7 @@ describe('AddToCartButton component', () => {
         available
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected={false}
       />
@@ -142,7 +143,7 @@ describe('AddToCartButton component', () => {
         available
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -159,7 +160,7 @@ describe('AddToCartButton component', () => {
         available={false}
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -186,7 +187,7 @@ describe('AddToCartButton component', () => {
         available={false}
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -213,7 +214,7 @@ describe('AddToCartButton component', () => {
         available={false}
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
       />
@@ -244,6 +245,7 @@ describe('AddToCartButton component', () => {
           detailUrl: '/star-color-top/p',
           imageUrl:
             'https://storecomponents.vtexassets.com/arquivos/ids/155518/download--40-.png?v=636942495289870000',
+          referenceId: 'red star',
         },
       ],
     }
@@ -259,7 +261,7 @@ describe('AddToCartButton component', () => {
         available={false}
         disabled={false}
         skuItems={mockSKUItems}
-        customToastUrl={''}
+        customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected={false}
       />
