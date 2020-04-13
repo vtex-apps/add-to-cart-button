@@ -13,6 +13,7 @@ interface Props {
   customToastUrl: string
   customOneClickBuyLink: string
   showToast: Function
+  selectedSeller: Seller | undefined
 }
 
 function checkAvailability(
@@ -61,6 +62,7 @@ const Wrapper: FC<Props> = ({
   customToastUrl,
   showToast,
   customOneClickBuyLink,
+  selectedSeller
 }) => {
   const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
@@ -68,7 +70,7 @@ const Wrapper: FC<Props> = ({
   const product = productContext?.product
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
-  const selectedSeller = productContext?.selectedItem?.sellers[0]
+  selectedSeller = selectedSeller ? selectedSeller : productContext?.selectedItem?.sellers[0]
   const selectedQuantity =
     productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
