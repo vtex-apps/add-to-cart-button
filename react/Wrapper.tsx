@@ -28,8 +28,7 @@ function checkAvailability(
     return availableProp
   }
 
-  const availableProductQuantity =
-    seller?.commertialOffer?.AvailableQuantity
+  const availableProductQuantity = seller?.commertialOffer?.AvailableQuantity
 
   return Boolean(availableProductQuantity)
 }
@@ -62,7 +61,7 @@ const Wrapper: FC<Props> = ({
   customToastUrl,
   showToast,
   customOneClickBuyLink,
-  selectedSeller
+  selectedSeller,
 }) => {
   const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
@@ -70,7 +69,7 @@ const Wrapper: FC<Props> = ({
   const product = productContext?.product
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
-  const seller = selectedSeller ? selectedSeller : productContext?.selectedItem?.sellers[0]
+  const seller = selectedSeller ?? productContext?.selectedItem?.sellers[0]
   const selectedQuantity =
     productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
@@ -88,11 +87,7 @@ const Wrapper: FC<Props> = ({
     [assemblyOptions, product, selectedItem, selectedQuantity, seller]
   )
 
-  const isAvailable = checkAvailability(
-    isEmptyContext,
-    seller,
-    available
-  )
+  const isAvailable = checkAvailability(isEmptyContext, seller, available)
 
   const isDisabled = checkDisabled(isEmptyContext, assemblyOptions, disabled)
 
