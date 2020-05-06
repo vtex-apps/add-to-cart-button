@@ -46,6 +46,7 @@ const messages = defineMessages({
   },
   schemaTitle: { id: 'admin/editor.add-to-cart.title' },
   schemaTextTitle: { id: 'admin/editor.add-to-cart.text.title' },
+  schemaTextDescription: { id: 'admin/editor.add-to-cart.text.description' },
   schemaUnavailableTextTitle: {
     id: 'admin/editor.add-to-cart.text-unavailable.title',
   },
@@ -171,7 +172,7 @@ function AddToCartButton(props: Props) {
   }
 
   /*
-   * If text if an empty string it should render the default message
+   * If text is an empty string it should render the default message
    */
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>

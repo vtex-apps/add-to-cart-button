@@ -5,6 +5,7 @@
       "properties": {
         "text": {
           "title": "admin/editor.add-to-cart.text.title",
+          "description": "admin/editor.add-to-cart.text.description",
           "$ref": "app:vtex.native-types#/definitions/text"
         },
         "unavailableText": {

@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- `label` and `unavailableLabel` to `add-to-cart-button`.
-- Edition in Site Editor.
+- `label` and `unavailableLabel` props to `add-to-cart-button`.
+- Support for editing via Site Editor.
 
 ## [0.9.0] - 2020-04-13
 ### Added

@@ -8,6 +8,7 @@
   "store/add-to-cart.select-sku-variations": "Por favor seleccione una opción de cada variación",
   "admin/editor.add-to-cart.title": "Botón Añadir al carrito",
   "admin/editor.add-to-cart.text.title": "Texto del botón",
+  "admin/editor.add-to-cart.text.description": "Texto del botón, ej. \"Agregar al carrito\"",
   "admin/editor.add-to-cart.text-unavailable.title": "texto del botón no disponible",
   "admin/editor.add-to-cart.text-unavailable.description": "Texto del botón cuando el producto no está disponible."
 }
