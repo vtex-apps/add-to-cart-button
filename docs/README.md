@@ -22,7 +22,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 }
 ```
 
-2. Add the `add-to-cart-button` block to the desired block from the `store.product` template. For example:
+2. Add the `add-to-cart-button` block to other blocks from your theme according to your needs. In the example below, the block is added to the `flex-layout.row` block from the `store.product` template:
 
 ```json
   "store.product": {
