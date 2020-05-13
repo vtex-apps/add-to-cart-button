@@ -1,5 +1,8 @@
 {
   "add-to-cart-button": {
-    "component": "Wrapper"
+    "component": "Wrapper",
+    "content": {
+      "$ref": "app:vtex.add-to-cart-button#/definitions/AddToCardButton"
+    }
   }
 }

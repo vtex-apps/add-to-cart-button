@@ -1,0 +1,19 @@
+{
+  "definitions": {
+    "AddToCardButton": {
+      "title": "admin/editor.add-to-cart.title",
+      "properties": {
+        "text": {
+          "title": "admin/editor.add-to-cart.text.title",
+          "description": "admin/editor.add-to-cart.text.description",
+          "$ref": "app:vtex.native-types#/definitions/text"
+        },
+        "unavailableText": {
+          "title": "admin/editor.add-to-cart.text-unavailable.title",
+          "description": "admin/editor.add-to-cart.text-unavailable.description",
+          "$ref": "app:vtex.native-types#/definitions/text"
+        }
+      }
+    }
+  }
+}
