@@ -1,17 +1,20 @@
-📢 Don't fork this project. Use, [contribute](https://github.com/vtex-apps/awesome-io#contributing), or open issues through [Store Discussion](https://github.com/vtex-apps/store-discussion).
+📢 Use this project, [contribute](https://github.com/vtex-apps/add-to-cart-button) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion). 
+
+# Add To Cart Button
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# Add To Cart Button
+The `add-to-cart-button` is a block responsible for adding products in the [Minicart](https://vtex.io/docs/components/all/vtex.minicart@2.46.1/) (`minicart.v2`). 
 
-`AddToCartButton` is a button responsible for handling events of adding products in the minicart.
+:warning: **The Add to Cart Button block only effectively function i.e. only adds products to the Minicart if the store uses the Minicart v2**. When using the Minicart v1, the [Buy Button block](https://vtex.io/docs/components/all/vtex.store-components@3.114.4/buybutton/) should be used instead.
 
 ![image](https://user-images.githubusercontent.com/284515/70233985-69e13700-173e-11ea-91f7-6675a6a0e73b.png)
 
 ## Configuration
 
-1. Import the `vtex.add-to-cart-button`'s app to your theme's dependencies in the manifest.json, for example:
+1. Import the `vtex.add-to-cart-button` app to your theme's dependencies in the manifest.json, for example:
 
 ```json
 "dependencies": {
@@ -19,7 +22,7 @@
 }
 ```
 
-2. Add the `add-to-cart-button` block to any block bellow `store.product`. For example:
+2. Add the `add-to-cart-button` to other theme block using the product context, such as the `product-summary.shelf`. In the example below, the `add-to-cart-button` is added to the `flex-layout.row` block from the `store.product` template (which uses the product context):
 
 ```json
   "store.product": {
@@ -36,9 +39,10 @@
 
 | Prop name               | Type      | Description                                                                       | Default value        |
 | ----------------------- | --------- | --------------------------------------------------------------------------------- | -------------------- |
-| `isOneClickBuy`         | `Boolean` | Should redirect to the checkout page or not                                       | `false`              |
-| `customToastURL`        | `String`  | Set the link associated with the Toast created when adding an item to your cart.  | `/checkout/#/cart`   |
-| `customOneClickBuyLink` | `String`  | Set the link to redirect the user when the `isOneClickBuy` prop is set to `true`. | `'/checkout/#/cart'` |
+| `isOneClickBuy`         | `boolean` | Whether the user should be redirected to the checkout page (`true`) or not (`false`) when the Add To Cart Button is clicked on.  | `false`              |
+| `customOneClickBuyLink` | `string`  | Defines the link to where users will be redirected when the Add To Cart Button is clicked on and the `isOneClickBuy` prop is set to `true`. | `/checkout/#/cart` |
+| `customToastURL`        | `string`  | Defines the link to where users will be redirected when the Toast (pop-up notification displayed when adding an item to the minicart) is clicked on.  | `/checkout/#/cart`   |
+
 
 ## Customization
 
@@ -50,9 +54,11 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `buttonDataContainer` |
 | `tooltipLabelText`    |
 
+<!-- DOCS-IGNORE:start -->
+
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -61,4 +67,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
+
+<!-- DOCS-IGNORE:end -->
