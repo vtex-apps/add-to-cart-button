@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.10.1] - 2020-05-14
+### Fixed
+- `add-to-cart-button` crashing if there is no image in the product.
+
+## [0.10.0] - 2020-05-13
+### Added
+- `label` and `unavailableLabel` props to `add-to-cart-button`.
+- Support for editing via Site Editor.
+
 ## [0.9.0] - 2020-04-13
 ### Added
 -  New prop `selectedSeller`.

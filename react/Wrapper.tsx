@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
@@ -14,6 +14,8 @@ interface Props {
   customOneClickBuyLink: string
   showToast: Function
   selectedSeller: Seller | undefined
+  text?: string
+  unavailableText?: string
 }
 
 function checkAvailability(
@@ -54,15 +56,18 @@ function checkDisabled(
   return !areAssemblyGroupsValid
 }
 
-const Wrapper: FC<Props> = ({
-  isOneClickBuy,
-  available,
-  disabled,
-  customToastUrl,
-  showToast,
-  customOneClickBuyLink,
-  selectedSeller,
-}) => {
+const Wrapper = withToast(function Wrapper(props: Props) {
+  const {
+    isOneClickBuy,
+    available,
+    disabled,
+    customToastUrl,
+    showToast,
+    customOneClickBuyLink,
+    selectedSeller,
+    unavailableText,
+    text,
+  } = props
   const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
 
@@ -96,16 +101,22 @@ const Wrapper: FC<Props> = ({
 
   return (
     <AddToCartButton
-      allSkuVariationsSelected={areAllSkuVariationsSelected}
+      text={text}
       skuItems={skuItems}
+      disabled={isDisabled}
+      showToast={showToast}
       available={isAvailable}
       isOneClickBuy={isOneClickBuy}
-      disabled={isDisabled}
       customToastUrl={customToastUrl}
-      showToast={showToast}
+      unavailableText={unavailableText}
       customOneClickBuyLink={customOneClickBuyLink}
+      allSkuVariationsSelected={areAllSkuVariationsSelected}
     />
   )
+})
+
+Wrapper.schema = {
+  title: 'admin/editor.add-to-cart.title',
 }
 
-export default withToast(Wrapper)
+export default Wrapper

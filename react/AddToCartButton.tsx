@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import {
   FormattedMessage,
   MessageDescriptor,
@@ -26,6 +26,8 @@ interface Props {
   skuItems: CartItem[]
   showToast: Function
   allSkuVariationsSelected: boolean
+  text?: string
+  unavailableText?: string
 }
 
 const CSS_HANDLES = [
@@ -35,13 +37,21 @@ const CSS_HANDLES = [
 ] as const
 
 const messages = defineMessages({
-  success: { id: 'store/add-to-cart.success', defaultMessage: '' },
-  duplicate: { id: 'store/add-to-cart.duplicate', defaultMessage: '' },
-  error: { id: 'store/add-to-cart.failure', defaultMessage: '' },
-  seeCart: { id: 'store/add-to-cart.see-cart', defaultMessage: '' },
+  success: { id: 'store/add-to-cart.success' },
+  duplicate: { id: 'store/add-to-cart.duplicate' },
+  error: { id: 'store/add-to-cart.failure' },
+  seeCart: { id: 'store/add-to-cart.see-cart' },
   skuVariations: {
     id: 'store/add-to-cart.select-sku-variations',
-    defaultMessage: '',
+  },
+  schemaTitle: { id: 'admin/editor.add-to-cart.title' },
+  schemaTextTitle: { id: 'admin/editor.add-to-cart.text.title' },
+  schemaTextDescription: { id: 'admin/editor.add-to-cart.text.description' },
+  schemaUnavailableTextTitle: {
+    id: 'admin/editor.add-to-cart.text-unavailable.title',
+  },
+  schemaUnavailableTextDescription: {
+    id: 'admin/editor.add-to-cart.text-unavailable.description',
   },
 })
 
@@ -65,16 +75,20 @@ const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
   }
 }
 
-const AddToCartButton: FC<Props> = ({
-  isOneClickBuy,
-  customOneClickBuyLink,
-  available,
-  disabled,
-  skuItems,
-  customToastUrl,
-  showToast,
-  allSkuVariationsSelected = true,
-}) => {
+function AddToCartButton(props: Props) {
+  const {
+    text,
+    isOneClickBuy,
+    available,
+    disabled,
+    skuItems,
+    showToast,
+    customToastUrl,
+    unavailableText,
+    customOneClickBuyLink,
+    allSkuVariationsSelected = true,
+  } = props
+
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItem } = useOrderItems()
@@ -157,15 +171,24 @@ const AddToCartButton: FC<Props> = ({
     }
   }
 
+  /*
+   * If text is an empty string it should render the default message
+   */
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
-      <FormattedMessage id="store/add-to-cart.add-to-cart">
-        {message => <span className={handles.buttonText}>{message}</span>}
-      </FormattedMessage>
+      {text ? (
+        <span className={handles.buttonText}>{text}</span>
+      ) : (
+        <FormattedMessage id="store/add-to-cart.add-to-cart">
+          {message => <span className={handles.buttonText}>{message}</span>}
+        </FormattedMessage>
+      )}
     </div>
   )
 
-  const unavailableButtonContent = (
+  const unavailableButtonContent = unavailableText ? (
+    <span className={handles.buttonText}>{unavailableText}</span>
+  ) : (
     <FormattedMessage id="store/add-to-cart.label-unavailable">
       {message => <span className={handles.buttonText}>{message}</span>}
     </FormattedMessage>
