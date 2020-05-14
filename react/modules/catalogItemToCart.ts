@@ -86,7 +86,7 @@ export function mapCatalogItemToCart({
         100,
       measurementUnit: selectedItem.measurementUnit,
       skuSpecifications: [],
-      imageUrl: selectedItem.images[0].imageUrl,
+      imageUrl: selectedItem.images[0]?.imageUrl,
       ...transformAssemblyOptions({
         assemblyOptionsItems: assemblyOptions?.items,
         inputValues: assemblyOptions?.inputValues,
