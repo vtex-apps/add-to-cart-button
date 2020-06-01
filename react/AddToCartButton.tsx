@@ -66,6 +66,7 @@ const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
     price: skuItem.price,
     name: skuItem.name,
     quantity: skuItem.quantity,
+    productId: skuItem.productId,
     productRefId: skuItem.productRefId,
     brand: skuItem.brand,
     category,
