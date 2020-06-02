@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Add 2 new props (https://github.com/vtex-apps/add-to-cart-button/pull/21) to the app documentation.
+
 ## [0.11.0] - 2020-06-02
 ### Added
 - Item property `productId` to Pixel events.
