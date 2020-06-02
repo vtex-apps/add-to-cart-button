@@ -239,6 +239,7 @@ describe('AddToCartButton component', () => {
           price: 3500,
           name: 'Top Star Color Shirt',
           quantity: 1,
+          productId: '2000024',
           productRefId: '998765',
           brand: 'Kawasaki',
           category: 'Apparel & Accessories/Clothing/Tops',
