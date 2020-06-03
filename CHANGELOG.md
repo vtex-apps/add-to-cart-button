@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.11.1] - 2020-06-03
+
 ### Fixed
 - Add 2 new props (https://github.com/vtex-apps/add-to-cart-button/pull/21) to the app documentation.
 
