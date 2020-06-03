@@ -39,6 +39,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 
 | Prop name               | Type      | Description                                                                       | Default value        |
 | ----------------------- | --------- | --------------------------------------------------------------------------------- | -------------------- |
+| `goToProductPage`       | `boolean` | Whether the user should be redirected to the product page but the product will not be added to cart (`true`) or not (`false`) | `false`              |
 | `isOneClickBuy`         | `boolean` | Whether the user should be redirected to the checkout page (`true`) or not (`false`) when the Add To Cart Button is clicked on.  | `false`              |
 | `customOneClickBuyLink` | `string`  | Defines the link to where users will be redirected when the Add To Cart Button is clicked on and the `isOneClickBuy` prop is set to `true`. | `/checkout/#/cart` |
 | `customToastURL`        | `string`  | Defines the link to where users will be redirected when the Toast (pop-up notification displayed when adding an item to the minicart) is clicked on.  | `/checkout/#/cart`   |

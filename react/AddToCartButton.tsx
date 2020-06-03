@@ -28,6 +28,8 @@ interface Props {
   allSkuVariationsSelected: boolean
   text?: string
   unavailableText?: string
+  linkText: string | undefined
+  goToProductPage: boolean | null
 }
 
 const CSS_HANDLES = [
@@ -88,6 +90,8 @@ function AddToCartButton(props: Props) {
     unavailableText,
     customOneClickBuyLink,
     allSkuVariationsSelected = true,
+    linkText,
+    goToProductPage = false,
   } = props
 
   const intl = useIntl()
@@ -121,9 +125,9 @@ function AddToCartButton(props: Props) {
 
     const action = success
       ? {
-          label: translateMessage(messages.seeCart),
-          href: customToastUrl,
-        }
+        label: translateMessage(messages.seeCart),
+        href: customToastUrl,
+      }
       : undefined
 
     showToast({ message, action })
@@ -132,6 +136,10 @@ function AddToCartButton(props: Props) {
   const handleAddToCart: React.MouseEventHandler = event => {
     event.stopPropagation()
     event.preventDefault()
+
+    if (goToProductPage && linkText) {
+      return navigate({ to: `/${linkText}/p` })
+    }
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
@@ -180,20 +188,20 @@ function AddToCartButton(props: Props) {
       {text ? (
         <span className={handles.buttonText}>{text}</span>
       ) : (
-        <FormattedMessage id="store/add-to-cart.add-to-cart">
-          {message => <span className={handles.buttonText}>{message}</span>}
-        </FormattedMessage>
-      )}
+          <FormattedMessage id="store/add-to-cart.add-to-cart">
+            {message => <span className={handles.buttonText}>{message}</span>}
+          </FormattedMessage>
+        )}
     </div>
   )
 
   const unavailableButtonContent = unavailableText ? (
     <span className={handles.buttonText}>{unavailableText}</span>
   ) : (
-    <FormattedMessage id="store/add-to-cart.label-unavailable">
-      {message => <span className={handles.buttonText}>{message}</span>}
-    </FormattedMessage>
-  )
+      <FormattedMessage id="store/add-to-cart.label-unavailable">
+        {message => <span className={handles.buttonText}>{message}</span>}
+      </FormattedMessage>
+    )
 
   const tooltipLabel = (
     <span className={handles.tooltipLabelText}>
@@ -210,10 +218,10 @@ function AddToCartButton(props: Props) {
   return allSkuVariationsSelected ? (
     ButtonWithLabel
   ) : (
-    <Tooltip trigger="click" label={tooltipLabel}>
-      {ButtonWithLabel}
-    </Tooltip>
-  )
+      <Tooltip trigger="click" label={tooltipLabel}>
+        {ButtonWithLabel}
+      </Tooltip>
+    )
 }
 
 export default AddToCartButton
