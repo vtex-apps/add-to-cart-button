@@ -142,7 +142,7 @@ function AddToCartButton(props: Props) {
     event.stopPropagation()
     event.preventDefault()
 
-    if (onClickBehavior == "go-to-product-page") {
+    if (onClickBehavior === "go-to-product-page") {
       return navigate({
         page: 'store.product',
         params: {
