@@ -16,7 +16,7 @@ interface Props {
   selectedSeller: Seller | undefined
   text?: string
   unavailableText?: string
-  goToProductPage: boolean | null
+  onClickBehavior?: string | undefined
 }
 
 function checkAvailability(
@@ -68,7 +68,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     selectedSeller,
     unavailableText,
     text,
-    goToProductPage,
+    onClickBehavior = 'add-to-cart',
   } = props
   const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
@@ -101,6 +101,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const areAllSkuVariationsSelected =
     !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
+  const productLink = { linkText: product?.linkText, productId: product?.productId }
+
   return (
     <AddToCartButton
       text={text}
@@ -113,8 +115,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       unavailableText={unavailableText}
       customOneClickBuyLink={customOneClickBuyLink}
       allSkuVariationsSelected={areAllSkuVariationsSelected}
-      linkText={product?.linkText}
-      goToProductPage={goToProductPage}
+      productLink={productLink}
+      onClickBehavior={onClickBehavior}
     />
   )
 })

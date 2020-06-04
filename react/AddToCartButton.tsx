@@ -17,6 +17,11 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
+interface ProductLink {
+  linkText: string | undefined
+  productId: string | undefined
+}
+
 interface Props {
   isOneClickBuy: boolean
   available: boolean
@@ -28,8 +33,8 @@ interface Props {
   allSkuVariationsSelected: boolean
   text?: string
   unavailableText?: string
-  linkText: string | undefined
-  goToProductPage: boolean | null
+  productLink: ProductLink
+  onClickBehavior: string
 }
 
 const CSS_HANDLES = [
@@ -90,8 +95,8 @@ function AddToCartButton(props: Props) {
     unavailableText,
     customOneClickBuyLink,
     allSkuVariationsSelected = true,
-    linkText,
-    goToProductPage = false,
+    productLink,
+    onClickBehavior,
   } = props
 
   const intl = useIntl()
@@ -137,8 +142,14 @@ function AddToCartButton(props: Props) {
     event.stopPropagation()
     event.preventDefault()
 
-    if (goToProductPage && linkText) {
-      return navigate({ to: `/${linkText}/p` })
+    if (onClickBehavior == "go-to-product-page") {
+      return navigate({
+        page: 'store.product',
+        params: {
+          slug: productLink?.linkText,
+          id: productLink?.productId,
+        }
+      })
     }
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
