@@ -34,7 +34,7 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior: string
+  onClickBehavior: 'add-to-cart' | 'go-to-product-page'
 }
 
 const CSS_HANDLES = [
