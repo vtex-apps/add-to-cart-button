@@ -16,7 +16,7 @@ interface Props {
   selectedSeller: Seller | undefined
   text?: string
   unavailableText?: string
-  onClickBehavior?: string
+  onClickBehavior?: 'add-to-cart' | 'go-to-product-page'
 }
 
 function checkAvailability(
