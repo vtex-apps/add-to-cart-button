@@ -18,8 +18,8 @@ import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
 interface ProductLink {
-  linkText: string | undefined
-  productId: string | undefined
+  linkText?: string
+  productId?: string
 }
 
 interface Props {
@@ -139,18 +139,19 @@ function AddToCartButton(props: Props) {
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
-    event.stopPropagation()
-    event.preventDefault()
 
-    if (onClickBehavior === "go-to-product-page") {
+    if (onClickBehavior === "go-to-product-page" && productLink.linkText && productLink.productId) {
       return navigate({
         page: 'store.product',
         params: {
-          slug: productLink?.linkText,
-          id: productLink?.productId,
+          slug: productLink.linkText,
+          id: productLink.productId,
         }
       })
     }
+
+    event.stopPropagation()
+    event.preventDefault()
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)

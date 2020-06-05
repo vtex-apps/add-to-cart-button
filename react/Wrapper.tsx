@@ -16,7 +16,7 @@ interface Props {
   selectedSeller: Seller | undefined
   text?: string
   unavailableText?: string
-  onClickBehavior?: string | undefined
+  onClickBehavior?: string
 }
 
 function checkAvailability(
