@@ -141,6 +141,8 @@ function AddToCartButton(props: Props) {
   const handleAddToCart: React.MouseEventHandler = event => {
 
     if (onClickBehavior === "go-to-product-page" && productLink.linkText && productLink.productId) {
+      event.stopPropagation()
+      event.preventDefault()
       return navigate({
         page: 'store.product',
         params: {
