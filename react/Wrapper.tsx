@@ -101,7 +101,10 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const areAllSkuVariationsSelected =
     !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
-  const productLink = { linkText: product?.linkText, productId: product?.productId }
+  const productLink = {
+    linkText: product?.linkText,
+    productId: product?.productId,
+  }
 
   return (
     <AddToCartButton

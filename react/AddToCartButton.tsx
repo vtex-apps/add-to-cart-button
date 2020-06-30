@@ -130,17 +130,20 @@ function AddToCartButton(props: Props) {
 
     const action = success
       ? {
-        label: translateMessage(messages.seeCart),
-        href: customToastUrl,
-      }
+          label: translateMessage(messages.seeCart),
+          href: customToastUrl,
+        }
       : undefined
 
     showToast({ message, action })
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
-
-    if (onClickBehavior === "go-to-product-page" && productLink.linkText && productLink.productId) {
+    if (
+      onClickBehavior === 'go-to-product-page' &&
+      productLink.linkText &&
+      productLink.productId
+    ) {
       event.stopPropagation()
       event.preventDefault()
       return navigate({
@@ -148,7 +151,7 @@ function AddToCartButton(props: Props) {
         params: {
           slug: productLink.linkText,
           id: productLink.productId,
-        }
+        },
       })
     }
 
@@ -202,20 +205,20 @@ function AddToCartButton(props: Props) {
       {text ? (
         <span className={handles.buttonText}>{text}</span>
       ) : (
-          <FormattedMessage id="store/add-to-cart.add-to-cart">
-            {message => <span className={handles.buttonText}>{message}</span>}
-          </FormattedMessage>
-        )}
+        <FormattedMessage id="store/add-to-cart.add-to-cart">
+          {message => <span className={handles.buttonText}>{message}</span>}
+        </FormattedMessage>
+      )}
     </div>
   )
 
   const unavailableButtonContent = unavailableText ? (
     <span className={handles.buttonText}>{unavailableText}</span>
   ) : (
-      <FormattedMessage id="store/add-to-cart.label-unavailable">
-        {message => <span className={handles.buttonText}>{message}</span>}
-      </FormattedMessage>
-    )
+    <FormattedMessage id="store/add-to-cart.label-unavailable">
+      {message => <span className={handles.buttonText}>{message}</span>}
+    </FormattedMessage>
+  )
 
   const tooltipLabel = (
     <span className={handles.tooltipLabelText}>
@@ -232,10 +235,10 @@ function AddToCartButton(props: Props) {
   return allSkuVariationsSelected ? (
     ButtonWithLabel
   ) : (
-      <Tooltip trigger="click" label={tooltipLabel}>
-        {ButtonWithLabel}
-      </Tooltip>
-    )
+    <Tooltip trigger="click" label={tooltipLabel}>
+      {ButtonWithLabel}
+    </Tooltip>
+  )
 }
 
 export default AddToCartButton
