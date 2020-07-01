@@ -45,8 +45,14 @@ const mockMarketingData = {
   utmiPart: 'testing utmiPart',
 }
 
+const mockProductLink = {
+  linkText: 'mock-product',
+  productId: '2000024',
+}
+
 const mockAddItem = jest.fn()
 const mockPixelEventPush = jest.fn()
+const mockNavigate = jest.fn()
 
 jest.mock('../hooks/useMarketingSessionParams', () => {
   return () => ({
@@ -73,9 +79,17 @@ jest.mock('vtex.pixel-manager/PixelContext', () => ({
   usePixel: () => ({ push: mockPixelEventPush }),
 }))
 
+jest.mock('vtex.render-runtime', () => ({
+  useRuntime: () => ({
+    rootPath: '',
+    navigate: mockNavigate,
+  }),
+}))
+
 afterEach(() => {
   mockAddItem.mockClear()
   mockPixelEventPush.mockClear()
+  mockNavigate.mockClear()
   cleanup()
 })
 
@@ -91,6 +105,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -108,6 +125,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -125,6 +145,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected={false}
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -146,6 +169,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -163,6 +189,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -190,6 +219,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -217,6 +249,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -265,6 +300,9 @@ describe('AddToCartButton component', () => {
         customToastUrl=""
         showToast={() => {}}
         allSkuVariationsSelected={false}
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
       />
     )
 
@@ -279,5 +317,79 @@ describe('AddToCartButton component', () => {
     })
 
     expect(mockAddItem).toHaveBeenCalledTimes(0)
+  })
+
+  it("should navigate to product page if onClickBehavior is set to 'go-to-product-page'", () => {
+    const { queryByTestId } = render(
+      <AddToCartButton
+        isOneClickBuy={false}
+        available
+        customOneClickBuyLink=""
+        disabled={false}
+        skuItems={mockSKUItems}
+        customToastUrl=""
+        showToast={() => {}}
+        allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="go-to-product-page"
+        multipleAvailableSKUs={false}
+      />
+    )
+
+    const button = queryByTestId('styleguide-button')
+
+    expect(button).toBeTruthy()
+
+    act(() => {
+      if (button) {
+        fireEvent.click(button)
+      }
+    })
+
+    expect(mockAddItem).toHaveBeenCalledTimes(0)
+    expect(mockNavigate).toHaveBeenCalledWith({
+      page: 'store.product',
+      params: {
+        slug: 'mock-product',
+        id: '2000024',
+      },
+    })
+  })
+
+  it("should navigate to product page if onClickBehavior is set to 'go-to-product-page-multiple-available-skus' and product has multiple SKUs", () => {
+    const { queryByTestId } = render(
+      <AddToCartButton
+        isOneClickBuy={false}
+        available
+        customOneClickBuyLink=""
+        disabled={false}
+        skuItems={mockSKUItems}
+        customToastUrl=""
+        showToast={() => {}}
+        allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="go-to-product-page-multiple-available-skus"
+        multipleAvailableSKUs
+      />
+    )
+
+    const button = queryByTestId('styleguide-button')
+
+    expect(button).toBeTruthy()
+
+    act(() => {
+      if (button) {
+        fireEvent.click(button)
+      }
+    })
+
+    expect(mockAddItem).toHaveBeenCalledTimes(0)
+    expect(mockNavigate).toHaveBeenCalledWith({
+      page: 'store.product',
+      params: {
+        slug: 'mock-product',
+        id: '2000024',
+      },
+    })
   })
 })
