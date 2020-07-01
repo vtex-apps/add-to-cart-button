@@ -26,6 +26,7 @@ interface Props {
   isOneClickBuy: boolean
   available: boolean
   disabled: boolean
+  multipleAvailableSKUs: boolean
   customToastUrl: string
   customOneClickBuyLink: string
   skuItems: CartItem[]
@@ -34,7 +35,10 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior: 'add-to-cart' | 'go-to-product-page'
+  onClickBehavior:
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'go-to-product-page-multiple-available-skus'
 }
 
 const CSS_HANDLES = [
@@ -97,12 +101,13 @@ function AddToCartButton(props: Props) {
     allSkuVariationsSelected = true,
     productLink,
     onClickBehavior,
+    multipleAvailableSKUs,
   } = props
 
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItem } = useOrderItems()
-  const dispatch = useProductDispatch()
+  const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
@@ -139,13 +144,18 @@ function AddToCartButton(props: Props) {
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
-    if (
-      onClickBehavior === 'go-to-product-page' &&
-      productLink.linkText &&
-      productLink.productId
-    ) {
-      event.stopPropagation()
-      event.preventDefault()
+    event.stopPropagation()
+    event.preventDefault()
+
+    const productLinkIsValid = Boolean(
+      productLink.linkText && productLink.productId
+    )
+    const shouldNavigateToProductPage =
+      onClickBehavior === 'go-to-product-page' ||
+      (onClickBehavior === 'go-to-product-page-multiple-available-skus' &&
+        multipleAvailableSKUs)
+
+    if (productLinkIsValid && shouldNavigateToProductPage) {
       return navigate({
         page: 'store.product',
         params: {
@@ -154,9 +164,6 @@ function AddToCartButton(props: Props) {
         },
       })
     }
-
-    event.stopPropagation()
-    event.preventDefault()
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
@@ -188,8 +195,11 @@ function AddToCartButton(props: Props) {
   }
 
   const handleClick = (e: React.MouseEvent) => {
-    if (dispatch) {
-      dispatch({ type: 'SET_BUY_BUTTON_CLICKED', args: { clicked: true } })
+    if (productContextDispatch) {
+      productContextDispatch({
+        type: 'SET_BUY_BUTTON_CLICKED',
+        args: { clicked: true },
+      })
     }
 
     if (allSkuVariationsSelected) {
