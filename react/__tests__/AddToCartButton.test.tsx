@@ -356,7 +356,7 @@ describe('AddToCartButton component', () => {
     })
   })
 
-  it("should navigate to product page if onClickBehavior is set to 'go-to-product-page-multiple-available-skus' and product has multiple SKUs", () => {
+  it("should navigate to product page if onClickBehavior is set to 'ensure-sku-selection' and product has multiple SKUs", () => {
     const { queryByTestId } = render(
       <AddToCartButton
         isOneClickBuy={false}
@@ -368,7 +368,7 @@ describe('AddToCartButton component', () => {
         showToast={() => {}}
         allSkuVariationsSelected
         productLink={mockProductLink}
-        onClickBehavior="go-to-product-page-multiple-available-skus"
+        onClickBehavior="ensure-sku-selection"
         multipleAvailableSKUs
       />
     )

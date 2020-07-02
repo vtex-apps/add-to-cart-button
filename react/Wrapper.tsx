@@ -19,7 +19,7 @@ interface Props {
   onClickBehavior?:
     | 'add-to-cart'
     | 'go-to-product-page'
-    | 'go-to-product-page-multiple-available-skus'
+    | 'ensure-sku-selection'
 }
 
 function checkAvailability(

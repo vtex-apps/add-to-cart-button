@@ -35,10 +35,7 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior:
-    | 'add-to-cart'
-    | 'go-to-product-page'
-    | 'go-to-product-page-multiple-available-skus'
+  onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
 }
 
 const CSS_HANDLES = [
@@ -152,8 +149,7 @@ function AddToCartButton(props: Props) {
     )
     const shouldNavigateToProductPage =
       onClickBehavior === 'go-to-product-page' ||
-      (onClickBehavior === 'go-to-product-page-multiple-available-skus' &&
-        multipleAvailableSKUs)
+      (onClickBehavior === 'ensure-sku-selection' && multipleAvailableSKUs)
 
     if (productLinkIsValid && shouldNavigateToProductPage) {
       return navigate({
