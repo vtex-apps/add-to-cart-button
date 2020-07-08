@@ -16,7 +16,10 @@ interface Props {
   selectedSeller: Seller | undefined
   text?: string
   unavailableText?: string
-  onClickBehavior?: 'add-to-cart' | 'go-to-product-page'
+  onClickBehavior?:
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'ensure-sku-selection'
 }
 
 function checkAvailability(
@@ -74,6 +77,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const isEmptyContext = Object.keys(productContext).length === 0
 
   const product = productContext?.product
+  const multipleAvailableSKUs = product ? product.items.length > 1 : false
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
   const seller = selectedSeller ?? productContext?.selectedItem?.sellers[0]
@@ -101,7 +105,10 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const areAllSkuVariationsSelected =
     !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
-  const productLink = { linkText: product?.linkText, productId: product?.productId }
+  const productLink = {
+    linkText: product?.linkText,
+    productId: product?.productId,
+  }
 
   return (
     <AddToCartButton
@@ -117,6 +124,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       allSkuVariationsSelected={areAllSkuVariationsSelected}
       productLink={productLink}
       onClickBehavior={onClickBehavior}
+      multipleAvailableSKUs={multipleAvailableSKUs}
     />
   )
 })

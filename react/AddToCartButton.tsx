@@ -26,6 +26,7 @@ interface Props {
   isOneClickBuy: boolean
   available: boolean
   disabled: boolean
+  multipleAvailableSKUs: boolean
   customToastUrl: string
   customOneClickBuyLink: string
   skuItems: CartItem[]
@@ -34,7 +35,7 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior: 'add-to-cart' | 'go-to-product-page'
+  onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
 }
 
 const CSS_HANDLES = [
@@ -97,12 +98,13 @@ function AddToCartButton(props: Props) {
     allSkuVariationsSelected = true,
     productLink,
     onClickBehavior,
+    multipleAvailableSKUs,
   } = props
 
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItem } = useOrderItems()
-  const dispatch = useProductDispatch()
+  const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
@@ -130,30 +132,34 @@ function AddToCartButton(props: Props) {
 
     const action = success
       ? {
-        label: translateMessage(messages.seeCart),
-        href: customToastUrl,
-      }
+          label: translateMessage(messages.seeCart),
+          href: customToastUrl,
+        }
       : undefined
 
     showToast({ message, action })
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
+    event.stopPropagation()
+    event.preventDefault()
 
-    if (onClickBehavior === "go-to-product-page" && productLink.linkText && productLink.productId) {
-      event.stopPropagation()
-      event.preventDefault()
+    const productLinkIsValid = Boolean(
+      productLink.linkText && productLink.productId
+    )
+    const shouldNavigateToProductPage =
+      onClickBehavior === 'go-to-product-page' ||
+      (onClickBehavior === 'ensure-sku-selection' && multipleAvailableSKUs)
+
+    if (productLinkIsValid && shouldNavigateToProductPage) {
       return navigate({
         page: 'store.product',
         params: {
           slug: productLink.linkText,
           id: productLink.productId,
-        }
+        },
       })
     }
-
-    event.stopPropagation()
-    event.preventDefault()
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
@@ -185,8 +191,11 @@ function AddToCartButton(props: Props) {
   }
 
   const handleClick = (e: React.MouseEvent) => {
-    if (dispatch) {
-      dispatch({ type: 'SET_BUY_BUTTON_CLICKED', args: { clicked: true } })
+    if (productContextDispatch) {
+      productContextDispatch({
+        type: 'SET_BUY_BUTTON_CLICKED',
+        args: { clicked: true },
+      })
     }
 
     if (allSkuVariationsSelected) {
@@ -202,20 +211,20 @@ function AddToCartButton(props: Props) {
       {text ? (
         <span className={handles.buttonText}>{text}</span>
       ) : (
-          <FormattedMessage id="store/add-to-cart.add-to-cart">
-            {message => <span className={handles.buttonText}>{message}</span>}
-          </FormattedMessage>
-        )}
+        <FormattedMessage id="store/add-to-cart.add-to-cart">
+          {message => <span className={handles.buttonText}>{message}</span>}
+        </FormattedMessage>
+      )}
     </div>
   )
 
   const unavailableButtonContent = unavailableText ? (
     <span className={handles.buttonText}>{unavailableText}</span>
   ) : (
-      <FormattedMessage id="store/add-to-cart.label-unavailable">
-        {message => <span className={handles.buttonText}>{message}</span>}
-      </FormattedMessage>
-    )
+    <FormattedMessage id="store/add-to-cart.label-unavailable">
+      {message => <span className={handles.buttonText}>{message}</span>}
+    </FormattedMessage>
+  )
 
   const tooltipLabel = (
     <span className={handles.tooltipLabelText}>
@@ -232,10 +241,10 @@ function AddToCartButton(props: Props) {
   return allSkuVariationsSelected ? (
     ButtonWithLabel
   ) : (
-      <Tooltip trigger="click" label={tooltipLabel}>
-        {ButtonWithLabel}
-      </Tooltip>
-    )
+    <Tooltip trigger="click" label={tooltipLabel}>
+      {ButtonWithLabel}
+    </Tooltip>
+  )
 }
 
 export default AddToCartButton
