@@ -6,11 +6,11 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The `add-to-cart-button` is a block responsible for adding products in the [Minicart](https://vtex.io/docs/components/all/vtex.minicart@2.46.1/) (`minicart.v2`). 
+The `add-to-cart-button` is a block responsible for adding products in the [Minicart](https://vtex.io/docs/components/all/vtex.minicart/) (`minicart.v2`). 
 
 ![image](https://user-images.githubusercontent.com/284515/70233985-69e13700-173e-11ea-91f7-6675a6a0e73b.png)
 
-:warning: **The Add to Cart Button block only effectively function i.e. only adds products to the Minicart if the store uses the Minicart v2**. When using the Minicart v1, the [Buy Button block](https://vtex.io/docs/components/all/vtex.store-components@3.114.4/buybutton/) should be used instead.
+:warning: **The Add To Cart Button only effectively function i.e. only adds products to the Minicart if the store uses the Minicart v2**. In this scenario, it successfully works in the Shelf component as well as in the Product Details page. **When using the [Minicart v1](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md), use the [Buy Button block](https://vtex.io/docs/components/all/vtex.store-components/buybutton/) in the Product Details page, and the [Product Summary Buy Button](https://vtex.io/docs/components/all/vtex.product-summary/product-summary-buy-button/) in the Shelf component instead**.
 
 ## Configuration
 
