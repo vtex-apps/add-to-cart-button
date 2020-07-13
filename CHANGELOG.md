@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Fix minicart breaking if product category tree query resolvers before the whole product query.
-- Use proper for product in ProductContextState.
+- Minicart breaking if product category tree query resolves before the whole product query.
+- Use proper type for `product` in `ProductContextState`.
 
 ## [0.13.1] - 2020-07-09
 ### Fixed
@@ -95,4 +95,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2019-11-18
 ### Added
 - Initial release.
-
