@@ -39,7 +39,7 @@ interface BuyButtonContextState {
 
 interface ProductContextState {
   selectedItem: Maybe<ProductContextItem>
-  product: Maybe<Product>
+  product: Maybe<Partial<Product>>
   selectedQuantity: number
   skuSelector: {
     isVisible: boolean

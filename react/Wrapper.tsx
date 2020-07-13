@@ -77,7 +77,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const isEmptyContext = Object.keys(productContext).length === 0
 
   const product = productContext?.product
-  const multipleAvailableSKUs = product ? product.items?.length > 1 : false
+  const itemsLength = product?.items?.length ?? 0
+  const multipleAvailableSKUs = itemsLength > 1
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
   const seller = selectedSeller ?? productContext?.selectedItem?.sellers[0]
