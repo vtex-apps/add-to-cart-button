@@ -32,7 +32,7 @@ export interface CartItem {
 }
 
 interface MapCatalogItemToCartArgs {
-  product: Maybe<Product>
+  product: ProductContextState['product']
   selectedItem: Maybe<ProductContextItem>
   selectedQuantity: number
   selectedSeller: any
@@ -63,17 +63,17 @@ export function mapCatalogItemToCart({
     {
       index: 0,
       id: selectedItem.itemId,
-      productId: product.productId,
+      productId: product.productId ?? '',
       quantity: selectedQuantity,
       uniqueId: '',
       detailUrl: `/${product.linkText}/p`,
-      name: product.productName,
-      brand: product.brand,
+      name: product.productName ?? '',
+      brand: product.brand ?? '',
       category:
         product.categories && product.categories.length > 0
           ? product.categories[0]
           : '',
-      productRefId: product.productReference,
+      productRefId: product.productReference ?? '',
       seller: selectedSeller.sellerId,
       variant: selectedItem.name,
       skuName: selectedItem.name,
