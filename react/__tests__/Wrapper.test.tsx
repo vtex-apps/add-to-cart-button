@@ -165,4 +165,73 @@ describe('Wrapper component', () => {
       {}
     )
   })
+
+  it('should pass correct skuItems received from props to AddToCartButton', () => {
+    const mockSKUItems = [
+      {
+        index: 0,
+        id: '2000564',
+        productId: '2000024',
+        quantity: 1,
+        uniqueId: '',
+        detailUrl: '/star-color-top/p',
+        name: 'Top Star Color Shirt',
+        brand: 'Kawasaki',
+        category: '/Apparel & Accessories/Clothing/Tops/',
+        productRefId: '998765',
+        seller: '1',
+        variant: 'Red star',
+        skuName: 'Red star',
+        price: 3500,
+        listPrice: 3500,
+        sellingPrice: 3500,
+        sellingPriceWithAssemblies: 3500,
+        measurementUnit: 'un',
+        skuSpecifications: [],
+        imageUrl:
+          'https://storecomponents.vtexassets.com/arquivos/ids/155518/download--40-.png?v=636942495289870000',
+        options: [],
+        assemblyOptions: {
+          added: [],
+          parentPrice: 35,
+          removed: [],
+        },
+        referenceId: [{ Key: 'Reference', Value: 'red star' }],
+      },
+      {
+        id: '2000535',
+        productId: '2000004',
+        quantity: 1,
+        uniqueId: '',
+        detailUrl: '/st-tropez-shorts/p',
+        name: 'St Tropez Top Shorts',
+        brand: 'Samsung',
+        category: '/Apparel & Accessories/Clothing/Bottoms/',
+        productRefId: '01212',
+        seller: '1',
+        variant: 'Navy Blue',
+        skuName: 'Navy Blue',
+        price: 303000,
+        listPrice: 303000,
+        sellingPrice: 303000,
+        sellingPriceWithAssemblies: 303000,
+        measurementUnit: 'un',
+        skuSpecifications: [],
+        imageUrl:
+          'https://storecomponents.vtexassets.com/arquivos/ids/155488-500-auto?width=500&height=auto&aspect=true',
+        options: [],
+        assemblyOptions: { added: [], removed: [], parentPrice: 3030 },
+        referenceId: { Value: '' },
+      },
+    ]
+
+    renderWithProductContext(<Wrapper skuItems={mockSKUItems} />, {})
+
+    expect(MockAddToCartButton).toBeCalledWith(
+      expect.objectContaining({
+        skuItems: mockSKUItems,
+      }),
+      {}
+    )
+  })
 })
