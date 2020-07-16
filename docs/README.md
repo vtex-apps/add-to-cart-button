@@ -42,7 +42,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 | `onClickBehavior`       | `enum` | Controls what happens when users click on the button. Possible values are: `go-to-product-page`, `add-to-cart`, and `ensure-sku-selection` (if multiple SKUs are available, users will be redirected to the product page to select the desired one. If the product only has 1 SKU available, it will be added to the cart once the button is clicked on). | `add-to-cart`              |
 | `isOneClickBuy`         | `boolean` | Whether the user should be redirected to the checkout page (`true`) or not (`false`) when the Add To Cart Button is clicked on.  | `false`              |
 | `customOneClickBuyLink` | `string`  | Defines the link to where users will be redirected when the Add To Cart Button is clicked on and the `isOneClickBuy` prop is set to `true`. | `/checkout/#/cart` |
-| `customToastURL`        | `string`  | Defines the link to where users will be redirected when the Toast (pop-up notification displayed when adding an item to the minicart) is clicked on.  | `/checkout/#/cart`   |
+| `customToastUrl`        | `string`  | Defines the link to where users will be redirected when the Toast (pop-up notification displayed when adding an item to the minicart) is clicked on.  | `/checkout/#/cart`   |
 | `text` | `string` | Defines a custom text message to be displayed on the Add To Cart Button. | `Add to cart` *( automatic translation will be applied according to your store's default language)* | 
 | `unavailableText` | `string` | Defines a custom text message to be displayed on the Add To Cart Button when a product is unavailable. | `Unavailable` *(automatic translation will be applied according to your store's default language)* | 
 
