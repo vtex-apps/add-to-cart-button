@@ -17,9 +17,10 @@ interface Props {
   text?: string
   unavailableText?: string
   onClickBehavior?:
-  | 'add-to-cart'
-  | 'go-to-product-page'
-  | 'ensure-sku-selection'
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'ensure-sku-selection'
+  onAddedToCart?: () => void | Promise<void>
 }
 
 function checkAvailability(
@@ -72,6 +73,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     unavailableText,
     text,
     onClickBehavior = 'add-to-cart',
+    onAddedToCart,
   } = props
   const productContext: ProductContextState = useProduct()
   const isEmptyContext = Object.keys(productContext).length === 0
@@ -126,6 +128,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       productLink={productLink}
       onClickBehavior={onClickBehavior}
       multipleAvailableSKUs={multipleAvailableSKUs}
+      onAddedToCart={onAddedToCart}
     />
   )
 })

@@ -36,6 +36,7 @@ interface Props {
   unavailableText?: string
   productLink: ProductLink
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
+  onAddedToCart?: () => void | Promise<void>
 }
 
 const CSS_HANDLES = [
@@ -99,6 +100,7 @@ function AddToCartButton(props: Props) {
     productLink,
     onClickBehavior,
     multipleAvailableSKUs,
+    onAddedToCart,
   } = props
 
   const intl = useIntl()
@@ -140,7 +142,7 @@ function AddToCartButton(props: Props) {
     showToast({ message, action })
   }
 
-  const handleAddToCart: React.MouseEventHandler = event => {
+  const handleAddToCart: React.MouseEventHandler = async event => {
     event.stopPropagation()
     event.preventDefault()
 
@@ -168,6 +170,8 @@ function AddToCartButton(props: Props) {
       event: 'addToCart',
       items: pixelEventItems,
     })
+
+    await onAddedToCart?.()
 
     if (isOneClickBuy) {
       if (
