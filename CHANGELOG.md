@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-
 - Handling of recursive input values in assembly options.
 
 ## [0.13.3] - 2020-07-16
