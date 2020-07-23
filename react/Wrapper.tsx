@@ -17,9 +17,9 @@ interface Props {
   text?: string
   unavailableText?: string
   onClickBehavior?:
-  | 'add-to-cart'
-  | 'go-to-product-page'
-  | 'ensure-sku-selection'
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'ensure-sku-selection'
 }
 
 function checkAvailability(

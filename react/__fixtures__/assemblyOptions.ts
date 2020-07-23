@@ -1,6 +1,6 @@
 import { AssemblyOptions } from '../modules/assemblyOptions'
 
-export const customBell = {
+export const customBell: AssemblyOptions = {
   items: {
     'add-on_Add-on': [
       {
@@ -83,7 +83,13 @@ export const customBell = {
       },
     ],
   },
-  inputValues: {},
+  inputValues: {
+    '1-3-lines': {
+      'Line 1': 'First line',
+      'Line 2': 'Second line',
+      'Line 3': 'Third line',
+    },
+  },
   areGroupsValid: {
     'add-on_Add-on': true,
     'text_style_Text Style': true,
