@@ -3,7 +3,7 @@ import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
-import { mapCatalogItemToCart } from './modules/catalogItemToCart'
+import { mapCatalogItemToCart, CartItem } from './modules/catalogItemToCart'
 import { AssemblyOptions } from './modules/assemblyOptions'
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
     | 'add-to-cart'
     | 'go-to-product-page'
     | 'ensure-sku-selection'
+  skuItems?: CartItem[]
 }
 
 function checkAvailability(
@@ -89,6 +90,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
 
   const skuItems = useMemo(
     () =>
+      props.skuItems ??
       mapCatalogItemToCart({
         product,
         selectedItem,
@@ -96,7 +98,14 @@ const Wrapper = withToast(function Wrapper(props: Props) {
         selectedSeller: seller,
         assemblyOptions,
       }),
-    [assemblyOptions, product, selectedItem, selectedQuantity, seller]
+    [
+      assemblyOptions,
+      product,
+      props.skuItems,
+      selectedItem,
+      selectedQuantity,
+      seller,
+    ]
   )
 
   const isAvailable = checkAvailability(isEmptyContext, seller, available)

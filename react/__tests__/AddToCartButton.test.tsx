@@ -34,6 +34,31 @@ const mockSKUItems = [
     },
     referenceId: [{ Key: 'Reference', Value: 'red star' }],
   },
+  {
+    id: '2000535',
+    productId: '2000004',
+    quantity: 1,
+    uniqueId: '',
+    detailUrl: '/st-tropez-shorts/p',
+    name: 'St Tropez Top Shorts',
+    brand: 'Samsung',
+    category: '/Apparel & Accessories/Clothing/Bottoms/',
+    productRefId: '01212',
+    seller: '1',
+    variant: 'Navy Blue',
+    skuName: 'Navy Blue',
+    price: 303000,
+    listPrice: 303000,
+    sellingPrice: 303000,
+    sellingPriceWithAssemblies: 303000,
+    measurementUnit: 'un',
+    skuSpecifications: [],
+    imageUrl:
+      'https://storecomponents.vtexassets.com/arquivos/ids/155488-500-auto?width=500&height=auto&aspect=true',
+    options: [],
+    assemblyOptions: { added: [], removed: [], parentPrice: 3030 },
+    referenceId: null,
+  },
 ]
 
 const mockMarketingData = {
@@ -282,6 +307,21 @@ describe('AddToCartButton component', () => {
           imageUrl:
             'https://storecomponents.vtexassets.com/arquivos/ids/155518/download--40-.png?v=636942495289870000',
           referenceId: 'red star',
+        },
+        {
+          skuId: '2000535',
+          variant: 'Navy Blue',
+          price: 303000,
+          name: 'St Tropez Top Shorts',
+          quantity: 1,
+          productId: '2000004',
+          productRefId: '01212',
+          brand: 'Samsung',
+          category: 'Apparel & Accessories/Clothing/Bottoms',
+          detailUrl: '/st-tropez-shorts/p',
+          imageUrl:
+            'https://storecomponents.vtexassets.com/arquivos/ids/155488-500-auto?width=500&height=auto&aspect=true',
+          referenceId: undefined,
         },
       ],
     }
