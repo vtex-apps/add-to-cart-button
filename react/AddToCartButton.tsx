@@ -27,8 +27,8 @@ interface Props {
   available: boolean
   disabled: boolean
   multipleAvailableSKUs: boolean
-  customToastUrl: string
-  customOneClickBuyLink: string
+  customToastUrl?: string
+  customOneClickBuyLink?: string
   skuItems: CartItem[]
   showToast: Function
   allSkuVariationsSelected: boolean
@@ -36,6 +36,8 @@ interface Props {
   unavailableText?: string
   productLink: ProductLink
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
+  customEventId?: string
+  addToCartFeedback?: 'customEvent' | 'toast'
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -103,6 +105,8 @@ function AddToCartButton(props: Props) {
     productLink,
     onClickBehavior,
     multipleAvailableSKUs,
+    customEventId,
+    addToCartFeedback,
   } = props
 
   const intl = useIntl()
@@ -190,8 +194,19 @@ function AddToCartButton(props: Props) {
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
+    const pixelEvent =
+      customEventId && addToCartFeedback === 'customEvent'
+        ? {
+            id: customEventId,
+            event: 'addToCart',
+            items: pixelEventItems,
+          }
+        : {
+            event: 'addToCart',
+            items: pixelEventItems,
+          }
 
-    push({ event: 'addToCart', items: pixelEventItems })
+    push(pixelEvent)
 
     if (isOneClickBuy) {
       if (
@@ -201,14 +216,15 @@ function AddToCartButton(props: Props) {
         navigate({ to: checkoutURL })
       } else {
         window.location.assign(
-          `${rootPath}${customOneClickBuyLink || checkoutURL}`
+          `${rootPath}${customOneClickBuyLink ?? checkoutURL}`
         )
       }
     }
 
-    timers.current.toast = window.setTimeout(() => {
-      toastMessage({ success: true, isNewItem: itemsAdded })
-    }, FAKE_LOADING_DURATION)
+    addToCartFeedback === 'toast' &&
+      (timers.current.toast = window.setTimeout(() => {
+        toastMessage({ success: true, isNewItem: itemsAdded })
+      }, FAKE_LOADING_DURATION))
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
