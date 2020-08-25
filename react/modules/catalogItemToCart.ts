@@ -8,6 +8,7 @@ import {
 export interface CartItem {
   detailUrl: string
   id: string
+  ean: string
   imageUrl: string
   index?: number
   listPrice: number
@@ -63,6 +64,7 @@ export function mapCatalogItemToCart({
     {
       index: 0,
       id: selectedItem.itemId,
+      ean: selectedItem.ean,
       productId: product.productId ?? '',
       quantity: selectedQuantity,
       uniqueId: '',
