@@ -74,7 +74,7 @@ export const StarColorTop = {
         name: 'Red star',
         nameComplete: 'Top Star Color Shirt Red star',
         complementName: 'Tank top with star',
-        ean: '',
+        ean: '123456',
         referenceId: [
           {
             Key: 'RefId',
@@ -250,7 +250,7 @@ export const StarColorTop = {
         name: 'Magento',
         nameComplete: 'Top Star Color Shirt Magento',
         complementName: 'Tank top with star',
-        ean: '',
+        ean: '123456',
         referenceId: [
           {
             Key: 'RefId',
@@ -2594,7 +2594,7 @@ export const StarColorTop = {
     name: 'Red star',
     nameComplete: 'Top Star Color Shirt Red star',
     complementName: 'Tank top with star',
-    ean: '',
+    ean: '123456',
     referenceId: [
       {
         Key: 'RefId',

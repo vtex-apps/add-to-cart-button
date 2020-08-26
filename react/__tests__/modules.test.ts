@@ -319,6 +319,7 @@ describe('catalogToCart module', () => {
       {
         index: 0,
         id: '2000564',
+        ean: '123456',
         productId: '2000024',
         quantity: 1,
         uniqueId: '',
