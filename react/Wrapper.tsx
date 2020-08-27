@@ -21,7 +21,7 @@ interface Props {
     | 'go-to-product-page'
     | 'ensure-sku-selection'
   skuItems?: CartItem[]
-  customEventId?: string
+  customPixelEventId?: string
   addToCartFeedback?: 'toast' | 'customEvent'
 }
 
@@ -74,7 +74,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     selectedSeller,
     unavailableText,
     text,
-    customEventId,
+    customPixelEventId,
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
   } = props
@@ -139,7 +139,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       productLink={productLink}
       onClickBehavior={onClickBehavior}
       multipleAvailableSKUs={multipleAvailableSKUs}
-      customEventId={customEventId}
+      customPixelEventId={customPixelEventId}
       addToCartFeedback={addToCartFeedback}
     />
   )

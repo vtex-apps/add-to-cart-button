@@ -36,7 +36,7 @@ interface Props {
   unavailableText?: string
   productLink: ProductLink
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
-  customEventId?: string
+  customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
 }
 
@@ -105,7 +105,7 @@ function AddToCartButton(props: Props) {
     productLink,
     onClickBehavior,
     multipleAvailableSKUs,
-    customEventId,
+    customPixelEventId,
     addToCartFeedback,
   } = props
 
@@ -195,9 +195,9 @@ function AddToCartButton(props: Props) {
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
     const pixelEvent =
-      customEventId && addToCartFeedback === 'customEvent'
+      customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
-            id: customEventId,
+            id: customPixelEventId,
             event: 'addToCart',
             items: pixelEventItems,
           }
