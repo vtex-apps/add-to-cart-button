@@ -70,6 +70,7 @@ const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
 
   return {
     skuId: skuItem.id,
+    ean: skuItem.ean,
     variant: skuItem.variant,
     price: skuItem.price,
     name: skuItem.name,
