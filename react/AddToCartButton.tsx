@@ -82,6 +82,7 @@ const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
     detailUrl: skuItem.detailUrl,
     imageUrl: skuItem.imageUrl,
     referenceId: skuItem?.referenceId?.[0]?.Value,
+    seller: skuItem.seller
   }
 }
 
