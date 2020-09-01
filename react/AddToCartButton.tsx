@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   FormattedMessage,
   MessageDescriptor,
@@ -119,9 +119,22 @@ function AddToCartButton(props: Props) {
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
 
+  // collect toast and fake loading delay timers
+  const timers = useRef<Record<string, number | undefined>>({})
+
   useEffect(() => {
+    const currentTimers = timers.current
+
     if (isFakeLoading) {
-      setTimeout(() => setFakeLoading(false), FAKE_LOADING_DURATION)
+      currentTimers.loading = window.setTimeout(
+        () => setFakeLoading(false),
+        FAKE_LOADING_DURATION
+      )
+    }
+
+    // remove all timers when unmounting
+    return () => {
+      Object.values(currentTimers).forEach(clearTimeout)
     }
   }, [isFakeLoading])
 
@@ -189,7 +202,7 @@ function AddToCartButton(props: Props) {
       }
     }
 
-    setTimeout(() => {
+    timers.current.toast = window.setTimeout(() => {
       toastMessage({ success: true, isNewItem: itemsAdded })
     }, FAKE_LOADING_DURATION)
 
