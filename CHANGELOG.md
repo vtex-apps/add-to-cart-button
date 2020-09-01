@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `seller` to `addToCart` event.
+- `sellerName` to `addToCart` event.
 
 ## [0.16.0] - 2020-09-08
 ### Added
