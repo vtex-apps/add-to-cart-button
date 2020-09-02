@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   FormattedMessage,
   MessageDescriptor,
@@ -38,6 +38,9 @@ interface Props {
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
 }
 
+// We apply a fake loading to accidental consecutive clicks on the button
+const FAKE_LOADING_DURATION = 500
+
 const CSS_HANDLES = [
   'buttonText',
   'buttonDataContainer',
@@ -63,7 +66,7 @@ const messages = defineMessages({
   },
 })
 
-const adjustSkuItemForPixelEvent = (skuItem: CartItem) => {
+const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
   const category = skuItem.category ? skuItem.category.slice(1, -1) : ''
@@ -112,8 +115,28 @@ function AddToCartButton(props: Props) {
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
   const { utmParams, utmiParams } = useMarketingSessionParams()
+  const [isFakeLoading, setFakeLoading] = useState(false)
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
+
+  // collect toast and fake loading delay timers
+  const timers = useRef<Record<string, number | undefined>>({})
+
+  useEffect(() => {
+    const currentTimers = timers.current
+
+    if (isFakeLoading) {
+      currentTimers.loading = window.setTimeout(
+        () => setFakeLoading(false),
+        FAKE_LOADING_DURATION
+      )
+    }
+
+    // remove all timers when unmounting
+    return () => {
+      Object.values(currentTimers).forEach(clearTimeout)
+    }
+  }, [isFakeLoading])
 
   const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
     if (!success) return translateMessage(messages.error)
@@ -132,10 +155,7 @@ function AddToCartButton(props: Props) {
     const message = resolveToastMessage(success, isNewItem)
 
     const action = success
-      ? {
-          label: translateMessage(messages.seeCart),
-          href: customToastUrl,
-        }
+      ? { label: translateMessage(messages.seeCart), href: customToastUrl }
       : undefined
 
     showToast({ message, action })
@@ -144,6 +164,8 @@ function AddToCartButton(props: Props) {
   const handleAddToCart: React.MouseEventHandler = event => {
     event.stopPropagation()
     event.preventDefault()
+
+    setFakeLoading(true)
 
     const productLinkIsValid = Boolean(
       productLink.linkText && productLink.productId
@@ -163,12 +185,9 @@ function AddToCartButton(props: Props) {
     }
 
     const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
-    const pixelEventItems = skuItems.map(adjustSkuItemForPixelEvent)
+    const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
 
-    push({
-      event: 'addToCart',
-      items: pixelEventItems,
-    })
+    push({ event: 'addToCart', items: pixelEventItems })
 
     if (isOneClickBuy) {
       if (
@@ -183,7 +202,9 @@ function AddToCartButton(props: Props) {
       }
     }
 
-    toastMessage({ success: true, isNewItem: itemsAdded })
+    timers.current.toast = window.setTimeout(() => {
+      toastMessage({ success: true, isNewItem: itemsAdded })
+    }, FAKE_LOADING_DURATION)
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
@@ -234,7 +255,12 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <Button block disabled={disabled || !available} onClick={handleClick}>
+    <Button
+      block
+      isLoading={isFakeLoading}
+      disabled={disabled || !available}
+      onClick={handleClick}
+    >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
   )
