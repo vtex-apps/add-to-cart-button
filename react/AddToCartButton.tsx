@@ -122,6 +122,15 @@ function AddToCartButton(props: Props) {
   // collect toast and fake loading delay timers
   const timers = useRef<Record<string, number | undefined>>({})
 
+  // prevent timers from doing something if the component was unmounted
+  useEffect(function onUnmount() {
+    return () => {
+      // We disable the eslint rule because we just want to clear the current existing timers
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      Object.values(timers.current).forEach(clearTimeout)
+    }
+  }, [])
+
   useEffect(() => {
     const currentTimers = timers.current
 
@@ -130,11 +139,6 @@ function AddToCartButton(props: Props) {
         () => setFakeLoading(false),
         FAKE_LOADING_DURATION
       )
-    }
-
-    // remove all timers when unmounting
-    return () => {
-      Object.values(currentTimers).forEach(clearTimeout)
     }
   }, [isFakeLoading])
 
