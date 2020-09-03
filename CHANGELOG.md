@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `seller` to `addToCart` event.
 - `sellerName` to `addToCart` event.
 
+## [0.15.1] - 2020-09-02
+### Fixed
+- Timers being cleared before being fired.
+
+## [0.15.0] - 2020-09-02
+### Added
+- A fake loading of 500ms to prevent accidental consecutive clicks.
+
 ## [0.14.0] - 2020-08-27
 ### Added
 - `ean` to `addToCart` event.
