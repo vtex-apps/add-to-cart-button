@@ -18,7 +18,7 @@ export interface CartItem {
   productId: string
   quantity: number
   seller: string
-  sellerName?: string
+  sellerName: string
   sellingPrice: number
   productRefId: string
   brand: string

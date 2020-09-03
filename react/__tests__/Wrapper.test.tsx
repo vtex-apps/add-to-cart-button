@@ -137,6 +137,7 @@ describe('Wrapper component', () => {
         category: '/Apparel & Accessories/Clothing/Tops/',
         productRefId: '998765',
         seller: '1',
+        sellerName: 'VTEX',
         variant: 'Red star',
         skuName: 'Red star',
         price: 3500,
