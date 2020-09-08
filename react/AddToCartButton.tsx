@@ -88,7 +88,7 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
     imageUrl: skuItem.imageUrl,
     referenceId: skuItem?.referenceId?.[0]?.Value,
     seller: skuItem.seller,
-    sellerName: skuItem.sellerName
+    sellerName: skuItem.sellerName,
   }
 }
 
