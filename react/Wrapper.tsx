@@ -10,10 +10,10 @@ interface Props {
   isOneClickBuy: boolean
   available: boolean
   disabled: boolean
-  customToastUrl: string
-  customOneClickBuyLink: string
+  customToastUrl?: string
+  customOneClickBuyLink?: string
   showToast: Function
-  selectedSeller: Seller | undefined
+  selectedSeller?: Seller
   text?: string
   unavailableText?: string
   onClickBehavior?:
@@ -21,6 +21,8 @@ interface Props {
     | 'go-to-product-page'
     | 'ensure-sku-selection'
   skuItems?: CartItem[]
+  customPixelEventId?: string
+  addToCartFeedback?: 'toast' | 'customEvent'
 }
 
 function checkAvailability(
@@ -72,6 +74,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     selectedSeller,
     unavailableText,
     text,
+    customPixelEventId,
+    addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
   } = props
   const productContext: ProductContextState = useProduct()
@@ -135,6 +139,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       productLink={productLink}
       onClickBehavior={onClickBehavior}
       multipleAvailableSKUs={multipleAvailableSKUs}
+      customPixelEventId={customPixelEventId}
+      addToCartFeedback={addToCartFeedback}
     />
   )
 })
