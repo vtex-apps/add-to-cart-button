@@ -16,6 +16,7 @@ const mockSKUItems = [
     category: '/Apparel & Accessories/Clothing/Tops/',
     productRefId: '998765',
     seller: '1',
+    sellerName: 'VTEX',
     variant: 'Red star',
     skuName: 'Red star',
     price: 3500,
@@ -45,6 +46,7 @@ const mockSKUItems = [
     category: '/Apparel & Accessories/Clothing/Bottoms/',
     productRefId: '01212',
     seller: '1',
+    sellerName: 'VTEX',
     variant: 'Navy Blue',
     skuName: 'Navy Blue',
     price: 303000,
@@ -307,6 +309,8 @@ describe('AddToCartButton component', () => {
           imageUrl:
             'https://storecomponents.vtexassets.com/arquivos/ids/155518/download--40-.png?v=636942495289870000',
           referenceId: 'red star',
+          seller: '1',
+          sellerName: 'VTEX',
         },
         {
           skuId: '2000535',
@@ -322,6 +326,8 @@ describe('AddToCartButton component', () => {
           imageUrl:
             'https://storecomponents.vtexassets.com/arquivos/ids/155488-500-auto?width=500&height=auto&aspect=true',
           referenceId: undefined,
+          seller: '1',
+          sellerName: 'VTEX',
         },
       ],
     }

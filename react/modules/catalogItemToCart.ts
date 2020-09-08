@@ -18,6 +18,7 @@ export interface CartItem {
   productId: string
   quantity: number
   seller: string
+  sellerName: string
   sellingPrice: number
   productRefId: string
   brand: string
@@ -77,6 +78,7 @@ export function mapCatalogItemToCart({
           : '',
       productRefId: product.productReference ?? '',
       seller: selectedSeller.sellerId,
+      sellerName: selectedSeller.sellerName,
       variant: selectedItem.name,
       skuName: selectedItem.name,
       price: selectedSeller.commertialOffer.PriceWithoutDiscount * 100,
