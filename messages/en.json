@@ -1,6 +1,5 @@
 {
   "store/add-to-cart.success": "Item added to your cart",
-  "store/add-to-cart.duplicate": "Item already in your cart",
   "store/add-to-cart.failure": "Something went wrong and the item was not added to your cart!",
   "store/add-to-cart.see-cart": "View cart",
   "store/add-to-cart.add-to-cart": "Add to cart",
