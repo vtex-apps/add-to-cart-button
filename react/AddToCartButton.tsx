@@ -148,21 +148,14 @@ function AddToCartButton(props: Props) {
     }
   }, [isFakeLoading])
 
-  const resolveToastMessage = (success: boolean, isNewItem: boolean) => {
+  const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
-    if (!isNewItem) return translateMessage(messages.duplicate)
 
     return translateMessage(messages.success)
   }
 
-  const toastMessage = ({
-    success,
-    isNewItem,
-  }: {
-    success: boolean
-    isNewItem: boolean
-  }) => {
-    const message = resolveToastMessage(success, isNewItem)
+  const toastMessage = ({ success }: { success: boolean }) => {
+    const message = resolveToastMessage(success)
 
     const action = success
       ? { label: translateMessage(messages.seeCart), href: customToastUrl }
@@ -194,7 +187,8 @@ function AddToCartButton(props: Props) {
       })
     }
 
-    const itemsAdded = addItem(skuItems, { ...utmParams, ...utmiParams })
+    addItem(skuItems, { ...utmParams, ...utmiParams })
+
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
@@ -225,7 +219,7 @@ function AddToCartButton(props: Props) {
 
     addToCartFeedback === 'toast' &&
       (timers.current.toast = window.setTimeout(() => {
-        toastMessage({ success: true, isNewItem: itemsAdded })
+        toastMessage({ success: true })
       }, FAKE_LOADING_DURATION))
 
     /* PWA */
