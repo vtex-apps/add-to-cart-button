@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Use navigate when redirecting to checkout
+- Use `navigate()` when redirecting to the checkout
 
 ## [0.18.0] - 2020-09-16
 ### Removed
