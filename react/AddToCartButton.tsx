@@ -146,7 +146,7 @@ function AddToCartButton(props: Props) {
         FAKE_LOADING_DURATION
       )
     }
-  }, [isFakeLoading])
+  }, [isFakeLoading, isOneClickBuy])
 
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
@@ -213,14 +213,17 @@ function AddToCartButton(props: Props) {
       ) {
         navigate({ to: checkoutURL })
       } else {
-        navigate({ to: `${customOneClickBuyLink ?? checkoutURL}`, fallbackToWindowLocation: true })
+        navigate({
+          to: `${customOneClickBuyLink ?? checkoutURL}`,
+          fallbackToWindowLocation: true,
+        })
       }
     }
 
     if (addToCartFeedback === 'toast' && !isOneClickBuy) {
-      (timers.current.toast = window.setTimeout(() => {
+      timers.current.toast = window.setTimeout(() => {
         toastMessage({ success: true })
-      }, FAKE_LOADING_DURATION))
+      }, FAKE_LOADING_DURATION)
     }
 
     /* PWA */
