@@ -218,9 +218,9 @@ function AddToCartButton(props: Props) {
     }
 
     if (addToCartFeedback === 'toast' && !isOneClickBuy) {
-      (timers.current.toast = window.setTimeout(() => {
+      timers.current.toast = window.setTimeout(() => {
         toastMessage({ success: true })
-      }, FAKE_LOADING_DURATION))
+      }, FAKE_LOADING_DURATION)
     }
 
     /* PWA */
