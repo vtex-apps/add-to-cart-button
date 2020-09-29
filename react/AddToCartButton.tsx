@@ -205,13 +205,11 @@ function AddToCartButton(props: Props) {
     push(pixelEvent)
 
     if (isOneClickBuy) {
-      setFakeLoading(false)
-
       if (
         major > 0 &&
         (!customOneClickBuyLink || customOneClickBuyLink === checkoutURL)
       ) {
-        navigate({ to: checkoutURL })
+        navigate({ to: checkoutURL, fallbackToWindowLocation: false })
       } else {
         navigate({
           to: `${customOneClickBuyLink ?? checkoutURL}`,
