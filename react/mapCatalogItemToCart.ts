@@ -1,3 +1,3 @@
-import { mapCatalogItemToCart } from './modules/mapCatalogItemToCart'
+import { mapCatalogItemToCart } from './modules/catalogItemToCart'
 
 export default mapCatalogItemToCart
