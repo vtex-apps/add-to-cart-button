@@ -115,7 +115,7 @@ function AddToCartButton(props: Props) {
   const handles = useCssHandles(CSS_HANDLES)
   const { addItem } = useOrderItems()
   const productContextDispatch = useProductDispatch()
-  const { rootPath = '', navigate } = useRuntime()
+  const { navigate } = useRuntime()
   const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
@@ -140,13 +140,13 @@ function AddToCartButton(props: Props) {
   useEffect(() => {
     const currentTimers = timers.current
 
-    if (isFakeLoading) {
+    if (isFakeLoading && !isOneClickBuy) {
       currentTimers.loading = window.setTimeout(
         () => setFakeLoading(false),
         FAKE_LOADING_DURATION
       )
     }
-  }, [isFakeLoading])
+  }, [isFakeLoading, isOneClickBuy])
 
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
@@ -209,18 +209,20 @@ function AddToCartButton(props: Props) {
         major > 0 &&
         (!customOneClickBuyLink || customOneClickBuyLink === checkoutURL)
       ) {
-        navigate({ to: checkoutURL })
+        navigate({ to: checkoutURL, fallbackToWindowLocation: false })
       } else {
-        window.location.assign(
-          `${rootPath}${customOneClickBuyLink ?? checkoutURL}`
-        )
+        navigate({
+          to: `${customOneClickBuyLink ?? checkoutURL}`,
+          fallbackToWindowLocation: true,
+        })
       }
     }
 
-    addToCartFeedback === 'toast' &&
-      (timers.current.toast = window.setTimeout(() => {
+    if (addToCartFeedback === 'toast' && !isOneClickBuy) {
+      timers.current.toast = window.setTimeout(() => {
         toastMessage({ success: true })
-      }, FAKE_LOADING_DURATION))
+      }, FAKE_LOADING_DURATION)
+    }
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
