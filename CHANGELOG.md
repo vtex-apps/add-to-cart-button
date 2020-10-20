@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.20.1] - 2020-10-20
+
 ### Fixed
 - Rollback changes introduced by v0.19.0.
 
