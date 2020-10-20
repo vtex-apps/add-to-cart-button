@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Export `mapCatalogItemToCart` in react root folder.
+
 ## [0.19.0] - 2020-10-13
 ### Fixed
 - Use `navigate()` when redirecting to the checkout
