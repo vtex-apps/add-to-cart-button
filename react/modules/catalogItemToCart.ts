@@ -63,7 +63,6 @@ export function mapCatalogItemToCart({
 
   return [
     {
-      index: 0,
       id: selectedItem.itemId,
       ean: selectedItem.ean,
       productId: product.productId ?? '',
