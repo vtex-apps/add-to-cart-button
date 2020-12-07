@@ -21,6 +21,7 @@ interface Props {
     | 'add-to-cart'
     | 'go-to-product-page'
     | 'ensure-sku-selection'
+  onClickEventPropagation?: 'disabled' | 'enabled'
   skuItems?: CartItem[]
   customPixelEventId?: string
   addToCartFeedback?: 'toast' | 'customEvent'
@@ -78,6 +79,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     customPixelEventId,
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
+    onClickEventPropagation = 'disabled',
   } = props
   const productContext = useProduct()
   const isEmptyContext = Object.keys(productContext ?? {}).length === 0
@@ -142,6 +144,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       allSkuVariationsSelected={areAllSkuVariationsSelected}
       productLink={productLink}
       onClickBehavior={onClickBehavior}
+      onClickEventPropagation={onClickEventPropagation}
       multipleAvailableSKUs={multipleAvailableSKUs}
       customPixelEventId={customPixelEventId}
       addToCartFeedback={addToCartFeedback}
