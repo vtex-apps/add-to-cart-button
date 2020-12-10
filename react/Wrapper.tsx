@@ -79,8 +79,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
   } = props
-  const productContext = useProduct() ?? {}
-  const isEmptyContext = Object.keys(productContext).length === 0
+  const productContext = useProduct()
+  const isEmptyContext = Object.keys(productContext ?? {}).length === 0
 
   const product = productContext?.product
   const itemsLength = product?.items?.length ?? 0

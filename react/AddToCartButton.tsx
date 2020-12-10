@@ -9,7 +9,7 @@ import { Button, Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
-import { PixelContext } from 'vtex.pixel-manager'
+import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
 import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
@@ -117,7 +117,7 @@ function AddToCartButton(props: Props) {
   const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = Utils.useCheckoutURL()
-  const { push } = PixelContext.usePixel()
+  const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
   const { utmParams, utmiParams } = useMarketingSessionParams()

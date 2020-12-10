@@ -3,3 +3,7 @@ export const PixelContext = {
     return { push: jest.fn() }
   },
 }
+
+export const usePixel = () => {
+  return { push: jest.fn() }
+}

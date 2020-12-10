@@ -103,9 +103,7 @@ jest.mock('vtex.order-items/OrderItems', () => ({
 }))
 
 jest.mock('vtex.pixel-manager', () => ({
-  PixelContext: {
-    usePixel: () => ({ push: mockPixelEventPush }),
-  },
+  usePixel: () => ({ push: mockPixelEventPush }),
 }))
 
 jest.mock('vtex.render-runtime', () => ({
