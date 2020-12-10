@@ -110,7 +110,7 @@ function AddToCartButton(props: Props) {
     multipleAvailableSKUs,
     customPixelEventId,
     addToCartFeedback,
-    onClickEventPropagation,
+    onClickEventPropagation = 'disabled',
   } = props
 
   const intl = useIntl()
