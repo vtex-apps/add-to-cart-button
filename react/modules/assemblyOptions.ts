@@ -1,12 +1,10 @@
-import type { ProductTypes } from 'vtex.product-context'
-
 type GroupId = string
 type GroupTypes = 'SINGLE' | 'TOGGLE' | 'MULTIPLE'
 
 type InputValue = Record<string, string | boolean>
 
 export interface AssemblyOptions {
-  items: Record<GroupId, ProductTypes.AssemblyOptionItem[]>
+  items: Record<GroupId, AssemblyOptionItem[]>
   inputValues: Record<GroupId, InputValue>
   areGroupsValid: Record<string, boolean>
 }
@@ -56,19 +54,19 @@ interface ParsedAssemblyOptions {
 }
 
 interface TransformAssemblyOptionsArgs {
-  assemblyOptionsItems?: Record<GroupId, ProductTypes.AssemblyOptionItem[]>
+  assemblyOptionsItems?: Record<GroupId, AssemblyOptionItem[]>
   inputValues?: Record<GroupId, InputValue>
   parentPrice: number
   parentQuantity: number
 }
 
 export function sumAssembliesPrice(
-  assemblyOptions: Record<GroupId, ProductTypes.AssemblyOptionItem[]>
-): number {
+  assemblyOptions: Record<GroupId, AssemblyOptionItem[]>
+) {
   const cleanAssemblies = assemblyOptions || {}
   const assembliesGroupItems = Object.values(cleanAssemblies)
   return assembliesGroupItems.reduce((sum, groupItems) => {
-    const groupPrice = groupItems.reduce<number>((groupSum, item) => {
+    const groupPrice = groupItems.reduce((groupSum, item) => {
       const childrenPrice: number = item.children
         ? sumAssembliesPrice(item.children)
         : 0
@@ -135,13 +133,13 @@ export function transformAssemblyOptions({
         added.push({
           normalizedQuantity: quantity,
           extraQuantity: quantity - initialQuantity,
-          choiceType: item.choiceType as GroupTypes,
+          choiceType: item.choiceType,
           item: {
             name: item.name,
             sellingPrice: item.price,
             quantity,
             sellingPriceWithAssemblies:
-              (item.price as number) + sumAssembliesPrice(item.children ?? {}),
+              item.price + sumAssembliesPrice(item.children ?? {}),
             id: item.id,
             ...(childrenAssemblyOptions
               ? { assemblyOptions: childrenAssemblyOptions }

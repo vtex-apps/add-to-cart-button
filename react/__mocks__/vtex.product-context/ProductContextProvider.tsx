@@ -1,4 +1,4 @@
-import React, { createContext, useContext, FC } from 'react'
+import React, { createContext, FC } from 'react'
 
 export const ProductContext = createContext({})
 
@@ -10,12 +10,4 @@ export const ProductContextProvider: FC<Props> = ({ children, value }) => {
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
   )
-}
-
-export function useProduct() {
-  return useContext(ProductContext)
-}
-
-export function useProductDispatch() {
-  return jest.fn()
 }

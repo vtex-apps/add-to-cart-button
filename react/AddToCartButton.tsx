@@ -6,11 +6,11 @@ import {
   defineMessages,
 } from 'react-intl'
 import { Button, Tooltip } from 'vtex.styleguide'
-import { Utils } from 'vtex.checkout-resources'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
-import { usePixel } from 'vtex.pixel-manager'
-import { useProductDispatch } from 'vtex.product-context'
+import { usePixel } from 'vtex.pixel-manager/PixelContext'
+import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
 import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
 
@@ -116,7 +116,7 @@ function AddToCartButton(props: Props) {
   const { addItem } = useOrderItems()
   const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
-  const { url: checkoutURL, major } = Utils.useCheckoutURL()
+  const { url: checkoutURL, major } = useCheckoutURL()
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
@@ -178,14 +178,13 @@ function AddToCartButton(props: Props) {
       (onClickBehavior === 'ensure-sku-selection' && multipleAvailableSKUs)
 
     if (productLinkIsValid && shouldNavigateToProductPage) {
-      navigate({
+      return navigate({
         page: 'store.product',
         params: {
           slug: productLink.linkText,
           id: productLink.productId,
         },
       })
-      return
     }
 
     addItem(skuItems, { ...utmParams, ...utmiParams })
@@ -203,7 +202,6 @@ function AddToCartButton(props: Props) {
             items: pixelEventItems,
           }
 
-    // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
 
     if (isOneClickBuy) {

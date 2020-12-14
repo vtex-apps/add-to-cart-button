@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
-import { useProduct } from 'vtex.product-context'
-import type { ProductTypes } from 'vtex.product-context'
+import useProduct from 'vtex.product-context/useProduct'
 import { withToast } from 'vtex.styleguide'
 
 import AddToCartButton from './AddToCartButton'
@@ -14,7 +13,7 @@ interface Props {
   customToastUrl?: string
   customOneClickBuyLink?: string
   showToast: Function
-  selectedSeller?: ProductTypes.Seller
+  selectedSeller?: Seller
   text?: string
   unavailableText?: string
   onClickBehavior?:
@@ -28,7 +27,7 @@ interface Props {
 
 function checkAvailability(
   isEmptyContext: boolean,
-  seller: ProductTypes.Seller | undefined,
+  seller: Seller | undefined,
   availableProp: Props['available']
 ) {
   if (isEmptyContext) {
@@ -45,7 +44,7 @@ function checkAvailability(
 
 function checkDisabled(
   isEmptyContext: boolean,
-  assemblyOptions: AssemblyOptions | undefined,
+  assemblyOptions: AssemblyOptions,
   disabledProp: Props['disabled']
 ) {
   if (isEmptyContext) {
@@ -79,17 +78,15 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
   } = props
-  const productContext = useProduct()
-  const isEmptyContext = Object.keys(productContext ?? {}).length === 0
+  const productContext: ProductContextState = useProduct()
+  const isEmptyContext = Object.keys(productContext).length === 0
 
   const product = productContext?.product
   const itemsLength = product?.items?.length ?? 0
   const multipleAvailableSKUs = itemsLength > 1
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
-  const seller =
-    selectedSeller ??
-    (productContext?.selectedItem?.sellers[0] as ProductTypes.Seller)
+  const seller = selectedSeller ?? productContext?.selectedItem?.sellers[0]
   const selectedQuantity =
     productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
@@ -119,9 +116,8 @@ const Wrapper = withToast(function Wrapper(props: Props) {
 
   const isDisabled = checkDisabled(isEmptyContext, assemblyOptions, disabled)
 
-  const areAllSkuVariationsSelected = Boolean(
-    !isEmptyContext && productContext?.skuSelector?.areAllVariationsSelected
-  )
+  const areAllSkuVariationsSelected =
+    !isEmptyContext && productContext?.skuSelector.areAllVariationsSelected
 
   const productLink = {
     linkText: product?.linkText,
