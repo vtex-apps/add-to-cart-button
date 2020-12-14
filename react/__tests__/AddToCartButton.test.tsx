@@ -102,7 +102,7 @@ jest.mock('vtex.order-items/OrderItems', () => ({
   }),
 }))
 
-jest.mock('vtex.pixel-manager/PixelContext', () => ({
+jest.mock('vtex.pixel-manager', () => ({
   usePixel: () => ({ push: mockPixelEventPush }),
 }))
 
