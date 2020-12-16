@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { render } from '@vtex/test-tools/react'
 
-import { ProductContextProvider } from '../__mocks__/vtex.product-context/ProductContextProvider'
+import { ProductContextProvider } from '../__mocks__/vtex.product-context'
 
 export function renderWithProductContext(Component: ReactElement, value: any) {
   return render(

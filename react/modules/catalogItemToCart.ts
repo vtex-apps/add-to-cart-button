@@ -1,9 +1,16 @@
+import type { ProductTypes } from 'vtex.product-context'
+
 import {
   transformAssemblyOptions,
   sumAssembliesPrice,
   ParsedAssemblyOptionsMeta,
   Option,
 } from './assemblyOptions'
+
+interface SKUSpecification {
+  fieldName: string
+  fieldValues: string[]
+}
 
 export interface CartItem {
   detailUrl: string
@@ -30,19 +37,18 @@ export interface CartItem {
   sellingPriceWithAssemblies: number
   options: Option[]
   assemblyOptions: ParsedAssemblyOptionsMeta
-  referenceId: ProductContextItem['referenceId']
+  referenceId: Array<{
+    Key: string
+    Value: string
+  }> | null
 }
 
 interface MapCatalogItemToCartArgs {
-  product: ProductContextState['product']
-  selectedItem: Maybe<ProductContextItem>
-  selectedQuantity: number
-  selectedSeller: any
-  assemblyOptions?: {
-    items: Record<string, AssemblyOptionItem[]>
-    inputValues: Record<string, Record<string, string>>
-    areGroupsValid: Record<string, boolean>
-  }
+  product?: ProductTypes.ProductContextState['product']
+  selectedItem: ProductTypes.ProductContextState['selectedItem']
+  selectedQuantity: ProductTypes.ProductContextState['selectedQuantity']
+  selectedSeller: ProductTypes.Seller
+  assemblyOptions?: ProductTypes.ProductContextState['assemblyOptions']
 }
 
 export function mapCatalogItemToCart({
