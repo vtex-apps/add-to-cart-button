@@ -38,6 +38,7 @@ interface Props {
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
+  onClickEventPropagation: 'disabled' | 'enabled'
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -109,6 +110,7 @@ function AddToCartButton(props: Props) {
     multipleAvailableSKUs,
     customPixelEventId,
     addToCartFeedback,
+    onClickEventPropagation = 'disabled',
   } = props
 
   const intl = useIntl()
@@ -165,8 +167,9 @@ function AddToCartButton(props: Props) {
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
-    event.stopPropagation()
-    event.preventDefault()
+    if (onClickEventPropagation === 'disabled') {
+      event.stopPropagation()
+    }
 
     setFakeLoading(true)
 
