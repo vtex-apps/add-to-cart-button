@@ -169,6 +169,7 @@ function AddToCartButton(props: Props) {
   const handleAddToCart: React.MouseEventHandler = event => {
     if (onClickEventPropagation === 'disabled') {
       event.stopPropagation()
+      event.preventDefault()
     }
 
     setFakeLoading(true)
