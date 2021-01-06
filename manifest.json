@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "add-to-cart-button",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "title": "Add to Cart Button",
   "description": "A button component to add items into the shopping cart.",
   "builders": {
