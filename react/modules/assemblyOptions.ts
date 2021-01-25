@@ -79,61 +79,6 @@ export function sumAssembliesPrice(
   }, 0)
 }
 
-function getObjectIdByPath({
-  path,
-  object,
-}: {
-  path: string[] | string
-  object: any
-}) {
-  if (Array.isArray(path)) {
-    return path.reduce(
-      (result, pathKey) => (result ? result[pathKey] : undefined),
-      object
-    )
-  }
-
-  return object[path]
-}
-
-function parseObjectIdToRemoveDollar({
-  path,
-  object,
-}: {
-  path: string[] | string
-  object: any
-}) {
-  const parsed = getObjectIdByPath({ path, object })
-
-  const splitedId = parsed?.split('$$$')
-
-  return splitedId[splitedId.length - 1]
-}
-
-function formatAddedAssembliesId(added: CartAddedOption[]) {
-  added.forEach(option => {
-    option.item.id = parseObjectIdToRemoveDollar({
-      path: ['item', 'id'],
-      object: option,
-    })
-  })
-}
-
-function formatOptionsIds(options: ItemOption[]) {
-  options.forEach(option => {
-    if (option.assemblyId) {
-      option.assemblyId = parseObjectIdToRemoveDollar({
-        path: 'assemblyId',
-        object: option,
-      })
-    }
-
-    if (option.id) {
-      option.id = parseObjectIdToRemoveDollar({ path: 'id', object: option })
-    }
-  })
-}
-
 export function transformAssemblyOptions({
   assemblyOptionsItems = {},
   inputValues = {},
@@ -160,8 +105,15 @@ export function transformAssemblyOptions({
 
       if (item.children) {
         const childInputValues: Record<GroupId, InputValue> = {}
+        const childrenAssemblyItems: Record<
+          string,
+          ProductTypes.AssemblyOptionItem[]
+        > = {}
+
         for (const key in item.children) {
           childInputValues[key] = inputValues[key]
+          childrenAssemblyItems[key] =
+            assemblyOptionsItems[key] ?? item.children[key]
         }
         const handledInputValues = Object.keys(childInputValues)
         assemblyInputValuesKeys = assemblyInputValuesKeys.filter(
@@ -169,7 +121,7 @@ export function transformAssemblyOptions({
         )
 
         childrenAddedData = transformAssemblyOptions({
-          assemblyOptionsItems: item.children,
+          assemblyOptionsItems: childrenAssemblyItems,
           inputValues: childInputValues,
           parentPrice: item.price,
           parentQuantity: item.quantity * parentQuantity,
@@ -240,13 +192,6 @@ export function transformAssemblyOptions({
       })
     }
   }
-
-  /*
-    parse ids to remove $$$ that is generated at product-customizer (assembly options).
-    Look useAssemblyOptions, function generateId, at line 18.
-  */
-  formatOptionsIds(options)
-  formatAddedAssembliesId(added)
 
   return {
     options,
