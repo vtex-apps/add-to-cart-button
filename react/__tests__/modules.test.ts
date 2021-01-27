@@ -4,6 +4,7 @@ import {
   customBell,
   comboPizza,
   starColor,
+  hamburguerComboTest,
 } from '../__fixtures__/assemblyOptions'
 import {
   sumAssembliesPrice,
@@ -114,6 +115,28 @@ describe('assemblyOptions module', () => {
 
       const drinksOptions = resultPizza.options[1] as ItemOption
       expect(drinksOptions.options).toBeUndefined()
+
+      const resultHamburguerComboTest = transformAssemblyOptions({
+        assemblyOptionsItems: hamburguerComboTest.items,
+        inputValues: {},
+        parentPrice,
+        parentQuantity,
+      })
+
+      expect(resultHamburguerComboTest.options).toHaveLength(2)
+      const [comboOne, comboTwo] = resultHamburguerComboTest.options
+      // check combo one
+      expect(comboOne.options).toHaveLength(2)
+      expect(comboOne.options?.[0].id).toBe('10091')
+      expect(comboOne.options?.[0].quantity).toBe(0)
+      expect(comboOne.options?.[1].id).toBe('10093')
+      expect(comboOne.options?.[1].quantity).toBe(1)
+      // check combo two
+      expect(comboTwo.options).toHaveLength(2)
+      expect(comboTwo.options?.[0].id).toBe('10091')
+      expect(comboTwo.options?.[0].quantity).toBe(0)
+      expect(comboTwo.options?.[1].id).toBe('10093')
+      expect(comboTwo.options?.[1].quantity).toBe(1)
     })
 
     it('input values', () => {

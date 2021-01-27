@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Tests do `transformAssemblyOptions` function.
+
+### Fixed
+- `transformAssemblyOptions` to pick the right children's values.
+
 ## [0.21.1] - 2021-01-06
 ### Fixed
 - Missing `preventDefault` call on `handleAddToCart` function.
