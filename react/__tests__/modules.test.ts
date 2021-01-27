@@ -115,12 +115,14 @@ describe('assemblyOptions module', () => {
 
       const drinksOptions = resultPizza.options[1] as ItemOption
       expect(drinksOptions.options).toBeUndefined()
+    })
 
+    it('deep AssemblyOptions transform test', () => {
       const resultHamburguerComboTest = transformAssemblyOptions({
         assemblyOptionsItems: hamburguerComboTest.items,
         inputValues: {},
-        parentPrice,
-        parentQuantity,
+        parentPrice: 450,
+        parentQuantity: 1,
       })
 
       expect(resultHamburguerComboTest.options).toHaveLength(2)
