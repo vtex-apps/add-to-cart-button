@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Articol adăugat în coșul tău",
+  "store/add-to-cart.failure": "A apărut o eroare, iar articolul nu a fost adăugat în coșul tău!",
+  "store/add-to-cart.see-cart": "Vizualizează coșul",
+  "store/add-to-cart.add-to-cart": "Adaugă în coș",
+  "store/add-to-cart.label-unavailable": "Indisponibil",
+  "store/add-to-cart.select-sku-variations": "Te rugăm să selectezi o opțiune pentru fiecare variație",
+  "admin/editor.add-to-cart.title": "Buton Adaugă în coș",
+  "admin/editor.add-to-cart.text.title": "Text buton",
+  "admin/editor.add-to-cart.text.description": "Textul butonului, de exemplu „Adaugă în coș”",
+  "admin/editor.add-to-cart.text-unavailable.title": "Text buton indisponibil",
+  "admin/editor.add-to-cart.text-unavailable.description": "Textul butonului atunci când un produs e indisponibil."
+}
