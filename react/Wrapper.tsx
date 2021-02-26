@@ -13,7 +13,8 @@ interface Props {
   disabled: boolean
   customToastUrl?: string
   customOneClickBuyLink?: string
-  showToast: Function
+  showToast: Function,
+  toastDuration: number,
   selectedSeller?: ProductTypes.Seller
   text?: string
   unavailableText?: string
@@ -80,6 +81,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
     onClickEventPropagation = 'disabled',
+    toastDuration,
   } = props
   const productContext = useProduct()
   const isEmptyContext = Object.keys(productContext ?? {}).length === 0
@@ -148,6 +150,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       multipleAvailableSKUs={multipleAvailableSKUs}
       customPixelEventId={customPixelEventId}
       addToCartFeedback={addToCartFeedback}
+      toastDuration={toastDuration}
     />
   )
 })

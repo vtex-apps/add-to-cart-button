@@ -30,7 +30,8 @@ interface Props {
   customToastUrl?: string
   customOneClickBuyLink?: string
   skuItems: CartItem[]
-  showToast: Function
+  showToast: Function,
+  toastDuration: number,
   allSkuVariationsSelected: boolean
   text?: string
   unavailableText?: string
@@ -43,6 +44,7 @@ interface Props {
 
 // We apply a fake loading to accidental consecutive clicks on the button
 const FAKE_LOADING_DURATION = 500
+const TOAST_DURATION = 5000
 
 const CSS_HANDLES = [
   'buttonText',
@@ -111,6 +113,7 @@ function AddToCartButton(props: Props) {
     customPixelEventId,
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
+    toastDuration = TOAST_DURATION
   } = props
 
   const intl = useIntl()
@@ -163,7 +166,7 @@ function AddToCartButton(props: Props) {
       ? { label: translateMessage(messages.seeCart), href: customToastUrl }
       : undefined
 
-    showToast({ message, action })
+    showToast({ message, action, duration: toastDuration })
   }
 
   const handleAddToCart: React.MouseEventHandler = event => {
