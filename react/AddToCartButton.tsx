@@ -79,6 +79,7 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
     ean: skuItem.ean,
     variant: skuItem.variant,
     price: skuItem.price,
+    priceIsInt: true,
     name: skuItem.name,
     quantity: skuItem.quantity,
     productId: skuItem.productId,
