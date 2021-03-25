@@ -47,7 +47,7 @@ interface MapCatalogItemToCartArgs {
   product?: ProductTypes.ProductContextState['product']
   selectedItem: ProductTypes.ProductContextState['selectedItem']
   selectedQuantity: ProductTypes.ProductContextState['selectedQuantity']
-  selectedSeller: ProductTypes.Seller
+  selectedSeller?: ProductTypes.Seller
   assemblyOptions?: ProductTypes.ProductContextState['assemblyOptions']
 }
 

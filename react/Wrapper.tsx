@@ -65,6 +65,20 @@ function checkDisabled(
   return !areAssemblyGroupsValid
 }
 
+function getDefaultSeller(sellers?: ProductTypes.Seller[]) {
+  if (!sellers) {
+    return undefined
+  }
+
+  const defaultSeller = sellers.find(seller => seller.sellerDefault)
+
+  if (defaultSeller) {
+    return defaultSeller
+  }
+
+  return sellers[0]
+}
+
 const Wrapper = withToast(function Wrapper(props: Props) {
   const {
     isOneClickBuy,
@@ -90,8 +104,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
   const seller =
-    selectedSeller ??
-    (productContext?.selectedItem?.sellers[0] as ProductTypes.Seller)
+    selectedSeller ?? getDefaultSeller(productContext?.selectedItem?.sellers)
   const selectedQuantity =
     productContext?.selectedQuantity != null
       ? productContext.selectedQuantity
