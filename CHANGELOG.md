@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.23.1] - 2021-03-30
 ### Fixed
-- Use `sellerDefault` as default seller selection and fallback to first available seller.
+- Use `sellerDefault` as default seller selection and fallback to first seller.
 
 ## [0.23.0] - 2021-03-17
 ### Added
