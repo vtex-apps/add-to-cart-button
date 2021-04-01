@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Property `allowedOutdatedData` is defined and passed to addItem mutation.
+
 ## [0.23.1] - 2021-03-30
 ### Fixed
 - Use `sellerDefault` as default seller selection and fallback to first seller.
