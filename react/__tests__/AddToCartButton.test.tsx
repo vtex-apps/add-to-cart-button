@@ -77,6 +77,8 @@ const mockProductLink = {
   productId: '2000024',
 }
 
+const mockAllowedOutdatedData = ['paymentData']
+
 const mockAddItem = jest.fn()
 const mockPixelEventPush = jest.fn()
 const mockNavigate = jest.fn()
@@ -232,7 +234,7 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData, undefined, mockAllowedOutdatedData)
   })
 
   it('should pass correct marketing data info to addItem function', () => {
@@ -262,7 +264,7 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData, undefined, mockAllowedOutdatedData)
   })
 
   it('should sent correct information about SKU items to pixel event', () => {
