@@ -69,7 +69,9 @@ const messages = defineMessages({
   },
 })
 
-const allowedOutdatedData =['paymentData']
+const options = {
+  allowedOutdatedData: ['paymentData']
+}
 
 const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
@@ -195,7 +197,7 @@ function AddToCartButton(props: Props) {
       return
     }
 
-    addItem(skuItems, { ...utmParams, ...utmiParams }, undefined, allowedOutdatedData)
+    addItem(skuItems, { ...utmParams, ...utmiParams }, undefined, options)
 
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
     const pixelEvent =

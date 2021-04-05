@@ -77,7 +77,9 @@ const mockProductLink = {
   productId: '2000024',
 }
 
-const mockAllowedOutdatedData = ['paymentData']
+const mockAllowedOutdatedData = {
+  allowedOutdatedData: ['paymentData']
+}
 
 const mockAddItem = jest.fn()
 const mockPixelEventPush = jest.fn()
