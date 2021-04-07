@@ -257,7 +257,7 @@ function AddToCartButton(props: Props) {
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
       {icon && (
-        <div className={`${handles.buttonIcon} pr3 itens-center`}>
+        <div className={`${handles.buttonIcon} pr3 flex items-center`}>
           <ExtensionPoint id="icon-cart" />
           <ExtensionPoint id="icon" />
         </div>
