@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^13.13.2",
+    "@types/react": "^17.0.3",
     "@vtex/intl-equalizer": "^2.4.2",
     "@vtex/prettier-config": "^0.1.4",
     "eslint": "^6.8.0",
