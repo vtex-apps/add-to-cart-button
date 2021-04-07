@@ -1,6 +1,7 @@
 {
   "add-to-cart-button": {
     "component": "Wrapper",
+    "allowed": ["icon", "icon-cart"],
     "content": {
       "$ref": "app:vtex.add-to-cart-button#/definitions/AddToCardButton"
     }
