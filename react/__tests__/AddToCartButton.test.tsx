@@ -77,6 +77,10 @@ const mockProductLink = {
   productId: '2000024',
 }
 
+const mockAllowedOutdatedData = {
+  allowedOutdatedData: ['paymentData'],
+}
+
 const mockAddItem = jest.fn()
 const mockPixelEventPush = jest.fn()
 const mockNavigate = jest.fn()
@@ -98,7 +102,7 @@ jest.mock('../hooks/useMarketingSessionParams', () => {
 
 jest.mock('vtex.order-items/OrderItems', () => ({
   useOrderItems: () => ({
-    addItem: mockAddItem,
+    addItems: mockAddItem,
   }),
 }))
 
@@ -232,7 +236,10 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, {
+      marketingData: mockMarketingData,
+      ...mockAllowedOutdatedData,
+    })
   })
 
   it('should pass correct marketing data info to addItem function', () => {
@@ -262,7 +269,10 @@ describe('AddToCartButton component', () => {
       }
     })
 
-    expect(mockAddItem).toBeCalledWith(mockSKUItems, mockMarketingData)
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, {
+      marketingData: mockMarketingData,
+      ...mockAllowedOutdatedData,
+    })
   })
 
   it('should sent correct information about SKU items to pixel event', () => {

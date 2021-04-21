@@ -69,6 +69,10 @@ const messages = defineMessages({
   },
 })
 
+const options = {
+  allowedOutdatedData: ['paymentData'],
+}
+
 const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
@@ -116,7 +120,7 @@ function AddToCartButton(props: Props) {
 
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
-  const { addItem } = useOrderItems()
+  const { addItems } = useOrderItems()
   const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = Utils.useCheckoutURL()
@@ -193,7 +197,10 @@ function AddToCartButton(props: Props) {
       return
     }
 
-    addItem(skuItems, { ...utmParams, ...utmiParams })
+    addItems(skuItems, {
+      marketingData: { ...utmParams, ...utmiParams },
+      ...options,
+    })
 
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
     const pixelEvent =
