@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "カートに追加された項目",
+  "store/add-to-cart.failure": "エラーが発生しました。項目はカートに追加されていません！",
+  "store/add-to-cart.see-cart": "カートを閲覧する",
+  "store/add-to-cart.add-to-cart": "カートに追加する",
+  "store/add-to-cart.label-unavailable": "利用不可",
+  "store/add-to-cart.select-sku-variations": "それぞれのバリエーションのオプションを選択してください",
+  "admin/editor.add-to-cart.title": "カートに追加するボタン",
+  "admin/editor.add-to-cart.text.title": "ボタンテキスト",
+  "admin/editor.add-to-cart.text.description": "ボタンのテキストです。例. 「カートに追加する」",
+  "admin/editor.add-to-cart.text-unavailable.title": "ボタンテキストは利用できません",
+  "admin/editor.add-to-cart.text-unavailable.description": "製品が入手できない時のボタンテキストです。"
+}

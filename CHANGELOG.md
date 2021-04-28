@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Add missing key `sellingPrice` on `CartItem` object sent to a `Pixel Event`
+## [0.24.0] - 2021-04-21
+
+### Added
+- Property `allowedOutdatedData` is defined and passed to addItem mutation.
+
+## [0.23.1] - 2021-03-30
+### Fixed
+- Use `sellerDefault` as default seller selection and fallback to first seller.
+
+## [0.23.0] - 2021-03-17
+### Added
+- Property `priceIsInt` in `addToCart` pixel event, so it's possible to properly identify when to divide price by 100 in pixel apps.
+
+## [0.22.0] - 2021-03-08
+
+### Added
+
+- I18n Ro and Jp.
+- Crowdin configuration file.
 
 ## [0.21.1] - 2021-01-06
 ### Fixed
