@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Add missing key `sellingPrice` on `CartItem` object sent to a `Pixel Event`
 ## [0.24.0] - 2021-04-21
 
 ### Added
