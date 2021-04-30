@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "장바구니에 추가 된 품목",
+  "store/add-to-cart.failure": "문제가 발생하여 상품이 장바구니에 추가되지 않았습니다!",
+  "store/add-to-cart.see-cart": "장바구니 보기",
+  "store/add-to-cart.add-to-cart": "장바구니에 담기",
+  "store/add-to-cart.label-unavailable": "구매할 수 없음",
+  "store/add-to-cart.select-sku-variations": "각 변동의 옵션을 선택하십시오",
+  "admin/editor.add-to-cart.title": "장바구니 버튼",
+  "admin/editor.add-to-cart.text.title": "버튼 텍스트",
+  "admin/editor.add-to-cart.text.description": "버튼의 텍스트 (예: \"장바구니에 담기\")",
+  "admin/editor.add-to-cart.text-unavailable.title": "버튼 텍스트를 사용할 수 없음",
+  "admin/editor.add-to-cart.text-unavailable.description": "제품을 사용할 수 없는 경우 버튼 텍스트입니다."
+}

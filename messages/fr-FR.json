@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Article ajouté à votre panier",
+  "store/add-to-cart.failure": "Un problème est survenu et l’article n’a pas été ajouté à votre panier !",
+  "store/add-to-cart.see-cart": "Voir le panier",
+  "store/add-to-cart.add-to-cart": "Ajouter au panier",
+  "store/add-to-cart.label-unavailable": "Indisponible",
+  "store/add-to-cart.select-sku-variations": "Veuillez sélectionner une option de chaque variante",
+  "admin/editor.add-to-cart.title": "Bouton Ajouter au panier",
+  "admin/editor.add-to-cart.text.title": "Texte du bouton",
+  "admin/editor.add-to-cart.text.description": "Texte du bouton, ex : \"Ajouter au panier\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "Texte du bouton non disponible",
+  "admin/editor.add-to-cart.text-unavailable.description": "Texte du bouton lorsque le produit n’est pas disponible."
+}
