@@ -291,6 +291,7 @@ function AddToCartButton(props: Props) {
       isLoading={isFakeLoading}
       disabled={disabled || !available}
       onClick={handleClick}
+      onTouchEnd={handleClick}
     >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
