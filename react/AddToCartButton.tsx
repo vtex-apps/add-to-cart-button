@@ -291,6 +291,8 @@ function AddToCartButton(props: Props) {
       isLoading={isFakeLoading}
       disabled={disabled || !available}
       onClick={handleClick}
+      // onTouchEnd is necessary because when using the button on mobile (with touch)
+      // the `preventDefault` is not mapped correctly in `onClick` and closes the autocomplete
       onTouchEnd={handleClick}
     >
       {available ? availableButtonContent : unavailableButtonContent}
