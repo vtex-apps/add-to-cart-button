@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Item toegevoegd aan uw winkelwagen",
+  "store/add-to-cart.failure": "Er is iets misgegaan en het item is niet toegevoegd aan uw winkelwagen!",
+  "store/add-to-cart.see-cart": "Bekijk winkelwagen",
+  "store/add-to-cart.add-to-cart": "Toevoegen aan winkelwagen",
+  "store/add-to-cart.label-unavailable": "Niet beschikbaar",
+  "store/add-to-cart.select-sku-variations": "Selecteer een optie van elke variatie",
+  "admin/editor.add-to-cart.title": "Toevoegen aan winkelwagen knop",
+  "admin/editor.add-to-cart.text.title": "Knoptekst",
+  "admin/editor.add-to-cart.text.description": "Tekst van de knop, bijv. \"Toevoegen aan winkelwagent",
+  "admin/editor.add-to-cart.text-unavailable.title": "Knoptekst niet beschikbaar",
+  "admin/editor.add-to-cart.text-unavailable.description": "Knoptekst wanneer het product niet beschikbaar is."
+}

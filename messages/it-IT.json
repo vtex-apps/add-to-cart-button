@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Articolo aggiunto al carrello",
+  "store/add-to-cart.failure": "Si è verificato un errore. L'articolo non è stato aggiunto al carrello.",
+  "store/add-to-cart.see-cart": "Visualizza carello",
+  "store/add-to-cart.add-to-cart": "Aggiungi al carrello",
+  "store/add-to-cart.label-unavailable": "Non disponibile",
+  "store/add-to-cart.select-sku-variations": "Selezionare un'opzione per ogni variante",
+  "admin/editor.add-to-cart.title": "Pulsante \"Aggiungi al carrello\"",
+  "admin/editor.add-to-cart.text.title": "Testo del pulsante",
+  "admin/editor.add-to-cart.text.description": "Testo del pulsante, ad es. \"Aggiungi al carrello\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "Testo del pulsante non disponibile",
+  "admin/editor.add-to-cart.text-unavailable.description": "Testo del pulsante quando il prodotto non è disponibile."
+}
