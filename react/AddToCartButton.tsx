@@ -285,20 +285,40 @@ function AddToCartButton(props: Props) {
     </span>
   )
 
+  let touchMoved = false
   const touchDevice =
     'ontouchstart' in window ||
     (typeof navigator !== 'undefined' &&
       (navigator?.maxTouchPoints || navigator?.msMaxTouchPoints))
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    touchMoved = false
+    event.preventDefault()
+  }
+
+  const handleTouchMove = (event: React.TouchEvent) => {
+    touchMoved = true
+    event.preventDefault()
+  }
+
+  const handleTouchEnd = (event: React.MouseEvent) => {
+    if (touchMoved) {
+      return
+    }
+    handleClick(event)
+  }
 
   const ButtonWithLabel = (
     <Button
       block
       isLoading={isFakeLoading}
       disabled={disabled || !available}
-      onClick={!touchDevice && handleClick}
+      onClick={!touchDevice ? handleClick : undefined}
       // onTouchEnd is necessary because when using the button on mobile (with touch)
       // the `preventDefault` is not mapped correctly in `onClick` and closes the autocomplete
-      onTouchEnd={touchDevice && handleClick}
+      onTouchEnd={touchDevice ? handleTouchEnd : undefined}
+      onTouchStart={touchDevice ? handleTouchStart : undefined}
+      onTouchMove={touchDevice ? handleTouchMove : undefined}
     >
       {available ? availableButtonContent : unavailableButtonContent}
     </Button>
