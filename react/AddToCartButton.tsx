@@ -286,6 +286,7 @@ function AddToCartButton(props: Props) {
   )
 
   let touchMoved = false
+  let position = window.pageYOffset
   const touchDevice =
     'ontouchstart' in window ||
     (typeof navigator !== 'undefined' &&
@@ -293,11 +294,14 @@ function AddToCartButton(props: Props) {
 
   const handleTouchStart = (event: React.TouchEvent) => {
     touchMoved = false
+    position = window.pageYOffset
     event.preventDefault()
   }
 
   const handleTouchMove = (event: React.TouchEvent) => {
-    touchMoved = true
+    if (Math.abs(window.pageYOffset - position) > 10) {
+      touchMoved = true
+    }
     event.preventDefault()
   }
 
