@@ -295,14 +295,14 @@ function AddToCartButton(props: Props) {
   const handleTouchStart = (event: React.TouchEvent) => {
     touchMoved = false
     position = window.pageYOffset
-    event.preventDefault()
+    event.stopPropagation()
   }
 
   const handleTouchMove = (event: React.TouchEvent) => {
     if (Math.abs(window.pageYOffset - position) > 10) {
       touchMoved = true
     }
-    event.preventDefault()
+    event.stopPropagation()
   }
 
   const handleTouchEnd = (event: React.MouseEvent) => {
