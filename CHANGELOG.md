@@ -7,9 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Fixed
-- Add to cart from mobile autocomplete.
-
 ## [0.26.0] - 2021-05-05
 
 ### Added 
