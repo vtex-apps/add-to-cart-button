@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Rollback changes introduced by v0.26.3.
+
+## [0.26.3] - 2021-06-09 [YANKED]
+
+### Fixed
+
+- Check position on the screen to consider as scroll/click.
+
+## [0.26.2] - 2021-05-20
+
+### Fixed
+
+- Behavior when scrolling on mobile.
+
+## [0.26.1] - 2021-05-18
+
+### Fixed
+- Add to cart from mobile autocomplete.
+
 ## [0.26.0] - 2021-05-05
 
 ### Added 

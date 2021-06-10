@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "add-to-cart-button",
-  "version": "0.26.0",
+  "version": "0.26.3",
   "title": "Add to Cart Button",
   "description": "A button component to add items into the shopping cart.",
   "builders": {
@@ -21,9 +21,7 @@
     "vtex.store-resources": "0.x",
     "vtex.native-types": "0.x"
   },
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
