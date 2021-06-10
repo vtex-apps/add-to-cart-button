@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.26.3] - 2021-06-09
-
 ### Fixed
 
 - Check position on the screen to consider as scroll/click.
