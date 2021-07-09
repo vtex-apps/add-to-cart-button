@@ -44,6 +44,10 @@ interface Props {
 // We apply a fake loading to accidental consecutive clicks on the button
 const FAKE_LOADING_DURATION = 500
 
+function getFakeLoadingDuration(isOneClickBuy: boolean) {
+  return isOneClickBuy ? FAKE_LOADING_DURATION * 10 : FAKE_LOADING_DURATION
+}
+
 const CSS_HANDLES = [
   'buttonText',
   'buttonDataContainer',
@@ -151,10 +155,10 @@ function AddToCartButton(props: Props) {
     if (isFakeLoading) {
       currentTimers.loading = window.setTimeout(
         () => setFakeLoading(false),
-        FAKE_LOADING_DURATION
+        getFakeLoadingDuration(isOneClickBuy)
       )
     }
-  }, [isFakeLoading])
+  }, [isFakeLoading, isOneClickBuy])
 
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
@@ -172,7 +176,7 @@ function AddToCartButton(props: Props) {
     showToast({ message, action })
   }
 
-  const handleAddToCart: React.MouseEventHandler = event => {
+  const handleAddToCart = async (event: React.MouseEvent) => {
     if (onClickEventPropagation === 'disabled') {
       event.stopPropagation()
       event.preventDefault()
@@ -198,7 +202,7 @@ function AddToCartButton(props: Props) {
       return
     }
 
-    addItems(skuItems, {
+    const addItemsPromise = addItems(skuItems, {
       marketingData: { ...utmParams, ...utmiParams },
       ...options,
     })
@@ -220,6 +224,8 @@ function AddToCartButton(props: Props) {
     push(pixelEvent)
 
     if (isOneClickBuy) {
+      await addItemsPromise
+
       if (
         major > 0 &&
         (!customOneClickBuyLink || customOneClickBuyLink === checkoutURL)
