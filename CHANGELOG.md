@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Now, when `isOneClickBuy` is enabled, the users are only redirected when there's confirmation that the item was added to the cart
+
 ## [0.26.5] - 2021-06-17
 
 ### Fixed
