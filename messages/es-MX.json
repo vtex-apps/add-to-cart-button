@@ -1,13 +1,13 @@
 {
   "store/add-to-cart.success": "Ítem agregado a su carrito",
-  "store/add-to-cart.failure": "¡Algo salió mal! El ítem no se agregó a su carrito.",
+  "store/add-to-cart.failure": "Se produjo un error. El ítem no se agregó a su carrito.",
   "store/add-to-cart.see-cart": "Ver carrito",
   "store/add-to-cart.add-to-cart": "Agregar al carrito",
   "store/add-to-cart.label-unavailable": "No disponible",
   "store/add-to-cart.select-sku-variations": "Por favor, seleccione una opción de cada variación",
   "admin/editor.add-to-cart.title": "Botón de agregar al carrito",
   "admin/editor.add-to-cart.text.title": "Texto del botón",
-  "admin/editor.add-to-cart.text.description": "Texto del botón, p. ej.: «Agregar al carrito»",
+  "admin/editor.add-to-cart.text.description": "Texto del botón, p. ej.: \"Agregar al carrito\"",
   "admin/editor.add-to-cart.text-unavailable.title": "Texto del botón no disponible",
   "admin/editor.add-to-cart.text-unavailable.description": "Texto del botón cuando el producto no está disponible."
 }
