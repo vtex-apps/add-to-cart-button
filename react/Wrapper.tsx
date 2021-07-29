@@ -134,7 +134,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
 
   const isDisabled =
     checkDisabled(isEmptyContext, assemblyOptions, disabled) ||
-    !!productContext?.loadingItem
+    Boolean(productContext?.loadingItem)
 
   const areAllSkuVariationsSelected = Boolean(
     !isEmptyContext && productContext?.skuSelector?.areAllVariationsSelected
