@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "crwdns130082:0crwdne130082:0",
+  "store/add-to-cart.failure": "crwdns130084:0crwdne130084:0",
+  "store/add-to-cart.see-cart": "crwdns130086:0crwdne130086:0",
+  "store/add-to-cart.add-to-cart": "crwdns130088:0crwdne130088:0",
+  "store/add-to-cart.label-unavailable": "crwdns130090:0crwdne130090:0",
+  "store/add-to-cart.select-sku-variations": "crwdns130092:0crwdne130092:0",
+  "admin/editor.add-to-cart.title": "crwdns130094:0crwdne130094:0",
+  "admin/editor.add-to-cart.text.title": "crwdns130096:0crwdne130096:0",
+  "admin/editor.add-to-cart.text.description": "crwdns130098:0crwdne130098:0",
+  "admin/editor.add-to-cart.text-unavailable.title": "crwdns130100:0crwdne130100:0",
+  "admin/editor.add-to-cart.text-unavailable.description": "crwdns130102:0crwdne130102:0"
+}
