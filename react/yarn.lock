@@ -4856,10 +4856,6 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.add-to-cart-button@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.add-to-cart-button@0.26.6/public/@types/vtex.add-to-cart-button":
-  version "0.26.6"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.add-to-cart-button@0.26.6/public/@types/vtex.add-to-cart-button#3c5b76afa4f175103863c196eb9711a8f8bd4442"
-
 "vtex.checkout-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.46.0/public/@types/vtex.checkout-resources":
   version "0.46.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.46.0/public/@types/vtex.checkout-resources#a6c7a59fd9a92d44d486425bc311cb93ad5f0653"
