@@ -6,12 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
-- Disable Button when loadingItem is true.
 
 ### Added
-
 - I18n pseudolanguage to implement in-context tool.
+- Disable Button when loadingItem is true.
 
 ## [0.26.6] - 2021-07-14
 
