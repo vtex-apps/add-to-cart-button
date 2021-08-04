@@ -23,8 +23,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.26.7] - 2021-08-03
 
 ### Added
-
 - I18n pseudolanguage to implement in-context tool.
+- Disable Button when loadingItem is true.
 
 ## [0.26.6] - 2021-07-14
 
