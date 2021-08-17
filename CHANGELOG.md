@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- Disable Button when loadingItem is true.
+- `isLoading` property to AddToCartButton Props.
+- Pass `ProductContext.loadingItem` to AddToCartButton `isLoading`.
+- I18n pseudolanguage to implement in-context tool.
 
 ## [0.26.9] - 2021-08-25 [YANKED]
 

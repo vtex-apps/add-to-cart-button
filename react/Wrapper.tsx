@@ -132,10 +132,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
 
   const isAvailable = checkAvailability(isEmptyContext, seller, available)
 
-  const isDisabled =
-    checkDisabled(isEmptyContext, assemblyOptions, disabled) ||
-    Boolean(productContext?.loadingItem)
-
+  const isDisabled = checkDisabled(isEmptyContext, assemblyOptions, disabled)
   const areAllSkuVariationsSelected = Boolean(
     !isEmptyContext && productContext?.skuSelector?.areAllVariationsSelected
   )
@@ -149,6 +146,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     <AddToCartButton
       text={text}
       skuItems={skuItems}
+      isLoading={productContext?.loadingItem}
       disabled={isDisabled}
       showToast={showToast}
       available={isAvailable}
