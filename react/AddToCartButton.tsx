@@ -8,7 +8,7 @@ import {
 import { Button, Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
-import { useRuntime } from 'vtex.render-runtime'
+import { useRuntime, ExtensionPoint } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
 import { usePWA } from 'vtex.store-resources/PWAContext'
@@ -39,6 +39,7 @@ interface Props {
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
+  icon?: boolean
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -52,6 +53,7 @@ const CSS_HANDLES = [
   'buttonText',
   'buttonDataContainer',
   'tooltipLabelText',
+  'buttonIcon',
 ] as const
 
 const messages = defineMessages({
@@ -121,6 +123,7 @@ function AddToCartButton(props: Props) {
     customPixelEventId,
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
+    icon,
   } = props
 
   const intl = useIntl()
@@ -267,6 +270,13 @@ function AddToCartButton(props: Props) {
    */
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
+      {icon && (
+        <div className={`${handles.buttonIcon} pr3 flex items-center`}>
+          <ExtensionPoint id="icon-cart" />
+          <ExtensionPoint id="icon" />
+        </div>
+      )}
+
       {text ? (
         <span className={handles.buttonText}>{text}</span>
       ) : (

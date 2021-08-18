@@ -47,6 +47,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 | `text` | `string` | Defines a custom text message to be displayed on the Add To Cart Button. | `Add to cart` *( automatic translation will be applied according to your store's default language)* | 
 | `unavailableText` | `string` | Defines a custom text message to be displayed on the Add To Cart Button when a product is unavailable. | `Unavailable` *(automatic translation will be applied according to your store's default language)* |
 | `customPixelEventId` | `string` | Define the `id` for the event that will be sent by the the button upon user interaction. | `undefined`   |
+| `icon` | `boolean` | Define if icon will be displayed. If `true`, an [icon block](https://developers.vtex.com/vtex-developer-docs/docs/vtex-store-icons) needs to be passed in `blocks` property | `false` |
 
 ## Customization
 
