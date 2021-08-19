@@ -176,12 +176,7 @@ function AddToCartButton(props: Props) {
     showToast({ message, action })
   }
 
-  const handleAddToCart = async (event: React.MouseEvent) => {
-    if (onClickEventPropagation === 'disabled') {
-      event.stopPropagation()
-      event.preventDefault()
-    }
-
+  const handleAddToCart = async () => {
     setFakeLoading(true)
 
     const productLinkIsValid = Boolean(
@@ -257,8 +252,13 @@ function AddToCartButton(props: Props) {
       })
     }
 
+    if (onClickEventPropagation === 'disabled') {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
     if (allSkuVariationsSelected) {
-      handleAddToCart(e)
+      handleAddToCart()
     }
   }
 

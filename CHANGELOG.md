@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- stopPropagation and preventDefault removed from `handleAddToCart` and added into `handleClick` in `AddToCartButton.tsx` to trigger too when no variation were selected.
+
+
 ## [0.26.7] - 2021-08-03
 
 ### Added
