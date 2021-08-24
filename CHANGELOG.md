@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed 
 
-- Add formatedIOMessage on the AddtoCartButton to format the available and the unavailable content and also out the import on the file, this allows the format to urdu texts to be added.
+- Available and unavailable content text wasn't being translated. So, formatedIOMessage was added to AddtoCartButton.
 
 ## [0.26.8] - 2021-08-19
 
