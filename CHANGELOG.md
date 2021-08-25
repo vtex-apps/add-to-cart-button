@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.26.9] - 2021-08-25
+
 ### Fixed 
 
 - Available and unavailable content text wasn't being translated. So, formatedIOMessage was added to AddtoCartButton.
