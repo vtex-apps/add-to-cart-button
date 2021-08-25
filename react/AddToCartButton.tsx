@@ -13,7 +13,6 @@ import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
 import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
-import { formatIOMessage } from 'vtex.native-types'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
@@ -207,14 +206,14 @@ function AddToCartButton(props: Props) {
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
-          id: customPixelEventId,
-          event: 'addToCart',
-          items: pixelEventItems,
-        }
+            id: customPixelEventId,
+            event: 'addToCart',
+            items: pixelEventItems,
+          }
         : {
-          event: 'addToCart',
-          items: pixelEventItems,
-        }
+            event: 'addToCart',
+            items: pixelEventItems,
+          }
 
     // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
@@ -269,9 +268,7 @@ function AddToCartButton(props: Props) {
   const availableButtonContent = (
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
       {text ? (
-        <span className={handles.buttonText}>
-          {formatIOMessage({ id: text, intl })}
-        </span>
+        <span className={handles.buttonText}>{text}</span>
       ) : (
         <FormattedMessage id="store/add-to-cart.add-to-cart">
           {message => <span className={handles.buttonText}>{message}</span>}
@@ -281,9 +278,7 @@ function AddToCartButton(props: Props) {
   )
 
   const unavailableButtonContent = unavailableText ? (
-    <span className={handles.buttonText}>
-      {formatIOMessage({ id: unavailableText, intl })}
-    </span>
+    <span className={handles.buttonText}>{unavailableText}</span>
   ) : (
     <FormattedMessage id="store/add-to-cart.label-unavailable">
       {message => <span className={handles.buttonText}>{message}</span>}
