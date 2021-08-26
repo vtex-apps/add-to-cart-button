@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.26.10] - 2021-08-26
+## [0.26.10] - 2021-08-26 [YANKED]
 
 ### Added
 - `isLoading` property to AddToCartButton Props.
