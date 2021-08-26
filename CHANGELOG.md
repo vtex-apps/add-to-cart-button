@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.26.10] - 2021-08-26
+
 ### Added
 - `isLoading` property to AddToCartButton Props.
 - Pass `ProductContext.loadingItem` to AddToCartButton `isLoading`.
