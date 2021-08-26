@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- `isLoading` property to AddToCartButton Props.
+- Pass `ProductContext.loadingItem` to AddToCartButton `isLoading`.
+- I18n pseudolanguage to implement in-context tool.
+
 ## [0.26.9] - 2021-08-25 [YANKED]
 
 ### Fixed 
@@ -20,11 +25,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - stopPropagation and preventDefault removed from `handleAddToCart` and added into `handleClick` in `AddToCartButton.tsx` to trigger too when no variation were selected.
 
 
-## [0.26.7] - 2021-08-03
+## [0.26.7] - 2021-08-03 [YANKED]
 
 ### Added
-
 - I18n pseudolanguage to implement in-context tool.
+- Disable Button when loadingItem is true.
 
 ## [0.26.6] - 2021-07-14
 

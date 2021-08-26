@@ -39,6 +39,7 @@ interface Props {
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
+  isLoading?: boolean
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -121,6 +122,7 @@ function AddToCartButton(props: Props) {
     customPixelEventId,
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
+    isLoading,
   } = props
 
   const intl = useIntl()
@@ -294,7 +296,7 @@ function AddToCartButton(props: Props) {
   const ButtonWithLabel = (
     <Button
       block
-      isLoading={isFakeLoading}
+      isLoading={isFakeLoading || isLoading}
       disabled={disabled || !available}
       onClick={handleClick}
     >
