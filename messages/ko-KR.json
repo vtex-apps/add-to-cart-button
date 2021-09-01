@@ -4,7 +4,7 @@
   "store/add-to-cart.see-cart": "장바구니 보기",
   "store/add-to-cart.add-to-cart": "장바구니에 담기",
   "store/add-to-cart.label-unavailable": "구매할 수 없음",
-  "store/add-to-cart.select-sku-variations": "각 변동의 옵션을 선택하십시오",
+  "store/add-to-cart.select-sku-variations": "각 변형의 옵션을 선택하세요.",
   "admin/editor.add-to-cart.title": "장바구니 버튼",
   "admin/editor.add-to-cart.text.title": "버튼 텍스트",
   "admin/editor.add-to-cart.text.description": "버튼의 텍스트 (예: \"장바구니에 담기\")",
