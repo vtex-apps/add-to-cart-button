@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Артикулът е добавен в количката ви",
+  "store/add-to-cart.failure": "Нещо се обърка и продуктът не беше добавен в количката ви!",
+  "store/add-to-cart.see-cart": "Преглед на количката",
+  "store/add-to-cart.add-to-cart": "Добавяне в количката",
+  "store/add-to-cart.label-unavailable": "Не е налично",
+  "store/add-to-cart.select-sku-variations": "Направете избор за всеки вариант",
+  "admin/editor.add-to-cart.title": "Бутон за добавяне в количката",
+  "admin/editor.add-to-cart.text.title": "Текст на бутона",
+  "admin/editor.add-to-cart.text.description": "Текст на бутона, напр. „Добавяне в количката“",
+  "admin/editor.add-to-cart.text-unavailable.title": "Не е наличен текст на бутона",
+  "admin/editor.add-to-cart.text-unavailable.description": "Текст на бутона, когато продуктът не е наличен."
+}
