@@ -7,6 +7,7 @@ type PublicSessionField =
   | 'utmi_cp'
   | 'utmi_p'
   | 'utmi_pc'
+  | 'gclid'
 
 interface SessionPromiseFieldValue {
   value: string
@@ -22,6 +23,10 @@ interface UtmiParams {
   utmiCampaign?: string
   utmiPage?: string
   utmiPart?: string
+}
+
+interface GoogleParams {
+  gclid?: string
 }
 
 interface SessionPromiseResponse {
@@ -66,6 +71,12 @@ const getUtmiParams = (
   utmiCampaign: publicFields.utmi_cp?.value ?? '',
 })
 
+const getGoogleParams = (
+  publicFields: Record<PublicSessionField, SessionPromiseFieldValue>
+) => ({
+  gclid: publicFields.gclid?.value ?? '',
+})
+
 const getSessionPromiseFromWindow = () => {
   const runtimeSessionPromise = (window as Window & {
     ['__RENDER_8_SESSION__']?: {
@@ -79,6 +90,7 @@ const getSessionPromiseFromWindow = () => {
 const useMarketingSessionParams = () => {
   const [utmParams, setUtmParams] = useState<UtmParams>({})
   const [utmiParams, setUtmiParams] = useState<UtmiParams>({})
+  const [googleParams, setGoogleParams] = useState<GoogleParams>({})
 
   useEffect(() => {
     getSessionPromiseFromWindow()
@@ -98,13 +110,19 @@ const useMarketingSessionParams = () => {
             publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
           )
         )
+
+        setGoogleParams(
+          getGoogleParams(
+            publicFields as Record<PublicSessionField, SessionPromiseFieldValue>
+          )
+        )
       })
       .catch(() => {
         // Do nothing
       })
   }, [])
 
-  return { utmParams, utmiParams }
+  return { utmParams, utmiParams, googleParams }
 }
 
 export default useMarketingSessionParams
