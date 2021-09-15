@@ -31,7 +31,11 @@ describe('useMarketingSessionParams', () => {
       await wait(1)
     })
 
-    expect(result.current).toEqual({ utmParams: {}, utmiParams: {} })
+    expect(result.current).toEqual({
+      googleParams: {},
+      utmParams: {},
+      utmiParams: {},
+    })
   })
 
   it('should return empty objects if sessionPromise is nullish', async () => {
@@ -46,7 +50,11 @@ describe('useMarketingSessionParams', () => {
       await wait(1)
     })
 
-    expect(result.current).toEqual({ utmParams: {}, utmiParams: {} })
+    expect(result.current).toEqual({
+      googleParams: {},
+      utmParams: {},
+      utmiParams: {},
+    })
   })
 
   it('should return empty strings for utmParams if there are no utm fields', async () => {
@@ -62,6 +70,9 @@ describe('useMarketingSessionParams', () => {
     })
 
     expect(result.current).toEqual({
+      googleParams: {
+        gclid: '',
+      },
       utmParams: {
         utmSource: '',
         utmMedium: '',
@@ -88,6 +99,9 @@ describe('useMarketingSessionParams', () => {
     })
 
     expect(result.current).toEqual({
+      googleParams: {
+        gclid: '',
+      },
       utmParams: {
         utmSource: 'test_utm_field',
         utmMedium: 'test_utm_field',
@@ -114,6 +128,9 @@ describe('useMarketingSessionParams', () => {
     })
 
     expect(result.current).toEqual({
+      googleParams: {
+        gclid: '',
+      },
       utmParams: {
         utmSource: 'test_utm_field',
         utmMedium: 'test_utm_field',
