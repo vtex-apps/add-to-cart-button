@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- I18n Bg
+
+### Fixed
+
+- I18n Es and Kr.
+
 ## [0.26.12] - 2021-08-27
 
 ### Fixed
