@@ -2,7 +2,7 @@
   "add-to-cart-button": {
     "component": "Wrapper",
     "content": {
-      "$ref": "app:vtex.add-to-cart-button#/definitions/AddToCardButton"
+      "$ref": "app:tfgroup.add-to-cart-button#/definitions/AddToCardButton"
     }
   }
 }
