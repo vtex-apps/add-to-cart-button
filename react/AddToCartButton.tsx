@@ -5,7 +5,7 @@ import {
   useIntl,
   defineMessages,
 } from 'react-intl'
-import { Button, Tooltip } from 'vtex.styleguide'
+import { Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
@@ -16,6 +16,8 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+
+import {ContainedIconTextButton} from 'tfgroup.custom-design-system';
 
 interface ProductLink {
   linkText?: string
@@ -294,14 +296,15 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <Button
+    <ContainedIconTextButton   
       block
-      isLoading={isFakeLoading || isLoading}
+      loading={isFakeLoading || isLoading}
       disabled={disabled || !available}
       onClick={handleClick}
+      icon="test"
     >
       {available ? availableButtonContent : unavailableButtonContent}
-    </Button>
+    </ContainedIconTextButton>
   )
 
   return allSkuVariationsSelected ? (
