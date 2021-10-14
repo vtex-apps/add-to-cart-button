@@ -17,7 +17,7 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
-import {ContainedIconTextButton} from 'tfgroup.custom-design-system';
+import {ContainedButton} from 'tfgroup.custom-design-system';
 
 interface ProductLink {
   linkText?: string
@@ -304,7 +304,7 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <ContainedIconTextButton   
+    <ContainedButton   
       block
       loading={isFakeLoading || isLoading}
       disabled={disabled || !available}
@@ -312,7 +312,7 @@ function AddToCartButton(props: Props) {
       icon={<BagIcon />}
     >
       {available ? availableButtonContent : unavailableButtonContent}
-    </ContainedIconTextButton>
+    </ContainedButton>
   )
 
   return allSkuVariationsSelected ? (
