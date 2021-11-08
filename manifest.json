@@ -20,7 +20,7 @@
     "vtex.pixel-manager": "1.x",
     "vtex.store-resources": "0.x",
     "vtex.native-types": "0.x",
-    "tfgroup.custom-design-system": "0.x"
+    "tfgroup.vtex-tfg-custom-components": "0.x"
   },
   "registries": [
     "smartcheckout"

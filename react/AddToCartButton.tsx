@@ -17,7 +17,7 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
-import {ContainedButton} from 'tfgroup.custom-design-system';
+import {ContainedButton} from 'tfgroup.vtex-tfg-custom-components';
 
 interface ProductLink {
   linkText?: string

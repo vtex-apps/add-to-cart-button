@@ -21,8 +21,7 @@
     "@types/recompose": "^0.30.7",
     "@vtex/test-tools": "^3.1.0",
     "@vtex/tsconfig": "^0.4.4",
-    "tfgroup.add-to-cart-button": "https://shaheentwo--tfgroup.myvtex.com/_v/private/typings/linked/v1/tfgroup.add-to-cart-button@0.26.13+build1634212067/public/@types/tfgroup.add-to-cart-button",
-    "tfgroup.custom-design-system": "https://shaheentwo--tfgroup.myvtex.com/_v/private/typings/linked/v1/tfgroup.custom-design-system@0.0.0+build1634212311/public/@types/tfgroup.custom-design-system",
+    "tfgroup.vtex-tfg-custom-components": "https://shaheentwo--tfgroup.myvtex.com/_v/private/typings/linked/v1/tfgroup.vtex-tfg-custom-components@0.0.0+build1636360179/public/@types/tfgroup.vtex-tfg-custom-components",
     "typescript": "3.9.7",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.47.0/public/@types/vtex.checkout-resources",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",
@@ -33,7 +32,7 @@
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.3/public/@types/vtex.render-runtime",
     "vtex.store-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.85.0/public/@types/vtex.store-resources",
-    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.0/public/@types/vtex.styleguide",
+    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide",
     "waait": "^1.0.5"
   }
 }
