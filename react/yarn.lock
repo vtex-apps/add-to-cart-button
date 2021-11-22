@@ -4655,9 +4655,9 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
-"tfgroup.vtex-tfg-custom-components@https://shaheentwo--tfgroup.myvtex.com/_v/private/typings/linked/v1/tfgroup.vtex-tfg-custom-components@0.0.0+build1636360179/public/@types/tfgroup.vtex-tfg-custom-components":
-  version "0.0.0"
-  resolved "https://shaheentwo--tfgroup.myvtex.com/_v/private/typings/linked/v1/tfgroup.vtex-tfg-custom-components@0.0.0+build1636360179/public/@types/tfgroup.vtex-tfg-custom-components#7a0f9ed31fb71349f373b76cd50742a5ecd24c65"
+"tfgroup.vtex-tfg-custom-components@http://tfgroup.vtexassets.com/_v/public/typings/v1/tfgroup.vtex-tfg-custom-components@1.0.0/public/@types/tfgroup.vtex-tfg-custom-components":
+  version "1.0.0"
+  resolved "http://tfgroup.vtexassets.com/_v/public/typings/v1/tfgroup.vtex-tfg-custom-components@1.0.0/public/@types/tfgroup.vtex-tfg-custom-components#52d7858acd0451360a5e2e1dcf71e82869cb0aee"
 
 throat@^4.0.0:
   version "4.1.0"
