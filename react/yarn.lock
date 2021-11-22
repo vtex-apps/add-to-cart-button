@@ -4655,10 +4655,6 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
-"tfgroup.vtex-tfg-custom-components@http://tfgroup.vtexassets.com/_v/public/typings/v1/tfgroup.vtex-tfg-custom-components@1.0.0/public/@types/tfgroup.vtex-tfg-custom-components":
-  version "1.0.0"
-  resolved "http://tfgroup.vtexassets.com/_v/public/typings/v1/tfgroup.vtex-tfg-custom-components@1.0.0/public/@types/tfgroup.vtex-tfg-custom-components#52d7858acd0451360a5e2e1dcf71e82869cb0aee"
-
 throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"

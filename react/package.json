@@ -21,7 +21,6 @@
     "@types/recompose": "^0.30.7",
     "@vtex/test-tools": "^3.1.0",
     "@vtex/tsconfig": "^0.4.4",
-    "tfgroup.vtex-tfg-custom-components": "http://tfgroup.vtexassets.com/_v/public/typings/v1/tfgroup.vtex-tfg-custom-components@1.0.0/public/@types/tfgroup.vtex-tfg-custom-components",
     "typescript": "3.9.7",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.47.0/public/@types/vtex.checkout-resources",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",
