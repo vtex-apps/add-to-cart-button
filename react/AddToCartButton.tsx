@@ -39,7 +39,8 @@ interface Props {
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
-  isLoading?: boolean
+  isLoading?: boolean,
+  messageAddToCartSucess?: string
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -123,6 +124,7 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
+    messageAddToCartSucess
   } = props
 
   const intl = useIntl()
@@ -164,12 +166,13 @@ function AddToCartButton(props: Props) {
 
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
-
+    console.log(success, 'success');
     return translateMessage(messages.success)
   }
 
   const toastMessage = ({ success }: { success: boolean }) => {
-    const message = resolveToastMessage(success)
+
+    const message = messageAddToCartSucess ?? resolveToastMessage(success)
 
     const action = success
       ? { label: translateMessage(messages.seeCart), href: customToastUrl }
