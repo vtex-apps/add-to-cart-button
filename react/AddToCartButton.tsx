@@ -166,7 +166,6 @@ function AddToCartButton(props: Props) {
 
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
-    console.log(success, 'success');
     return translateMessage(messages.success)
   }
 
