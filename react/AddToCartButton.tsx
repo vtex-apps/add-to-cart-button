@@ -40,7 +40,7 @@ interface Props {
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean,
-  messageAddToCartSucess?: string
+  messageAddToCartSuccess?: string
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -124,7 +124,7 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
-    messageAddToCartSucess
+    messageAddToCartSuccess
   } = props
 
   const intl = useIntl()
@@ -171,7 +171,7 @@ function AddToCartButton(props: Props) {
 
   const toastMessage = ({ success }: { success: boolean }) => {
 
-    const message = messageAddToCartSucess ?? resolveToastMessage(success)
+    const message = messageAddToCartSuccess ?? resolveToastMessage(success)
 
     const action = success
       ? { label: translateMessage(messages.seeCart), href: customToastUrl }

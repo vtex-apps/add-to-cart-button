@@ -25,7 +25,7 @@ interface Props {
   skuItems?: CartItem[]
   customPixelEventId?: string
   addToCartFeedback?: 'toast' | 'customEvent',
-  messageAddToCartSucess?: string
+  messageAddToCartSuccess?: string
 }
 
 function checkAvailability(
@@ -95,7 +95,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     addToCartFeedback = 'toast',
     onClickBehavior = 'add-to-cart',
     onClickEventPropagation = 'disabled',
-    messageAddToCartSucess
+    messageAddToCartSuccess
   } = props
   const productContext = useProduct()
   const isEmptyContext = Object.keys(productContext ?? {}).length === 0
@@ -163,7 +163,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       multipleAvailableSKUs={multipleAvailableSKUs}
       customPixelEventId={customPixelEventId}
       addToCartFeedback={addToCartFeedback}
-      messageAddToCartSucess={messageAddToCartSucess}
+      messageAddToCartSuccess={messageAddToCartSuccess}
     />
   )
 })
