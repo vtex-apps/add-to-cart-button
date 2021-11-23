@@ -47,7 +47,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 | `text` | `string` | Defines a custom text message to be displayed on the Add To Cart Button. | `Add to cart` *( automatic translation will be applied according to your store's default language)* |
 | `unavailableText` | `string` | Defines a custom text message to be displayed on the Add To Cart Button when a product is unavailable. | `Unavailable` *(automatic translation will be applied according to your store's default language)* |
 | `customPixelEventId` | `string` | Define the `id` for the event that will be sent by the the button upon user interaction. | `undefined`   |
-| `messageAddToCartSucess` | `string` | Defines a custom text message to be displayed inside Toast when add products to cart. | `store/add-to-cart.success` *( automatic translation will be applied according to your store's default
+| `messageAddToCartSucess` | `string` | Defines a custom text message to be displayed inside Toast when add products to cart. | `store/add-to-cart.success`  *(automatic translation will be applied according to your store's default language)* |
 ## Customization
 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
