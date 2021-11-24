@@ -17,7 +17,7 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
 
-import {ContainedButton} from 'tfgroup.vtex-tfg-custom-components';
+import ContainedButton from './ContainedButton';
 
 interface ProductLink {
   linkText?: string
@@ -306,7 +306,7 @@ function AddToCartButton(props: Props) {
   const ButtonWithLabel = (
     <ContainedButton   
       block
-      loading={isFakeLoading || isLoading}
+      loading={isFakeLoading || isLoading || false}
       disabled={disabled || !available}
       onClick={handleClick}
       icon={<BagIcon />}
