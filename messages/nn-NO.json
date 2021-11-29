@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Vare lagt til i handlevognen",
+  "store/add-to-cart.failure": "Noe gikk galt og varen ble ikke lagt til i handlekurven!",
+  "store/add-to-cart.see-cart": "Vis handlekurv",
+  "store/add-to-cart.add-to-cart": "Legg i handlekurv",
+  "store/add-to-cart.label-unavailable": "Utilgjengelig",
+  "store/add-to-cart.select-sku-variations": "Velg et alternativ for hver variant",
+  "admin/editor.add-to-cart.title": "\"Legg i handlekurv\"-knapp",
+  "admin/editor.add-to-cart.text.title": "Tekst knapp",
+  "admin/editor.add-to-cart.text.description": "Tekst på knappen, f. eks. \"Legg i handlekurv\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "Tekst på knappen er ikke tilgjengelig",
+  "admin/editor.add-to-cart.text-unavailable.description": "Tekst på knappen når produktet er utilgjengelig."
+}

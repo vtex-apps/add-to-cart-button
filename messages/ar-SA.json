@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "تمت اضافة المنتج الى عربتك",
+  "store/add-to-cart.failure": "حدث خطأ ولم تتم إضافة العنصر إلى سلة التسوق الخاصة بك!",
+  "store/add-to-cart.see-cart": "عرض عربة التسوق",
+  "store/add-to-cart.add-to-cart": "إضافة إلى العربة",
+  "store/add-to-cart.label-unavailable": "غير متاح",
+  "store/add-to-cart.select-sku-variations": "الرجاء تحديد خيار من كل متغير",
+  "admin/editor.add-to-cart.title": "عملية \"أضف إلى عربة التسوق\"",
+  "admin/editor.add-to-cart.text.title": "Button text",
+  "admin/editor.add-to-cart.text.description": "نص الزر، على سبيل المثال، \"إضافة إلى عربة التسوق\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "نص الزر غير متوفر",
+  "admin/editor.add-to-cart.text-unavailable.description": "نص الزر عندما يكون المنتج غير متوفر."
+}
