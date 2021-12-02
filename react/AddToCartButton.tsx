@@ -16,6 +16,7 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+import AddToCartPopup from './components/AddToCartPopup'
 
 interface ProductLink {
   linkText?: string
@@ -37,7 +38,7 @@ interface Props {
   productLink: ProductLink
   onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
   customPixelEventId?: string
-  addToCartFeedback?: 'customEvent' | 'toast'
+  addToCartFeedback?: 'customEvent' | 'toast' | 'popup'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
 }
@@ -162,6 +163,8 @@ function AddToCartButton(props: Props) {
     }
   }, [isFakeLoading, isOneClickBuy])
 
+  const [showPopup, setshowPopup] = useState(false)
+
   const resolveToastMessage = (success: boolean) => {
     if (!success) return translateMessage(messages.error)
 
@@ -240,6 +243,13 @@ function AddToCartButton(props: Props) {
         toastMessage({ success: true })
       }, FAKE_LOADING_DURATION))
 
+    if (addToCartFeedback === 'popup') {
+      setshowPopup(true)
+      setTimeout(() => {
+        setshowPopup(false)
+      }, 4000)
+    }
+
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
       showInstallPrompt()
@@ -305,7 +315,12 @@ function AddToCartButton(props: Props) {
   )
 
   return allSkuVariationsSelected ? (
-    ButtonWithLabel
+    <div>
+      {ButtonWithLabel}
+      {showPopup ? (
+        <AddToCartPopup setshowPopup={setshowPopup} skuItems={skuItems} />
+      ) : null}
+    </div>
   ) : (
     <Tooltip trigger="click" label={tooltipLabel}>
       {ButtonWithLabel}

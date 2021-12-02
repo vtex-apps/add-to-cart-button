@@ -5,9 +5,18 @@
   "store/add-to-cart.add-to-cart": "Agregar al carrito",
   "store/add-to-cart.label-unavailable": "No disponible",
   "store/add-to-cart.select-sku-variations": "Por favor, selecciona una opción de cada variación",
+  "store/add-to-cart.added-to-cart": "Agregado al carrito",
+  "store/add-to-cart.quantity": "Cantidad",
+  "store/add-to-cart.your-cart": "Tu carrito",
+  "store/add-to-cart.items": "articulo(s)",
+  "store/add-to-cart.subtotal": "Costo total de los productos",
+  "store/add-to-cart.total": "Total",
+  "store/add-to-cart.continue-shopping": "Seguir comprando",
+  "store/add-to-cart.go-to-checkout": "Ver carrito",
   "admin/editor.add-to-cart.title": "Botón de agregar al carrito",
   "admin/editor.add-to-cart.text.title": "Texto del botón",
   "admin/editor.add-to-cart.text.description": "Texto del botón, p. ej.: \"Agregar al carrito\"",
   "admin/editor.add-to-cart.text-unavailable.title": "Texto del botón no disponible",
   "admin/editor.add-to-cart.text-unavailable.description": "Texto del botón cuando el producto no está disponible."
+
 }
