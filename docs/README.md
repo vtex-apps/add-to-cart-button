@@ -1,6 +1,7 @@
 # TFG Specifics
 This repo has been forked to allow TFG to customize the add to cart button with an icon button for the PDP pages 
 
+[TFG VTEX Developer Guide](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1693483009/VTEX+Developer+Guide)
 ---
 
 📢 Use this project, [contribute](https://github.com/vtex-apps/add-to-cart-button) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion). 
