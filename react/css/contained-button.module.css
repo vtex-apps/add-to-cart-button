@@ -15,6 +15,7 @@
     border-radius: 4px;
     padding: 0 1.25rem;
     border: none;
+    flex-direction: row-reverse;
   
     margin: 0 16px 16px 0;
     text-decoration: none;
@@ -46,7 +47,7 @@
   .containedBtn > svg {
     height: 16px;
     width: 16px;
-    margin-right: 8px;
+    margin-left: 8px;
   }
   
   .block {
