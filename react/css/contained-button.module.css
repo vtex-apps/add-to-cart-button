@@ -7,15 +7,16 @@
     text-align: center;
     font-family: MuseoSans;
     font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 15px;
     line-height: 12px;
-    text-transform: uppercase;
+    text-transform: none;
     color: #ffffff;
     border-radius: 4px;
     padding: 0 1.25rem;
     border: none;
     flex-direction: row-reverse;
+    width: 420px;
   
     margin: 0 16px 16px 0;
     text-decoration: none;
@@ -45,8 +46,8 @@
   }
   
   .containedBtn > svg {
-    height: 16px;
-    width: 16px;
+    height: 23px;
+    width: 23px;
     margin-left: 8px;
   }
   
@@ -55,6 +56,7 @@
   }
   
   .text {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    text-transform: none;
+    padding-top: 18px;
+    padding-bottom: 16px;
   }
