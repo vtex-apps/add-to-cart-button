@@ -2,7 +2,7 @@
   "add-to-cart-button": {
     "component": "Wrapper",
     "content": {
-      "$ref": "app:tfgroup.add-to-cart-button#/definitions/AddToCardButton"
+      "$ref": "app:thefoschini.add-to-cart-button#/definitions/AddToCardButton"
     }
   }
 }
