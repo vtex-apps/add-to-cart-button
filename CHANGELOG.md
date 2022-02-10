@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- New component 'AddToCartPopup.tsx' has been added 
+- `popup` value to addToCartFeedback prop added
+- Messages files has been updated with Add to cart pop up component translates
+
 ## [0.26.13] - 2021-09-24
 
 ### Added

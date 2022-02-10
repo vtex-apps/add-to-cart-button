@@ -24,7 +24,7 @@ interface Props {
   onClickEventPropagation?: 'disabled' | 'enabled'
   skuItems?: CartItem[]
   customPixelEventId?: string
-  addToCartFeedback?: 'toast' | 'customEvent'
+  addToCartFeedback?: 'toast' | 'customEvent' | 'popup'
 }
 
 function checkAvailability(
