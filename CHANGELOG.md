@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Portuguese translation and removed Pseudolanguage.
+
+### Added
+
+- Arabic, Norwegian and Norwegian variant translation.
+
 ## [0.26.13] - 2021-09-24
 
 ### Added
@@ -34,7 +42,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.26.9] - 2021-08-25 [YANKED]
 
-### Fixed 
+### Fixed
 
 - Available and unavailable content text wasn't being translated. So, formatedIOMessage was added to AddtoCartButton.
 
@@ -88,7 +96,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.26.0] - 2021-05-05
 
-### Added 
+### Added
 - I18n It, Fr, Nl and Ko translations
 
 ### Changed
@@ -190,7 +198,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.13.1] - 2020-07-09
 ### Fixed
-- Updated the README.md file to make the disclaimer regarding Minicart versions clearer. 
+- Updated the README.md file to make the disclaimer regarding Minicart versions clearer.
 
 ## [0.13.0] - 2020-07-08
 ### Added
