@@ -1,27 +1,33 @@
-#### What problem is this solving?
+### What problem is this solving?
 
-<!--- What is the motivation and context for this change? -->
+
+### How it works:
+
 
 #### How to test it?
+Provide sufficient enough information for a non developer to test 
+Workspace
 
-<!--- Don't forget to add a link to a Workspace where this branch is linked -->
+### Screenshots/Video example usage:
 
-[Workspace](Link goes here!)
 
-#### Screenshots or example usage:
+### Screenshots/Video of effect on all relevant breakpoints
 
-<!--- Add some images or gifs to showcase changes in behaviour or layout. Example: before and after images -->
 
-#### Describe alternatives you've considered, if any.
+### Describe alternatives you've considered, if any.
 
-<!--- Optional -->
+### Related to / Depends on
 
-#### Related to / Depends on
 
-<!--- Optional -->
+### Coding Standards Checklist: https://tfginfotec.atlassian.net/l/c/60ZyZonH
+- [ ] [BlockClass principles]( https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#Block-Classes)
+- [ ] [Block name principles]( https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#Block-Names?)
+- [ ] [Folder Structure principles ](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#JSON-Folder-Structure)
+- [ ] [CSS folder principles](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#CSS-Folder-Structure)
+- [ ] [JSONC files principles](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#JSONC-File-Structure)
+- [ ] [CSS file principles](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#CSS-file-structure)
+- [ ] S[tyle tokens and SCSS]( https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#STYLE-TOKENS-AND-SCSS)
+- [ ] [Code comments](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#STYLE-TOKENS-AND-SCSS)
+- [ ] [Responsibility to maintain code](https://tfginfotec.atlassian.net/wiki/spaces/LABSPLAT/pages/1711341597/Styleguide+and+Code+Organisation+Principles#Responsibility-to-Maintain-The-Code-Quality)
 
-#### How does this PR make you feel? [:link:](http://giphy.com/)
-
-<!-- Go to http://giphy.com/ and pick a gif that represents how this PR makes you feel -->
-
-![](put .gif link here - can be found under "advanced" on giphy)
+### How does this PR make you feel? 🔗

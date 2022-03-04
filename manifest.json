@@ -1,7 +1,7 @@
 {
-  "vendor": "vtex",
+  "vendor": "thefoschini",
   "name": "add-to-cart-button",
-  "version": "0.26.13",
+  "version": "1.0.5",
   "title": "Add to Cart Button",
   "description": "A button component to add items into the shopping cart.",
   "builders": {
@@ -24,6 +24,9 @@
   "registries": [
     "smartcheckout"
   ],
+  "scripts": {
+    "postreleasy": "vtex publish --verbose"
+  },
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

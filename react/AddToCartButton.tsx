@@ -5,7 +5,7 @@ import {
   useIntl,
   defineMessages,
 } from 'react-intl'
-import { Button, Tooltip } from 'vtex.styleguide'
+import { Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
@@ -16,6 +16,8 @@ import { useOrderItems } from 'vtex.order-items/OrderItems'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+
+import ContainedButton from './ContainedButton';
 
 interface ProductLink {
   linkText?: string
@@ -103,6 +105,14 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
     sellerName: skuItem.sellerName,
   }
 }
+
+const BagIcon = () =>(
+  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <use href="#tfg-add-to-bag-icon"> </use> 
+  </svg>
+);
+ 
+
 
 function AddToCartButton(props: Props) {
   const {
@@ -294,14 +304,15 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <Button
+    <ContainedButton   
       block
-      isLoading={isFakeLoading || isLoading}
+      loading={isFakeLoading || isLoading || false}
       disabled={disabled || !available}
       onClick={handleClick}
+      icon={<BagIcon />}
     >
       {available ? availableButtonContent : unavailableButtonContent}
-    </Button>
+    </ContainedButton>
   )
 
   return allSkuVariationsSelected ? (
