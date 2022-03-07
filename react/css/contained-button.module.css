@@ -17,7 +17,7 @@
   border: none;
   flex-direction: row-reverse;
   width: 420px;
-
+padding: 10px;
   margin: 0 16px 16px 0;
   text-decoration: none;
   transition: box-shadow 250ms ease-in-out, transform 150ms ease;
