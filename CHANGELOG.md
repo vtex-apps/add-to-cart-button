@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Thai translation.
+
+### Fixed
+
+- Arabic translation.
+
 ## [0.27.1] - 2022-03-10
 
 ### Fixed
