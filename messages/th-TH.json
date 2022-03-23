@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "เพิ่มสินค้าลงในรถเข็นของคุณแล้ว",
+  "store/add-to-cart.failure": "มีบางอย่างผิดพลาดและเพิ่มสินค้าลงในรถเข็นของคุณไม่ได้!",
+  "store/add-to-cart.see-cart": "ดูรถเข็น",
+  "store/add-to-cart.add-to-cart": "เพิ่มลงในรถเข็น",
+  "store/add-to-cart.label-unavailable": "ไม่พร้อมจำหน่าย",
+  "store/add-to-cart.select-sku-variations": "กรุณาเลือกตัวเลือกของแต่ละรุ่นสินค่า",
+  "admin/editor.add-to-cart.title": "ปุ่มเพิ่มลงในรถเข็น",
+  "admin/editor.add-to-cart.text.title": "ข้อความบนปุ่ม",
+  "admin/editor.add-to-cart.text.description": "ข้อความบนปุ่ม เช่น \"เพิมลงในรถเข็น\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "ไม่มีข้อความบนปุ่ม",
+  "admin/editor.add-to-cart.text-unavailable.description": "ข้อความบนปุ่มเมื่อผลิตถัณฑ์ไม่พร้อมจำหน่าย"
+}

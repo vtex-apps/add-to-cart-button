@@ -1,5 +1,5 @@
 {
-  "store/add-to-cart.success": "تمت اضافة المنتج الى عربتك",
+  "store/add-to-cart.success": "تمت إضافة المنتج إلى السلة بنجاح",
   "store/add-to-cart.failure": "حدث خطأ ولم تتم إضافة العنصر إلى سلة التسوق الخاصة بك!",
   "store/add-to-cart.see-cart": "عرض عربة التسوق",
   "store/add-to-cart.add-to-cart": "أضف الى السلة",
