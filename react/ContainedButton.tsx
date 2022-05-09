@@ -1,6 +1,10 @@
 import React from "react";
-import styles from "./css/contained-button.module.css";
 import LoadingSpinner from "./LoadingSpinner";
+
+import { useCssHandles } from 'vtex.css-handles'
+
+const CSS_HANDLES = ['containedButton','containedButtonBlock','containedButtonText','containedButtonLoader',] as const
+
 
 type ContainedButtonProps = {
   children: React.ReactNode,
@@ -19,13 +23,17 @@ function ContainedButton({
   onClick = () => {},
   children,
 }: ContainedButtonProps) {
+
+  const handles = useCssHandles(CSS_HANDLES)
+
+
   return (
     <button
-      className={`${styles.containedBtn} ${block ? styles.block : ""}`}
+      className={`${handles.containedButton}  ${block ? handles.containedButtonBlock : ""}`}
       onClick={onClick}
       disabled={disabled}
     >
-      {loading ? <LoadingSpinner /> : icon} <span className={styles.text}>{children}</span>
+      {loading ? <LoadingSpinner /> : icon} <span className={handles.containedButtonText} >{children}</span>
     </button>
   );
 }
