@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 import styles from "./css/loading-spinner.module.css";
 
 const LoadingSpinner: FC = () => {
@@ -13,16 +13,14 @@ const LoadingSpinner: FC = () => {
     >
       <circle
         className="vtex-spinner_circle"
-        cx="50"
-        cy="50"
-        fill="none"
-        r="40"
+        cx={50}
+        cy={50} fill="none"
+        r={40}
         stroke="currentColor"
-        stroke-width="10"
-        stroke-dasharray="0 0 163.36281798666926 251.32741228718345"
-        stroke-linecap="round"
-        stroke-dashoffset="1"
-      ></circle>
+        strokeWidth={10}
+        strokeDasharray="0 0 163.36281798666926 251.32741228718345"
+        strokeLinecap="round"
+        strokeDashoffset={1} />
     </svg>
   );
 };

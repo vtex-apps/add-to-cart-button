@@ -1,7 +1,11 @@
 {
   "recommendations": [
+    "agenciae-plus.vtexio-intellisense",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "naumovs.color-highlight",
     "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig",
-    "esbenp.prettier-vscode"
+    "sibiraj-s.vscode-scss-formatter"
   ]
 }
