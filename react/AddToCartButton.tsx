@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  FormattedMessage,
+  defineMessages, FormattedMessage,
   MessageDescriptor,
-  useIntl,
-  defineMessages,
+  useIntl
 } from 'react-intl'
-import { Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
-import { useRuntime } from 'vtex.render-runtime'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
+import { useRuntime } from 'vtex.render-runtime'
 import { usePWA } from 'vtex.store-resources/PWAContext'
-import { useOrderItems } from 'vtex.order-items/OrderItems'
+import { Tooltip } from 'vtex.styleguide'
 
-import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+import { CartItem } from './modules/catalogItemToCart'
 
-import ContainedButton from './ContainedButton';
+import ContainedButton from './ContainedButton'
 
 interface ProductLink {
   linkText?: string
@@ -106,12 +105,12 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
   }
 }
 
-const BagIcon = () =>(
+const BagIcon = () => (
   <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <use href="#tfg-add-to-bag-icon"> </use> 
+    <use href="#tfg-add-to-bag-icon"> </use>
   </svg>
 );
- 
+
 
 
 function AddToCartButton(props: Props) {
@@ -218,14 +217,14 @@ function AddToCartButton(props: Props) {
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
-            id: customPixelEventId,
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
+          id: customPixelEventId,
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
         : {
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
 
     // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
@@ -304,7 +303,7 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <ContainedButton   
+    <ContainedButton
       block
       loading={isFakeLoading || isLoading || false}
       disabled={disabled || !available}
