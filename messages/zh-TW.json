@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "商品已添加到購物車",
+  "store/add-to-cart.failure": "系統出錯；商品未添加到您的購物車！",
+  "store/add-to-cart.see-cart": "檢視購物車",
+  "store/add-to-cart.add-to-cart": "添加到購物車",
+  "store/add-to-cart.label-unavailable": "無貨",
+  "store/add-to-cart.select-sku-variations": "請為每個品類選擇一項",
+  "admin/editor.add-to-cart.title": "添加到購物車按鈕",
+  "admin/editor.add-to-cart.text.title": "按鈕文字",
+  "admin/editor.add-to-cart.text.description": "按鈕文字，例如「添加到購物車」",
+  "admin/editor.add-to-cart.text-unavailable.title": "按鈕文字不可用",
+  "admin/editor.add-to-cart.text-unavailable.description": "当商品無貨時的按钮文字"
+}
