@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Item ditambahkan ke troli Anda",
+  "store/add-to-cart.failure": "Terjadi kesalahan sehingga item tidak ditambahkan ke troli Anda!",
+  "store/add-to-cart.see-cart": "Lihat troli",
+  "store/add-to-cart.add-to-cart": "Tambahkan ke troli",
+  "store/add-to-cart.label-unavailable": "Tidak tersedia",
+  "store/add-to-cart.select-sku-variations": "Pilih opsi dari tiap variasi",
+  "admin/editor.add-to-cart.title": "Tombol Tambahkan ke troli",
+  "admin/editor.add-to-cart.text.title": "Tombol teks",
+  "admin/editor.add-to-cart.text.description": "Teks tombol, mis. \"Tambahkan ke troli\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "Teks tombol tidak tersedia",
+  "admin/editor.add-to-cart.text-unavailable.description": "Teks tombol saat produk tidak tersedia."
+}
