@@ -5,9 +5,9 @@
   "store/add-to-cart.add-to-cart": "Add to Cart",
   "store/add-to-cart.label-unavailable": "Unavailable",
   "store/add-to-cart.select-sku-variations": "Please select an option for each variation",
-  "admin/editor.add-to-cart.title": "Add-to-Cart Button",
+  "admin/editor.add-to-cart.title": "\"Add to Cart\" Button",
   "admin/editor.add-to-cart.text.title": "Button text",
-  "admin/editor.add-to-cart.text.description": "Button displayed on button, e.g.: \"Add to Cart\"",
+  "admin/editor.add-to-cart.text.description": "Text displayed on button, e.g.: \"Add to Cart\"",
   "admin/editor.add-to-cart.text-unavailable.title": "Button text (unavailable)",
-  "admin/editor.add-to-cart.text-unavailable.description": "Button text when the product is unavailable."
+  "admin/editor.add-to-cart.text-unavailable.description": "Text displayed on button when the product is unavailable."
 }
