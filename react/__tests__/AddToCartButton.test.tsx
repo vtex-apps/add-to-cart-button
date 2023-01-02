@@ -134,7 +134,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -154,7 +154,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -162,7 +162,7 @@ describe('AddToCartButton component', () => {
       />
     )
 
-    expect(queryByText('Add to cart')).toBeTruthy()
+    expect(queryByText('Add to Cart')).toBeTruthy()
   })
 
   it('should render tooltip with correct message when not all SKU variations are selected', () => {
@@ -174,7 +174,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected={false}
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -183,7 +183,7 @@ describe('AddToCartButton component', () => {
     )
 
     const tooltip = queryByTestId('Tooltip')
-    const label = queryByText('Please select an option of each variation')
+    const label = queryByText('Please select an option for each variation')
 
     expect(tooltip).toBeTruthy()
     expect(label).toBeTruthy()
@@ -198,7 +198,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -218,7 +218,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -251,7 +251,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -284,7 +284,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -360,7 +360,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected={false}
         productLink={mockProductLink}
         onClickBehavior="add-to-cart"
@@ -390,7 +390,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="go-to-product-page"
@@ -427,7 +427,7 @@ describe('AddToCartButton component', () => {
         disabled={false}
         skuItems={mockSKUItems}
         customToastUrl=""
-        showToast={() => {}}
+        showToast={() => { }}
         allSkuVariationsSelected
         productLink={mockProductLink}
         onClickBehavior="ensure-sku-selection"
