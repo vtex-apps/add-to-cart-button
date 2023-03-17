@@ -1,0 +1,13 @@
+{
+  "store/add-to-cart.success": "Artikel in den Warenkorb gelegt",
+  "store/add-to-cart.failure": "Etwas ging schief und der Artikel wurde nicht in Ihren Warenkorb gelegt!",
+  "store/add-to-cart.see-cart": "Warenkorb anzeigen",
+  "store/add-to-cart.add-to-cart": "In den Warenkorb legen",
+  "store/add-to-cart.label-unavailable": "Nicht verfügbar",
+  "store/add-to-cart.select-sku-variations": "Bitte wählen Sie für jede Variante eine Option aus",
+  "admin/editor.add-to-cart.title": "In den Warenkorb legen",
+  "admin/editor.add-to-cart.text.title": "Text der Schaltfläche",
+  "admin/editor.add-to-cart.text.description": "Text der Schaltfläche, z. B. \"In den Warenkorb\"",
+  "admin/editor.add-to-cart.text-unavailable.title": "Schaltflächentext nicht verfügbar",
+  "admin/editor.add-to-cart.text-unavailable.description": "Schaltflächentext, wenn das Produkt nicht verfügbar ist."
+}
