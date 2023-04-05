@@ -158,21 +158,17 @@ export function transformAssemblyOptions({
         })
       }
 
-      const addedChildrenCount = childrenAddedData
-        ? childrenAddedData.options.length
-        : 0
-
-      if (quantity !== initialQuantity || addedChildrenCount > 0) {
-        options.push({
-          assemblyId: groupId,
-          id: item.id,
-          quantity: quantity * parentQuantity,
-          seller: item.seller,
-          ...(childrenOptions && childrenOptions.length > 0
-            ? { options: childrenOptions }
-            : {}),
-        })
-      }
+      // push all items to options array regardless of quantity
+      // this solves KI 743529
+      options.push({
+        assemblyId: groupId,
+        id: item.id,
+        quantity: quantity * parentQuantity,
+        seller: item.seller,
+        ...(childrenOptions && childrenOptions.length > 0
+          ? { options: childrenOptions }
+          : {}),
+      })
     }
   }
 

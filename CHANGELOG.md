@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Assembly option quantity selections are no longer ignored (solves KI 743529)
+
 ## [0.30.0] - 2023-03-28
 
 ### Added
