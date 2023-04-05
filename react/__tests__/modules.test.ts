@@ -257,7 +257,7 @@ describe('assemblyOptions module', () => {
               "assemblyId": "add-on_Add-on",
               "id": "2000590",
               "quantity": 0,
-              "seller": "1"
+              "seller": "1",
             },
             Object {
               "assemblyId": "text_style_Text Style",
