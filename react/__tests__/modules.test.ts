@@ -90,7 +90,7 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultBell.options).toHaveLength(5)
+      expect(resultBell.options).toHaveLength(7)
       const addonOption = resultBell.options[0] as ItemOption
       expect(addonOption.assemblyId).toBe('add-on_Add-on')
       expect(addonOption.id).toBe('2000588')
@@ -169,7 +169,7 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultBell.options).toHaveLength(5)
+      expect(resultBell.options).toHaveLength(7)
 
       const engraving = resultBell.options[4] as ItemOption
       expect(engraving.options).toHaveLength(1)
