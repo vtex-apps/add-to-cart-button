@@ -104,7 +104,7 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultPizza.options).toHaveLength(2)
+      expect(resultPizza.options).toHaveLength(4)
       const pizzaOption = resultPizza.options[0] as ItemOption
       expect(pizzaOption.assemblyId).toBe('pizza_composition_Pizza flavor')
       expect(pizzaOption.id).toBe('5101')
@@ -171,7 +171,7 @@ describe('assemblyOptions module', () => {
 
       expect(resultBell.options).toHaveLength(7)
 
-      const engraving = resultBell.options[4] as ItemOption
+      const engraving = resultBell.options[5] as ItemOption
       expect(engraving.options).toHaveLength(1)
 
       const recursiveInputValue = engraving.options![0] as ItemOption
