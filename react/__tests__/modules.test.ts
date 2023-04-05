@@ -90,7 +90,7 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultBell.options).toHaveLength(5)
+      expect(resultBell.options).toHaveLength(7)
       const addonOption = resultBell.options[0] as ItemOption
       expect(addonOption.assemblyId).toBe('add-on_Add-on')
       expect(addonOption.id).toBe('2000588')
@@ -104,13 +104,13 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultPizza.options).toHaveLength(2)
+      expect(resultPizza.options).toHaveLength(4)
       const pizzaOption = resultPizza.options[0] as ItemOption
       expect(pizzaOption.assemblyId).toBe('pizza_composition_Pizza flavor')
       expect(pizzaOption.id).toBe('5101')
       expect(pizzaOption.quantity).toBe(1)
       expect(pizzaOption.seller).toBe('1')
-      expect(pizzaOption.options).toHaveLength(3)
+      expect(pizzaOption.options).toHaveLength(9)
 
       const drinksOptions = resultPizza.options[1] as ItemOption
       expect(drinksOptions.options).toBeUndefined()
@@ -169,9 +169,9 @@ describe('assemblyOptions module', () => {
         parentQuantity,
       })
 
-      expect(resultBell.options).toHaveLength(5)
+      expect(resultBell.options).toHaveLength(7)
 
-      const engraving = resultBell.options[4] as ItemOption
+      const engraving = resultBell.options[5] as ItemOption
       expect(engraving.options).toHaveLength(1)
 
       const recursiveInputValue = engraving.options![0] as ItemOption
@@ -254,6 +254,12 @@ describe('assemblyOptions module', () => {
               "seller": "1",
             },
             Object {
+              "assemblyId": "add-on_Add-on",
+              "id": "2000590",
+              "quantity": 0,
+              "seller": "1",
+            },
+            Object {
               "assemblyId": "text_style_Text Style",
               "id": "2000591",
               "quantity": 0,
@@ -279,6 +285,12 @@ describe('assemblyOptions module', () => {
                 },
               ],
               "quantity": 1,
+              "seller": "1",
+            },
+            Object {
+              "assemblyId": "engraving_Engraving",
+              "id": "2000587",
+              "quantity": 0,
               "seller": "1",
             },
           ],
