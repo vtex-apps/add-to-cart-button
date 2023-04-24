@@ -1,21 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  FormattedMessage,
+  defineMessages, FormattedMessage,
   MessageDescriptor,
-  useIntl,
-  defineMessages,
+  useIntl
 } from 'react-intl'
-import { Button, Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
-import { useRuntime } from 'vtex.render-runtime'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
+import { useRuntime } from 'vtex.render-runtime'
 import { usePWA } from 'vtex.store-resources/PWAContext'
-import { useOrderItems } from 'vtex.order-items/OrderItems'
-
-import { CartItem } from './modules/catalogItemToCart'
+import { Button, Tooltip } from 'vtex.styleguide'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+import { CartItem } from './modules/catalogItemToCart'
+
 
 interface ProductLink {
   linkText?: string
@@ -40,6 +39,7 @@ interface Props {
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
+  goToProductPageText?: string
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -123,6 +123,7 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
+    goToProductPageText,
   } = props
 
   const intl = useIntl()
@@ -136,6 +137,13 @@ function AddToCartButton(props: Props) {
   const { promptOnCustomEvent } = settings
   const { utmParams, utmiParams } = useMarketingSessionParams()
   const [isFakeLoading, setFakeLoading] = useState(false)
+  const productLinkIsValid = Boolean(
+    productLink.linkText && productLink.productId
+  )
+  const shouldNavigateToProductPage =
+    onClickBehavior === 'go-to-product-page' ||
+    (onClickBehavior === 'ensure-sku-selection' && multipleAvailableSKUs)
+  const canNavigateToProductPage = productLinkIsValid && shouldNavigateToProductPage
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
 
@@ -181,14 +189,7 @@ function AddToCartButton(props: Props) {
   const handleAddToCart = async () => {
     setFakeLoading(true)
 
-    const productLinkIsValid = Boolean(
-      productLink.linkText && productLink.productId
-    )
-    const shouldNavigateToProductPage =
-      onClickBehavior === 'go-to-product-page' ||
-      (onClickBehavior === 'ensure-sku-selection' && multipleAvailableSKUs)
-
-    if (productLinkIsValid && shouldNavigateToProductPage) {
+    if (canNavigateToProductPage) {
       navigate({
         page: 'store.product',
         params: {
@@ -271,6 +272,8 @@ function AddToCartButton(props: Props) {
     <div className={`${handles.buttonDataContainer} flex justify-center`}>
       {text ? (
         <span className={handles.buttonText}>{text}</span>
+      ) : (canNavigateToProductPage && goToProductPageText) ? (
+        <span className={handles.buttonText}>{goToProductPageText}</span>
       ) : (
         <FormattedMessage id="store/add-to-cart.add-to-cart">
           {message => <span className={handles.buttonText}>{message}</span>}
