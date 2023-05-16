@@ -6,15 +6,15 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The `add-to-cart-button` is a block responsible for adding products in the [Minicart](https://vtex.io/docs/components/all/vtex.minicart/) (`minicart.v2`). 
+The `add-to-cart-button` block is designed to add products to the [Minicart](https://developers.vtex.com/docs/guides/vtex-minicart/) (`minicart.v2`).
 
-![image](https://user-images.githubusercontent.com/284515/70233985-69e13700-173e-11ea-91f7-6675a6a0e73b.png)
+![image](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/vtex-add-to-cart-button-0.png)
 
-:warning: **The Add To Cart Button only effectively function i.e. only adds products to the Minicart if the store uses the Minicart v2**. In this scenario, it successfully works in the Shelf component as well as in the Product Details page. **When using the [Minicart v1](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md), you should configure the [Buy Button block](https://vtex.io/docs/components/all/vtex.store-components/buybutton/) in the Product Details page, and the [Product Summary Buy Button](https://vtex.io/docs/components/all/vtex.product-summary/product-summary-buy-button/) in the Shelf component instead**.
+> ⚠️ **Please note that the Add to Cart button is only compatible with stores using Minicart v2. ** For these stores, it will function correctly on the Shelf component and the Product Details page. **If you are using [Minicart v1](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md), you should configure the [Buy Button block](https://developers.vtex.com/docs/guides/vtex-store-components-buybutton/) on the Product Details page and the [Product Summary Buy button](https://developers.vtex.com/docs/guides/vtex-product-summary-productsummarybuybutton/) on the Shelf component instead.**
 
-## Configuration
+## Configurating Add to Cart
 
-1. Import the `vtex.add-to-cart-button` app to your theme's dependencies in the manifest.json, for example:
+1. Import the `vtex.add-to-cart-button` app to your theme dependencies in the manifest.json. For example:
 
 ```json
 "dependencies": {
@@ -22,7 +22,7 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
 }
 ```
 
-2. Add the `add-to-cart-button` to other theme block using the product context, such as the `product-summary.shelf`. In the example below, the `add-to-cart-button` is added to the `flex-layout.row` block from the `store.product` template (which uses the product context):
+2. Add the `add-to-cart-button` to another theme block using the product context, such as the `product-summary.shelf`. In the example below, the `add-to-cart-button` is added to the `flex-layout.row` block from the `store.product` template, which uses the product context:
 
 ```json
   "store.product": {
@@ -37,20 +37,20 @@ The `add-to-cart-button` is a block responsible for adding products in the [Mini
   }
 ```
 
-| Prop name               | Type      | Description                                                                       | Default value        |
-| ----------------------- | --------- | --------------------------------------------------------------------------------- | -------------------- |
-| `onClickBehavior`       | `enum` | Controls what happens when users click on the button. Possible values are: `go-to-product-page`, `add-to-cart`, and `ensure-sku-selection` (if multiple SKUs are available, users will be redirected to the product page to select the desired one. If the product only has 1 SKU available, it will be added to the cart once the button is clicked on). | `add-to-cart`              |
-| `onClickEventPropagation` | `enum` | Controls whether the 'onClick' event (triggered upon user clicks) should be spread to the page's parent elements. Possible values are: `disabled` and `enabled`. | `disabled` |
-| `isOneClickBuy`         | `boolean` | Whether the user should be redirected to the checkout page (`true`) or not (`false`) when the Add To Cart Button is clicked on.  | `false`              |
-| `customOneClickBuyLink` | `string`  | Defines the link to where users will be redirected when the Add To Cart Button is clicked on and the `isOneClickBuy` prop is set to `true`. | `/checkout/#/cart` |
-| `customToastUrl`        | `string`  | Defines the link to where users will be redirected when the Toast (pop-up notification displayed when adding an item to the minicart) is clicked on.  | `/checkout/#/cart`   |
-| `text` | `string` | Defines a custom text message to be displayed on the Add To Cart Button. | `Add to cart` *( automatic translation will be applied according to your store's default language)* | 
-| `unavailableText` | `string` | Defines a custom text message to be displayed on the Add To Cart Button when a product is unavailable. | `Unavailable` *(automatic translation will be applied according to your store's default language)* |
-| `customPixelEventId` | `string` | Define the `id` for the event that will be sent by the the button upon user interaction. | `undefined`   |
+| Prop name                 | Type      | Description                                                                                                                                                                                                                                                                                                                                                       | Default value                                                                                 |
+| ------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `onClickBehavior`         | `enum`    | Controls what happens when users click the button. Possible values are: `go-to-product-page`, `add-to-cart`, and `ensure-sku-selection` (if multiple SKUs are available, users will be redirected to the product page to select the desired one. If the product only has 1 SKU available, it will be automatically added to the cart when the button is clicked). | `add-to-cart`                                                                                 |
+| `onClickEventPropagation` | `enum`    | Controls whether the 'onClick' event, triggered upon user clicks, should propagate to the parent elements of the page. Possible values are: `disabled` and `enabled`.                                                                                                                                                                                             | `disabled`                                                                                    |
+| `isOneClickBuy`           | `boolean` | Determines whether the user should be redirected to the checkout page (`true`) or not (`false`) when the Add to Cart button is clicked.                                                                                                                                                                                                                           | `false`                                                                                       |
+| `customOneClickBuyLink`   | `string`  | Defines the link to which users will be redirected when the Add to Cart button is clicked, and the `isOneClickBuy` prop is set to `true`.                                                                                                                                                                                                                         | `/checkout/#/cart`                                                                            |
+| `customToastUrl`          | `string`  | Defines the link to which users will be redirected when the toast (pop-up notification displayed when adding an item to the minicart) is clicked.                                                                                                                                                                                                                 | `/checkout/#/cart`                                                                            |
+| `text`                    | `string`  | Defines a custom text message to be displayed on the Add to Cart button.                                                                                                                                                                                                                                                                                          | `Add to cart` _(automatic translation will be applied following your store default language)_ |
+| `unavailableText`         | `string`  | Defines a custom text message to be displayed on the Add to Cart button when a product is unavailable.                                                                                                                                                                                                                                                            | `Unavailable` _(automatic translation will be applied following your store default language)_ |
+| `customPixelEventId`      | `string`  | Defines the `id` for the event that the button will send upon user interaction.                                                                                                                                                                                                                                                                                   | `undefined`                                                                                   |
 
 ## Customization
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+To apply CSS customizations to this and other blocks, follow the instructions in [Using CSS Handles for store customization](https://developers.vtex.com/docs/guides/vtex-io-documentation-using-css-handles-for-store-customization).
 
 | CSS Handles           |
 | --------------------- |
