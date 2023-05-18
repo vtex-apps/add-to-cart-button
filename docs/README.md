@@ -10,7 +10,7 @@ The `add-to-cart-button` block is designed to add products to the [Minicart](htt
 
 ![image](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/vtex-add-to-cart-button-0.png)
 
-> ⚠️ **Please note that the Add to Cart button is only compatible with stores using Minicart v2. ** For these stores, it will function correctly on the Shelf component and the Product Details page. **If you are using [Minicart v1](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md), you should configure the [Buy Button block](https://developers.vtex.com/docs/guides/vtex-store-components-buybutton/) on the Product Details page and the [Product Summary Buy button](https://developers.vtex.com/docs/guides/vtex-product-summary-productsummarybuybutton/) on the Shelf component instead.**
+> ⚠️ Please note that the Add to Cart button is only compatible with stores using Minicart v2. For these stores, it will function correctly on the Shelf component and the Product Details page. If you are using [Minicart v1](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md), you should configure the [Buy Button block](https://developers.vtex.com/docs/apps/vtex.store-components/buybutton) on the Product Details page and the [Product Summary Buy button](https://developers.vtex.com/docs/apps/vtex.product-summary/productsummarybuybutton) on the Shelf component instead.
 
 ## Configurating Add to Cart
 
