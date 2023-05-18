@@ -6,7 +6,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The `add-to-cart-button` block is designed to add products to the [Minicart](https://developers.vtex.com/docs/guides/vtex-minicart/) (`minicart.v2`).
+The `add-to-cart-button` block is designed to add products to the [Minicart](https://developers.vtex.com/docs/apps/vtex.minicart/) (`minicart.v2`).
 
 ![image](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/vtex-add-to-cart-button-0.png)
 
