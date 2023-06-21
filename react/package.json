@@ -21,7 +21,7 @@
     "@types/recompose": "^0.30.7",
     "@vtex/test-tools": "^3.1.0",
     "@vtex/tsconfig": "^0.4.4",
-    "thefoschini.add-to-cart-button": "https://bpf446--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.add-to-cart-button@1.0.7+build1687302038/public/@types/thefoschini.add-to-cart-button",
+    "thefoschini.add-to-cart-button": "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.8/public/@types/thefoschini.add-to-cart-button",
     "typescript": "3.9.7",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.49.0/public/@types/vtex.checkout-resources",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",

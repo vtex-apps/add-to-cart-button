@@ -4655,9 +4655,9 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
-"thefoschini.add-to-cart-button@https://bpf446--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.add-to-cart-button@1.0.7+build1687302038/public/@types/thefoschini.add-to-cart-button":
-  version "1.0.7"
-  resolved "https://bpf446--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.add-to-cart-button@1.0.7+build1687302038/public/@types/thefoschini.add-to-cart-button#5f379918e8813ef9e2eb811b80d37cac718127d3"
+"thefoschini.add-to-cart-button@http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.8/public/@types/thefoschini.add-to-cart-button":
+  version "1.0.8"
+  resolved "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.8/public/@types/thefoschini.add-to-cart-button#bb46f464f042cc5ad94b82b45222b7c9df17d335"
 
 throat@^4.0.0:
   version "4.1.0"
