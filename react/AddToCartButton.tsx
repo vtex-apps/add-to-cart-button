@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {
-  defineMessages, FormattedMessage,
-  MessageDescriptor,
+  FormattedMessage,
+  defineMessages,
   useIntl
 } from 'react-intl'
 import { Utils } from 'vtex.checkout-resources'
@@ -120,8 +120,6 @@ function AddToCartButton(props: Props) {
     available,
     disabled,
     skuItems,
-    showToast,
-    customToastUrl,
     unavailableText,
     customOneClickBuyLink,
     allSkuVariationsSelected = true,
@@ -145,8 +143,6 @@ function AddToCartButton(props: Props) {
   const { promptOnCustomEvent } = settings
   const { utmParams, utmiParams } = useMarketingSessionParams()
   const [isFakeLoading, setFakeLoading] = useState(false)
-  const translateMessage = (message: MessageDescriptor) =>
-    intl.formatMessage(message)
 
   // collect toast and fake loading delay timers
   const timers = useRef<Record<string, number | undefined>>({})
@@ -170,22 +166,6 @@ function AddToCartButton(props: Props) {
       )
     }
   }, [isFakeLoading, isOneClickBuy])
-
-  const resolveToastMessage = (success: boolean) => {
-    if (!success) return translateMessage(messages.error)
-
-    return translateMessage(messages.success)
-  }
-
-  const toastMessage = ({ success }: { success: boolean }) => {
-    const message = resolveToastMessage(success)
-
-    const action = success
-      ? { label: translateMessage(messages.seeCart), href: customToastUrl }
-      : undefined
-
-    showToast({ message, action })
-  }
 
   const handleAddToCart = async () => {
     setFakeLoading(true)
@@ -243,11 +223,6 @@ function AddToCartButton(props: Props) {
         )
       }
     }
-
-    addToCartFeedback === 'toast' &&
-      (timers.current.toast = window.setTimeout(() => {
-        toastMessage({ success: true })
-      }, FAKE_LOADING_DURATION))
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
