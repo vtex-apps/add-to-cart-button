@@ -1,37 +1,32 @@
 {
+  "files.eol": "\n",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#4646e8",
+    "titleBar.inactiveBackground": "#4646e8",
+    "titleBar.activeForeground": "#fff",
+    "titleBar.inactiveForeground": "#fff",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.background": "#4646e8"
+  },
+  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "eslint.validate": [
-    {
-      "language": "javascript",
-      "autoFix": true
-    },
-    {
-      "language": "javascriptreact",
-      "autoFix": true
-    },
-    {
-      "language": "typescript",
-      "autoFix": true
-    },
-    {
-      "language": "typescriptreact",
-      "autoFix": true
-    }
-  ],
-  "eslint.autoFixOnSave": true,
-  "eslint.alwaysShowStatus": true,
-  "eslint.packageManager": "yarn",
-  "eslint.workingDirectories": [
-    {
-      "directory": "react",
-      "changeProcessCWD": true
-    },
-    {
-      "directory": "node",
-      "changeProcessCWD": true
-    }
-  ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "emmet.triggerExpansionOnTab": true,
+  "files.autoSave": "onFocusChange",
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.semi": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+  },
 }

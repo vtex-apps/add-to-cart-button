@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   FormattedMessage,
-  MessageDescriptor,
-  useIntl,
   defineMessages,
+  useIntl
 } from 'react-intl'
-import { Tooltip } from 'vtex.styleguide'
 import { Utils } from 'vtex.checkout-resources'
 import { useCssHandles } from 'vtex.css-handles'
-import { useRuntime } from 'vtex.render-runtime'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
+import { useRuntime } from 'vtex.render-runtime'
 import { usePWA } from 'vtex.store-resources/PWAContext'
-import { useOrderItems } from 'vtex.order-items/OrderItems'
+import { Tooltip } from 'vtex.styleguide'
 
-import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+import { CartItem } from './modules/catalogItemToCart'
 
-import ContainedButton from './ContainedButton';
+import ContainedButton from './ContainedButton'
 
 interface ProductLink {
   linkText?: string
@@ -42,7 +41,7 @@ interface Props {
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
-  storeName: string 
+  storeName: string
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -110,7 +109,7 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem, storeName: string) => {
 
 const BagIcon = () => (
   <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <use href="#tfg-add-to-bag-icon"> </use> 
+    <use href="#tfg-add-to-bag-icon"> </use>
   </svg>
 );
 
@@ -121,8 +120,6 @@ function AddToCartButton(props: Props) {
     available,
     disabled,
     skuItems,
-    showToast,
-    customToastUrl,
     unavailableText,
     customOneClickBuyLink,
     allSkuVariationsSelected = true,
@@ -147,8 +144,6 @@ function AddToCartButton(props: Props) {
   const { promptOnCustomEvent } = settings
   const { utmParams, utmiParams } = useMarketingSessionParams()
   const [isFakeLoading, setFakeLoading] = useState(false)
-  const translateMessage = (message: MessageDescriptor) =>
-    intl.formatMessage(message)
 
   // collect toast and fake loading delay timers
   const timers = useRef<Record<string, number | undefined>>({})
@@ -161,7 +156,7 @@ function AddToCartButton(props: Props) {
       Object.values(timers.current).forEach(clearTimeout)
     }
   }, [])
-  
+
   useEffect(() => {
     const currentTimers = timers.current
 
@@ -172,22 +167,6 @@ function AddToCartButton(props: Props) {
       )
     }
   }, [isFakeLoading, isOneClickBuy])
-
-  const resolveToastMessage = (success: boolean) => {
-    if (!success) return translateMessage(messages.error)
-
-    return translateMessage(messages.success)
-  }
-
-  const toastMessage = ({ success }: { success: boolean }) => {
-    const message = resolveToastMessage(success)
-
-    const action = success
-      ? { label: translateMessage(messages.seeCart), href: customToastUrl }
-      : undefined
-
-    showToast({ message, action })
-  }
 
   const handleAddToCart = async () => {
     setFakeLoading(true)
@@ -216,19 +195,19 @@ function AddToCartButton(props: Props) {
     })
 
     const pixelEventItems = skuItems.map(skuItem => mapSkuItemForPixelEvent(skuItem, storeName))
-    
+
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
-            id: customPixelEventId,
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
+          id: customPixelEventId,
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
         : {
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
-    
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
+
     // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
 
@@ -246,11 +225,6 @@ function AddToCartButton(props: Props) {
         )
       }
     }
-
-    addToCartFeedback === 'toast' &&
-      (timers.current.toast = window.setTimeout(() => {
-        toastMessage({ success: true })
-      }, FAKE_LOADING_DURATION))
 
     /* PWA */
     if (promptOnCustomEvent === 'addToCart' && showInstallPrompt) {
@@ -306,7 +280,7 @@ function AddToCartButton(props: Props) {
   )
 
   const ButtonWithLabel = (
-    <ContainedButton   
+    <ContainedButton
       block
       loading={isFakeLoading || isLoading || false}
       disabled={disabled || !available}
