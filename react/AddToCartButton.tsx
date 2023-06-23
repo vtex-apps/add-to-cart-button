@@ -42,6 +42,7 @@ interface Props {
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
+  storeName: string 
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -80,7 +81,7 @@ const options = {
   allowedOutdatedData: ['paymentData'],
 }
 
-const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
+const mapSkuItemForPixelEvent = (skuItem: CartItem, storeName: string) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
   const category = skuItem.category ? skuItem.category.slice(1, -1) : ''
@@ -103,16 +104,15 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
     referenceId: skuItem?.referenceId?.[0]?.Value,
     seller: skuItem.seller,
     sellerName: skuItem.sellerName,
+    affiliate: storeName
   }
 }
 
-const BagIcon = () =>(
+const BagIcon = () => (
   <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
   <use href="#tfg-add-to-bag-icon"> </use> 
   </svg>
 );
- 
-
 
 function AddToCartButton(props: Props) {
   const {
@@ -133,6 +133,7 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
+    storeName
   } = props
 
   const intl = useIntl()
@@ -160,7 +161,7 @@ function AddToCartButton(props: Props) {
       Object.values(timers.current).forEach(clearTimeout)
     }
   }, [])
-
+  
   useEffect(() => {
     const currentTimers = timers.current
 
@@ -214,7 +215,8 @@ function AddToCartButton(props: Props) {
       ...options,
     })
 
-    const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
+    const pixelEventItems = skuItems.map(skuItem => mapSkuItemForPixelEvent(skuItem, storeName))
+    
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
@@ -226,7 +228,7 @@ function AddToCartButton(props: Props) {
             event: 'addToCart',
             items: pixelEventItems,
           }
-
+    
     // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
 
