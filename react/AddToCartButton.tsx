@@ -41,6 +41,7 @@ interface Props {
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
+  storeName: string
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -79,7 +80,7 @@ const options = {
   allowedOutdatedData: ['paymentData'],
 }
 
-const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
+const mapSkuItemForPixelEvent = (skuItem: CartItem, storeName: string) => {
   // Changes this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
   const category = skuItem.category ? skuItem.category.slice(1, -1) : ''
@@ -102,6 +103,7 @@ const mapSkuItemForPixelEvent = (skuItem: CartItem) => {
     referenceId: skuItem?.referenceId?.[0]?.Value,
     seller: skuItem.seller,
     sellerName: skuItem.sellerName,
+    affiliate: storeName
   }
 }
 
@@ -110,8 +112,6 @@ const BagIcon = () => (
     <use href="#tfg-add-to-bag-icon"> </use>
   </svg>
 );
-
-
 
 function AddToCartButton(props: Props) {
   const {
@@ -130,6 +130,7 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
+    storeName
   } = props
 
   const intl = useIntl()
@@ -193,7 +194,8 @@ function AddToCartButton(props: Props) {
       ...options,
     })
 
-    const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
+    const pixelEventItems = skuItems.map(skuItem => mapSkuItemForPixelEvent(skuItem, storeName))
+
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {

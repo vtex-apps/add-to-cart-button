@@ -104,11 +104,13 @@ const Wrapper = withToast(function Wrapper(props: Props) {
   const selectedItem = productContext?.selectedItem
   const assemblyOptions = productContext?.assemblyOptions
   const seller =
-    selectedSeller ?? getDefaultSeller(productContext?.selectedItem?.sellers)
+  selectedSeller ?? getDefaultSeller(productContext?.selectedItem?.sellers)
   const selectedQuantity =
-    productContext?.selectedQuantity != null
-      ? productContext.selectedQuantity
-      : 1
+  productContext?.selectedQuantity != null
+  ? productContext.selectedQuantity
+  : 1
+  
+  const storeName = productContext?.product?.properties.find((property: { name: string }) => property.name === "Store")
 
   const skuItems = useMemo(
     () =>
@@ -141,7 +143,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
     linkText: product?.linkText,
     productId: product?.productId,
   }
-
+  
   return (
     <AddToCartButton
       text={text}
@@ -161,6 +163,7 @@ const Wrapper = withToast(function Wrapper(props: Props) {
       multipleAvailableSKUs={multipleAvailableSKUs}
       customPixelEventId={customPixelEventId}
       addToCartFeedback={addToCartFeedback}
+      storeName={storeName?.values[0] || ""}
     />
   )
 })
