@@ -4655,9 +4655,9 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
-"thefoschini.add-to-cart-button@http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.8/public/@types/thefoschini.add-to-cart-button":
-  version "1.0.8"
-  resolved "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.8/public/@types/thefoschini.add-to-cart-button#bb46f464f042cc5ad94b82b45222b7c9df17d335"
+"thefoschini.add-to-cart-button@http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.9/public/@types/thefoschini.add-to-cart-button":
+  version "1.0.9"
+  resolved "http://thefoschini.vtexassets.com/_v/public/typings/v1/thefoschini.add-to-cart-button@1.0.9/public/@types/thefoschini.add-to-cart-button#f62f778299e01300c323b69d58fc03e75391fa4f"
 
 throat@^4.0.0:
   version "4.1.0"
@@ -4868,9 +4868,9 @@ verror@1.10.0:
   version "0.4.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles#8c45c6decf9acd2b944e07261686decff93d6422"
 
-"vtex.native-types@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.10.0/public/@types/vtex.native-types":
-  version "0.10.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.10.0/public/@types/vtex.native-types#b24c375354e8c46e39448e63a8ef762baca86c61"
+"vtex.native-types@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.10.1/public/@types/vtex.native-types":
+  version "0.10.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.10.1/public/@types/vtex.native-types#7ddf7f34265f8902dfad93d3a13021108023a584"
 
 "vtex.order-items@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.13.21/public/@types/vtex.order-items":
   version "0.13.21"
