@@ -134,7 +134,7 @@ function AddToCartButton(props: Props) {
   const { push } = usePixel()
   const { settings = {}, showInstallPrompt = undefined } = usePWA() || {}
   const { promptOnCustomEvent } = settings
-  const { utmParams, utmiParams } = useMarketingSessionParams()
+  const { utmParams, utmiParams, couponParam } = useMarketingSessionParams()
   const [isFakeLoading, setFakeLoading] = useState(false)
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
@@ -200,7 +200,7 @@ function AddToCartButton(props: Props) {
     }
 
     const addItemsPromise = addItems(skuItems, {
-      marketingData: { ...utmParams, ...utmiParams },
+      marketingData: { ...utmParams, ...utmiParams, ...couponParam },
       ...options,
     })
 

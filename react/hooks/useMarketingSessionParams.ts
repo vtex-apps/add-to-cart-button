@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 type PublicSessionField =
   | 'utm_source'
@@ -22,6 +23,10 @@ interface UtmiParams {
   utmiCampaign?: string
   utmiPage?: string
   utmiPart?: string
+}
+
+interface CouponParam {
+  coupon?: string
 }
 
 interface SessionPromiseResponse {
@@ -77,8 +82,14 @@ const getSessionPromiseFromWindow = () => {
 }
 
 const useMarketingSessionParams = () => {
+  const { orderForm: { marketingData}} = useOrderForm()
   const [utmParams, setUtmParams] = useState<UtmParams>({})
   const [utmiParams, setUtmiParams] = useState<UtmiParams>({})
+  const [couponParam, setCouponParam] = useState<CouponParam>({})
+
+  useEffect(() => {
+    if(marketingData?.coupon?.length) setCouponParam({ coupon: marketingData.coupon })
+  }, [marketingData])
 
   useEffect(() => {
     getSessionPromiseFromWindow()
@@ -104,7 +115,7 @@ const useMarketingSessionParams = () => {
       })
   }, [])
 
-  return { utmParams, utmiParams }
+  return { utmParams, utmiParams, couponParam }
 }
 
 export default useMarketingSessionParams
