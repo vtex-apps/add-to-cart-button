@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Add marketing tags together with coupon when adding items to the cart
+
 ## [0.30.2] - 2023-07-13
 ### Fixed
 - Fixes of i18n on readme.md according to task LOC-10625.
