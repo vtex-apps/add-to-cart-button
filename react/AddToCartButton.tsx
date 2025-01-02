@@ -13,9 +13,11 @@ import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
 import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
+import { isShippingSelected } from './utils/shipping'
 
 interface ProductLink {
   linkText?: string
@@ -35,7 +37,11 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
+  onClickBehavior:
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'ensure-sku-selection'
+    | 'add-to-cart-with-shipping'
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
@@ -128,6 +134,9 @@ function AddToCartButton(props: Props) {
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItems } = useOrderItems()
+  const {
+    orderForm: { items },
+  } = useOrderForm()
   const productContextDispatch = useProductDispatch()
   const { rootPath = '', navigate } = useRuntime()
   const { url: checkoutURL, major } = Utils.useCheckoutURL()
@@ -257,6 +266,16 @@ function AddToCartButton(props: Props) {
     if (onClickEventPropagation === 'disabled') {
       e.preventDefault()
       e.stopPropagation()
+    }
+
+    if (
+      onClickBehavior === 'add-to-cart-with-shipping' &&
+      items.length > 0 &&
+      !isShippingSelected()
+    ) {
+      push({
+        id: 'shipping-modal-open',
+      })
     }
 
     if (allSkuVariationsSelected) {
