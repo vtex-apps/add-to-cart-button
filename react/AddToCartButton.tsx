@@ -13,6 +13,7 @@ import { usePixel } from 'vtex.pixel-manager'
 import { useProductDispatch } from 'vtex.product-context'
 import { usePWA } from 'vtex.store-resources/PWAContext'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
+import { useShippingOptionState } from 'vtex.shipping-option-components/ShippingOptionContext'
 
 import { CartItem } from './modules/catalogItemToCart'
 import useMarketingSessionParams from './hooks/useMarketingSessionParams'
@@ -35,7 +36,11 @@ interface Props {
   text?: string
   unavailableText?: string
   productLink: ProductLink
-  onClickBehavior: 'add-to-cart' | 'go-to-product-page' | 'ensure-sku-selection'
+  onClickBehavior:
+    | 'add-to-cart'
+    | 'go-to-product-page'
+    | 'ensure-sku-selection'
+    | 'add-to-cart-and-trigger-shipping-modal'
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
@@ -138,6 +143,7 @@ function AddToCartButton(props: Props) {
   const [isFakeLoading, setFakeLoading] = useState(false)
   const translateMessage = (message: MessageDescriptor) =>
     intl.formatMessage(message)
+  const { shippingOption } = useShippingOptionState()
 
   // collect toast and fake loading delay timers
   const timers = useRef<Record<string, number | undefined>>({})
@@ -196,6 +202,24 @@ function AddToCartButton(props: Props) {
           id: productLink.productId,
         },
       })
+      return
+    }
+
+    if (
+      onClickBehavior === 'add-to-cart-and-trigger-shipping-modal' &&
+      !shippingOption
+    ) {
+      push({
+        id: 'item-added-to-cart-shipping-modal',
+        addToCartInfo: {
+          skuItems,
+          options: {
+            marketingData: { ...utmParams, ...utmiParams },
+            ...options,
+          },
+        },
+      })
+
       return
     }
 

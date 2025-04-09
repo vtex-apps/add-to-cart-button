@@ -84,6 +84,7 @@ const mockAllowedOutdatedData = {
 const mockAddItem = jest.fn()
 const mockPixelEventPush = jest.fn()
 const mockNavigate = jest.fn()
+const mockUseShippingOptionState = jest.fn()
 
 jest.mock('../hooks/useMarketingSessionParams', () => {
   return () => ({
@@ -114,6 +115,12 @@ jest.mock('vtex.render-runtime', () => ({
   useRuntime: () => ({
     rootPath: '',
     navigate: mockNavigate,
+  }),
+}))
+
+jest.mock('vtex.shipping-option-components/ShippingOptionContext', () => ({
+  useShippingOptionState: () => ({
+    shippingOption: undefined,
   }),
 }))
 
@@ -452,6 +459,152 @@ describe('AddToCartButton component', () => {
         slug: 'mock-product',
         id: '2000024',
       },
+    })
+  })
+
+  it("should send an 'item-added-to-cart-shipping-modal' event if onClickBehavior is set to 'add-to-cart-and-trigger-shipping-modal' and there is no 'shippingOption' selected", () => {
+    mockUseShippingOptionState.mockImplementation(() => ({
+      shippingOption: undefined,
+    }))
+
+    const { queryByTestId } = render(
+      <AddToCartButton
+        isOneClickBuy={false}
+        available
+        customOneClickBuyLink=""
+        disabled={false}
+        skuItems={mockSKUItems}
+        customToastUrl=""
+        showToast={() => {}}
+        allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart-and-trigger-shipping-modal"
+        multipleAvailableSKUs
+      />
+    )
+
+    const button = queryByTestId('styleguide-button')
+
+    expect(button).toBeTruthy()
+
+    act(() => {
+      if (button) {
+        fireEvent.click(button)
+      }
+    })
+
+    expect(mockAddItem).toHaveBeenCalledTimes(0)
+    expect(mockNavigate).toHaveBeenCalledTimes(0)
+
+    const expectedPixelEvent = {
+      id: 'item-added-to-cart-shipping-modal',
+      addToCartInfo: {
+        skuItems: [
+          {
+            index: 0,
+            id: '2000564',
+            productId: '2000024',
+            quantity: 1,
+            uniqueId: '',
+            detailUrl: '/star-color-top/p',
+            name: 'Top Star Color Shirt',
+            brand: 'Kawasaki',
+            category: '/Apparel & Accessories/Clothing/Tops/',
+            productRefId: '998765',
+            seller: '1',
+            sellerName: 'VTEX',
+            variant: 'Red star',
+            skuName: 'Red star',
+            price: 3500,
+            listPrice: 3500,
+            sellingPrice: 3500,
+            sellingPriceWithAssemblies: 3500,
+            measurementUnit: 'un',
+            skuSpecifications: [],
+            imageUrl:
+              'https://storecomponents.vtexassets.com/arquivos/ids/155518/download--40-.png?v=636942495289870000',
+            options: [],
+            assemblyOptions: { added: [], parentPrice: 35, removed: [] },
+            referenceId: [{ Key: 'Reference', Value: 'red star' }],
+          },
+          {
+            id: '2000535',
+            productId: '2000004',
+            quantity: 1,
+            uniqueId: '',
+            detailUrl: '/st-tropez-shorts/p',
+            name: 'St Tropez Top Shorts',
+            brand: 'Samsung',
+            category: '/Apparel & Accessories/Clothing/Bottoms/',
+            productRefId: '01212',
+            seller: '1',
+            sellerName: 'VTEX',
+            variant: 'Navy Blue',
+            skuName: 'Navy Blue',
+            price: 303000,
+            listPrice: 303000,
+            sellingPrice: 303000,
+            sellingPriceWithAssemblies: 303000,
+            measurementUnit: 'un',
+            skuSpecifications: [],
+            imageUrl:
+              'https://storecomponents.vtexassets.com/arquivos/ids/155488-500-auto?width=500&height=auto&aspect=true',
+            options: [],
+            assemblyOptions: { added: [], removed: [], parentPrice: 3030 },
+            referenceId: null,
+          },
+        ],
+        options: {
+          marketingData: {
+            utmSource: 'testing utmSource',
+            utmMedium: 'testing utmMedium',
+            utmCampaign: 'testing utmCampaign',
+            utmiCampaign: 'testing utmiCampaign',
+            utmiPage: 'testing utmiPage',
+            utmiPart: 'testing utmiPart',
+          },
+          allowedOutdatedData: ['paymentData'],
+        },
+      },
+    }
+
+    expect(mockPixelEventPush).toBeCalledWith(expectedPixelEvent)
+  })
+
+  it("should add to cart normally if onClickBehavior is set to 'add-to-cart-and-trigger-shipping-modal' and there is a 'shippingOption' selected", () => {
+    mockUseShippingOptionState.mockImplementation(() => ({
+      shippingOption: 'delivery',
+    }))
+
+    const { queryByTestId } = render(
+      <AddToCartButton
+        isOneClickBuy
+        customOneClickBuyLink=""
+        available={false}
+        disabled={false}
+        skuItems={mockSKUItems}
+        customToastUrl=""
+        showToast={() => {}}
+        allSkuVariationsSelected
+        productLink={mockProductLink}
+        onClickBehavior="add-to-cart"
+        multipleAvailableSKUs={false}
+      />
+    )
+
+    const button = queryByTestId('styleguide-button')
+
+    expect(button).toBeTruthy()
+
+    act(() => {
+      if (button) {
+        fireEvent.click(button)
+      }
+    })
+
+    expect(mockAddItem).toBeCalledWith(mockSKUItems, {
+      marketingData: mockMarketingData,
+      ...mockAllowedOutdatedData,
     })
   })
 })
