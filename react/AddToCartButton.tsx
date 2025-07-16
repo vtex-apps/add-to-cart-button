@@ -205,10 +205,11 @@ function AddToCartButton(props: Props) {
       return
     }
 
-    if (
+    const shouldOpenShippingModal =
       onClickBehavior === 'add-to-cart-and-trigger-shipping-modal' &&
       !shippingOption
-    ) {
+
+    if (shouldOpenShippingModal) {
       push({
         id: 'item-added-to-cart-shipping-modal',
         addToCartInfo: {
