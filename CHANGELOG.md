@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- `add-to-cart-and-trigger-shipping-modal` option to the `onClickBehavior` prop.
+
 ### Changed
 
 - Update GitHub actions/cache to v4
