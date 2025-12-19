@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- `add-to-cart-button` new prop `ignoreMarketingData` in order to avoid sending marketing data within the `add to cart` query
+
 ## [0.31.0] - 2025-09-08
 
 ### Added

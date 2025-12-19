@@ -47,6 +47,7 @@ The `add-to-cart-button` block is designed to add products to the [Minicart](htt
 | `text` | `string`  | Defines a custom text message to be displayed on the **Add to Cart** button. | `Add to cart` _(automatic translation will be applied following your store default language)_ |
 | `unavailableText` | `string`  | Defines a custom text message to be displayed on the **Add to Cart** button when a product is unavailable. | `Unavailable` _(automatic translation will be applied following your store default language)_ |
 | `customPixelEventId` | `string`  | Defines the `id` for the event that the button will send upon user interaction.                                                                                                                                                                                                                                                                                   | `undefined` |
+| `ignoreMarketingData` | `boolean` | If true, avoids sending marketing data (utm/utmi campaign, medium, source) through the `addToCart` query | `false` |
 
 ## Customization
 
