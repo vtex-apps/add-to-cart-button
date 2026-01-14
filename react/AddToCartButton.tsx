@@ -37,14 +37,15 @@ interface Props {
   unavailableText?: string
   productLink: ProductLink
   onClickBehavior:
-    | 'add-to-cart'
-    | 'go-to-product-page'
-    | 'ensure-sku-selection'
-    | 'add-to-cart-and-trigger-shipping-modal'
+  | 'add-to-cart'
+  | 'go-to-product-page'
+  | 'ensure-sku-selection'
+  | 'add-to-cart-and-trigger-shipping-modal'
   customPixelEventId?: string
   addToCartFeedback?: 'customEvent' | 'toast'
   onClickEventPropagation: 'disabled' | 'enabled'
   isLoading?: boolean
+  ignoreMarketingData?: boolean
 }
 
 // We apply a fake loading to accidental consecutive clicks on the button
@@ -128,8 +129,8 @@ function AddToCartButton(props: Props) {
     addToCartFeedback,
     onClickEventPropagation = 'disabled',
     isLoading,
+    ignoreMarketingData = false
   } = props
-
   const intl = useIntl()
   const handles = useCssHandles(CSS_HANDLES)
   const { addItems } = useOrderItems()
@@ -209,38 +210,36 @@ function AddToCartButton(props: Props) {
       onClickBehavior === 'add-to-cart-and-trigger-shipping-modal' &&
       !shippingOption
 
+    const addToCartOptions = ignoreMarketingData
+      ? options
+      : { marketingData: { ...utmParams, ...utmiParams }, ...options }
+
     if (shouldOpenShippingModal) {
       push({
         id: 'item-added-to-cart-shipping-modal',
         addToCartInfo: {
           skuItems,
-          options: {
-            marketingData: { ...utmParams, ...utmiParams },
-            ...options,
-          },
+          options: addToCartOptions,
         },
       })
 
       return
     }
 
-    const addItemsPromise = addItems(skuItems, {
-      marketingData: { ...utmParams, ...utmiParams },
-      ...options,
-    })
+    const addItemsPromise = addItems(skuItems, addToCartOptions)
 
     const pixelEventItems = skuItems.map(mapSkuItemForPixelEvent)
     const pixelEvent =
       customPixelEventId && addToCartFeedback === 'customEvent'
         ? {
-            id: customPixelEventId,
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
+          id: customPixelEventId,
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
         : {
-            event: 'addToCart',
-            items: pixelEventItems,
-          }
+          event: 'addToCart',
+          items: pixelEventItems,
+        }
 
     // @ts-expect-error the event is not typed in pixel-manager
     push(pixelEvent)
