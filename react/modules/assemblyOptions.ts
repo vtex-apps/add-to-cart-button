@@ -108,10 +108,6 @@ export function transformAssemblyOptions({
         for (const key in item.children) {
           childInputValues[key] = inputValues[key]
         }
-        const handledInputValues = Object.keys(childInputValues)
-        assemblyInputValuesKeys = assemblyInputValuesKeys.filter(
-          inputValueKey => handledInputValues.includes(inputValueKey)
-        )
 
         childrenAddedData = transformAssemblyOptions({
           assemblyOptionsItems: item.children,
