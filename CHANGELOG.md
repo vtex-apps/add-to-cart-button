@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Register `vtex.com/platform-flow-id` as `Shopper#2` in `.vtex/catalog-info.yaml` ([STR-969](https://vtex-dev.atlassian.net/browse/STR-969)).
+
 ## [0.31.0] - 2025-09-08
 
 ### Added
