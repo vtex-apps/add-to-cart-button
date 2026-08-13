@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Forward the search-signed `priceToken` (Pricing Fallback V2) from the selected seller's commercial offer to the cart item, so checkout can close the cart with that price while the Pricing system is unavailable.
+
 ### Changed
 
 - Register `vtex.com/platform-flow-id` as `Shopper#2` in `.vtex/catalog-info.yaml` ([STR-969](https://vtex-dev.atlassian.net/browse/STR-969)).
