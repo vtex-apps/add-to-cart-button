@@ -41,6 +41,13 @@ export interface CartItem {
     Key: string
     Value: string
   }> | null
+  priceToken?: string
+}
+
+// `priceToken` is served by vtex.search-graphql >= 0.72.0, but it is not part of
+// the published vtex.product-context typings yet.
+type CommertialOfferWithPriceToken = ProductTypes.Seller['commertialOffer'] & {
+  priceToken?: string | null
 }
 
 interface MapCatalogItemToCartArgs {
@@ -66,6 +73,8 @@ export function mapCatalogItemToCart({
   ) {
     return []
   }
+
+  const { priceToken } = selectedSeller.commertialOffer as CommertialOfferWithPriceToken
 
   return [
     {
@@ -104,6 +113,7 @@ export function mapCatalogItemToCart({
         parentQuantity: selectedQuantity,
       }),
       referenceId: selectedItem.referenceId,
+      ...(priceToken ? { priceToken } : {}),
     },
   ]
 }
