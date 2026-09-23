@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.33.0] - 2026-09-23
+
 ### Changed
 
 - Republish the `priceToken` support first released in 0.32.0, with no functional change over it. That version was deprecated on purpose while the Pricing Fallback V2 chain was sequenced: this app only attaches the token to the cart item, and the mutation that carries it to Checkout is built by `vtex.order-items`, which in turn is validated against whatever `vtex.checkout-graphql` version the account runs. A version that does not declare `priceToken` on `ItemInput` rejects the whole document, which would break add to cart. Both dependencies are now in production — `vtex.order-items@0.15.0` forwards the field and `vtex.checkout-graphql` accepts it — so the token can be attached safely.
